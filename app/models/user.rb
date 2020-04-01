@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, :last_name, :birthdate, :admin, presence: true
-
+  validates :email, presence: true, 'valid_email_2/email': true
 end
