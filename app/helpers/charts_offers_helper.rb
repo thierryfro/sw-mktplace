@@ -1,0 +1,2 @@
+module ChartsOffersHelper
+end
