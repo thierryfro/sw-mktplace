@@ -1,0 +1,2 @@
+class FreightZonesController < ApplicationController
+end
