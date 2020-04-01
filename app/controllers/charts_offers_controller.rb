@@ -1,0 +1,2 @@
+class ChartsOffersController < ApplicationController
+end
