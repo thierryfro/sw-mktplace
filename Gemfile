@@ -20,7 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
+gem 'simple_form'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -40,6 +40,10 @@ gem 'mechanize', '~> 2.7'
 gem 'pg_search', '~> 2.3.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+# Custom gems for project
+gem 'validates_cpf_cnpj' # validate cnpj from stores
+gem "valid_email2" #validate email from users and sotres
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
