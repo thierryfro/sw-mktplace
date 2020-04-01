@@ -6,4 +6,9 @@ class User < ApplicationRecord
 
   validates :name, :last_name, :birthdate, :admin, presence: true
   validates :email, presence: true, 'valid_email_2/email': true
+
+  has_many :user_stores, dependent: :destroy
+  has_many :user_ratings, dependent: :destroy
+  has_many :charts, dependent: :destroy
+  has_many :stores, dependent: :destroy
 end
