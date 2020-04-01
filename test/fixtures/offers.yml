@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store: one
+  stock: 1
+  price: 1.5
+  active: false
+
+two:
+  store: two
+  stock: 1
+  price: 1.5
+  active: false
