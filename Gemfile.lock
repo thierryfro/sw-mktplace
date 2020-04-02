@@ -229,17 +229,14 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-<<<<<<< HEAD
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
-=======
     valid_email2 (3.2.1)
       activemodel (>= 3.2)
       mail (~> 2.5)
     validates_cpf_cnpj (0.2.0)
       activemodel (>= 3.0.0)
->>>>>>> d27dbebca96fcb3dd1896b08816e4d836aa87a7a
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
