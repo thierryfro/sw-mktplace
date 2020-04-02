@@ -23,6 +23,7 @@ class BrandUpdater
   end
 
   def save_brand(brand)
+    #check if already exists on DB
     if Brand.search_name(brand['search_name']).empty?
       b = Brand.create!(brand)
       puts "#{b.name} created on DB"
@@ -37,6 +38,7 @@ class BrandUpdater
   end
 
   def last_page
+    #pagination info are present in header response
     info = make_request.header
     total = info['total'].to_i
     elements = info['per-page'].to_i

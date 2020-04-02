@@ -1,4 +1,4 @@
-require 'mechanize'
+
 
 desc 'Seed Brands on DB'
 task update_brands: :environment do
