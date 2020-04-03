@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 require 'mechanize'
-# scrape to index product page
 
 class BrandUpdater
-  # Access-Control-Allow-Headers, x-requested-with, x-requested-by
 
   def initialize(_options = {})
     @page = 1

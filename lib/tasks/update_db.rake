@@ -2,12 +2,14 @@
 
 require 'mechanize'
 
+# BRANDS
 desc 'Seed Brands on DB'
 task update_brands: :environment do
   brands = BrandUpdater.new
   brands.access_api
 end
 
+# CATEGORIES
 desc 'Seed Categories/Subcategories on DB'
 task create_categories: :environment do
   def make_request
@@ -27,7 +29,14 @@ task create_categories: :environment do
     puts "#{new_category.name} category created on db"
     subcategories = new_category.subcategories
     if subcategories.present?
-      puts "#{new_category.name}: ** #{subcategories.pluck(:name).join(' -- ')} ** subcategories created on db"      
+      puts "#{new_category.name}: ** #{subcategories.pluck(:name).join(' -- ')} ** subcategories created on db"
     end
   end
+end
+
+# PRODUCTS
+desc 'Seed and Update Products on DB'
+task update_products: :environment do
+  products = ProductUpdater.new
+  products.access_api
 end
