@@ -25,7 +25,7 @@ task create_categories: :environment do
     db_category = Category.where(name: category['name']).first
     next if db_category.present?
 
-    new_category = Category.create(category)
+    new_category = Category.create!(category)
     puts "#{new_category.name} category created on db"
     subcategories = new_category.subcategories
     if subcategories.present?
@@ -40,3 +40,16 @@ task update_products: :environment do
   products = ProductUpdater.new
   products.access_api
 end
+
+
+# PRODUCTS
+desc 'Seed DB Brands/Categories/Subcategries/Products'
+task seed_product_db: :environment do
+  Rake::Task["create_categories"].invoke
+  puts "-------------------------------"
+  Rake::Task["update_brands"].invoke
+  puts "-------------------------------"
+  Rake::Task["update_products"].invoke
+  puts "-------------END---------------"
+end
+
