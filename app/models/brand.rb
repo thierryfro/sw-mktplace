@@ -5,4 +5,6 @@ class Brand < ApplicationRecord
   using: {
     tsearch: { prefix: true }
   }
+
+  validates :name, :search_name, presence: true
 end
