@@ -15,4 +15,5 @@ class Store < ApplicationRecord
   validates :email, presence: true, 'valid_email_2/email': true
   validates_cnpj :cnpj
 
+
 end
