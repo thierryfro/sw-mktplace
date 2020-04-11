@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
+  # root to index
+  root to: 'offers#index'
+
   # Offers
-  resources :offers
+  resources :offers, except: %i[ destroy ]
 
   # Stores
-  resources :stores
+  resources :stores, except: %i[ destroy ]
 
   # Devise
   devise_for :users

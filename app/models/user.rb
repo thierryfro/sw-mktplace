@@ -10,5 +10,5 @@ class User < ApplicationRecord
   has_many :user_stores, dependent: :destroy
   has_many :user_ratings, dependent: :destroy
   has_many :charts, dependent: :destroy
-  has_many :stores, dependent: :destroy
+  # has_many :stores, as: :owner, dependent: :destroy
 end
