@@ -11,6 +11,8 @@ class OffersController < ApplicationController
 
   def new
     @offer = Offer.new
+    @offer.offer_products.build
+    @products = Product.all
   end
 
   def create
@@ -25,6 +27,7 @@ class OffersController < ApplicationController
   end
 
   def edit
+    @products = Product.all
   end
 
   def update
@@ -40,7 +43,7 @@ class OffersController < ApplicationController
   private
 
   def offer_params
-    params.require(:offer).permit(:store_id, :stock, :price, :active)
+    params.require(:offer).permit(:store_id, :stock, :price, :active, offer_products_attributes: [:product_id])
   end
 
   def set_offer

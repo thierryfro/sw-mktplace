@@ -1,4 +1,7 @@
 <h1>Offers#show</h1>
 <p>Find me in app/views/offers/show.html.erb</p>
 
-<%= @offer %>
+<p>Produtos nessa oferta: <%= @offer.products.count %> </p>
+<% @offer.products.each do |product| %>
+  <p>- <%= product.name %></p>
+<% end %>

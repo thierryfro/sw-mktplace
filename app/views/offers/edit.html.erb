@@ -2,6 +2,9 @@
 <p>Find me in app/views/offers/edit.html.erb</p>
 
   <%= simple_form_for @offer do |f| %>
+    <%= f.simple_fields_for :offer_products do |m| %>
+      <%= m.input :product_id, collection: @products %>
+    <% end %>
     <%= f.input :store_id, collection: Store.where(owner_id: current_user) %>
     <%= f.input :stock %>
     <%= f.input :price %>
