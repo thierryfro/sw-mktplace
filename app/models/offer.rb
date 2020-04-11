@@ -6,4 +6,6 @@ class Offer < ApplicationRecord
 
   validates :stock, :price, :active, presence: true
 
+  accepts_nested_attributes_for :offer_products
+
 end
