@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_003200) do
+ActiveRecord::Schema.define(version: 2020_04_11_142019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 2020_04_03_003200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_freight_zones_on_store_id"
+  end
+
+  create_table "offer_products", force: :cascade do |t|
+    t.bigint "offer_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_offer_products_on_offer_id"
+    t.index ["product_id"], name: "index_offer_products_on_product_id"
   end
 
   create_table "offers", force: :cascade do |t|
@@ -163,6 +172,8 @@ ActiveRecord::Schema.define(version: 2020_04_03_003200) do
   add_foreign_key "freight_rules", "freight_zones"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_zones", "stores"
+  add_foreign_key "offer_products", "offers"
+  add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"
   add_foreign_key "product_photos", "products"
   add_foreign_key "products", "brands"

@@ -1,7 +1,7 @@
 class FreightRule < ApplicationRecord
-  belongs_to :freight_zone
-  belongs_to :store
+  belongs_to :freight_zone, optional: true
+  belongs_to :store, optional: true
 
-  validates :limit_pricce, :discount, presence: true
+  validates :limit_price, :discount, presence: true
 
 end

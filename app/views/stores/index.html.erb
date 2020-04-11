@@ -1,4 +1,3 @@
-
 <% if @stores.empty? %>
   <h4>Você nao tem nenhuma store criada!</h4>
 <% else %>
@@ -7,3 +6,4 @@
     <p> - <%= store.comercial_name %> <%= link_to 'Editar loja', edit_store_path(store.id)  %> <%= link_to 'Deletar loja', store_path(store.id), method: :delete, data: { confirm: 'Are you sure?' }  %></p>
   <% end %>
 <% end %>
+

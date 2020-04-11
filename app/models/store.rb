@@ -10,8 +10,10 @@ class Store < ApplicationRecord
   has_many :users, through: :user_stores
   has_many :users, through: :user_ratings
 
-  validates :name, :email, :cnpj, :comercial_name, presence: true
-  # validates :email, presence: true, 'valid_email_2/email': true
-  # validates_cnpj :cnpj
+  validates :cnpj, presence: true, uniqueness: true
+  validates :name, :email, :comercial_name, presence: true
+  validates :email, presence: true, 'valid_email_2/email': true
+  validates_cnpj :cnpj
+
 
 end
