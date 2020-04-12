@@ -18,11 +18,11 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
     if @offer.save
-      redirect_to @offer
       flash[:notice] = "Loja criada com sucesso!"
+      redirect_to @offer
     else
-      render :new
       flash[:notice] = "Algo errado não está certo!"
+      render :new
     end
   end
 
@@ -38,6 +38,10 @@ class OffersController < ApplicationController
   def destroy
     # @offer.destroy
     # redirect_to offers_path
+  end
+
+  def product_list
+    @products = Product.order(:name).page params[:page]
   end
 
   private

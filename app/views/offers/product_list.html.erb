@@ -1,0 +1,20 @@
+<h4>Lista de produtos</h4>
+
+<%# Mostrando 25 produtos por pagina %>
+<%= paginate @products %>
+
+<% @products.each do |product| %>
+  <table>
+    <tr>
+      <th><%= image_tag product.product_photos.where(name: "Principal").first.url %> </th>
+      <th><%= product.name %> |</th>
+      <th>Peso: <%= product.weight %> |</th>
+      <th>Sabor: <%= product.flavor %> |</th>
+      <th>Ean: <%= product.ean %> |</th>
+      <th>Marca: <%= product.brand.name %> |</th>
+      <th>Descrição: <%= product.description %></th>
+    </tr>
+  </table>
+<% end %>
+
+<%= paginate @products %>
