@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Offers
   resources :offers, except: %i[ destroy ]
-
+  get "/produtos", to: "offers#product_list"
   # Stores
   resources :stores, except: %i[ destroy ]
 

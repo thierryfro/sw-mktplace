@@ -15,7 +15,7 @@ class StoresController < ApplicationController
 
   def create
     @store = Store.new(store_params)
-    @store.owner = User.first # Mudar para current_user.id depois que a parte de cadastro usuario tiver ok
+    @store.owner = current_user # Mudar para current_user.id depois que a parte de cadastro usuario tiver ok
     if @store.save
       redirect_to @store
       flash[:notice] = "Loja criada com sucesso!"
@@ -35,7 +35,7 @@ class StoresController < ApplicationController
 
   def destroy
     @store.destroy
-    redirect_to stores_path
+    redirect_to root_path
   end
 
   private
