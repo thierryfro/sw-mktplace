@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_04_01_223359) do
+=======
+ActiveRecord::Schema.define(version: 2020_04_11_142019) do
+>>>>>>> ee674ae357b515c5f7baebc722e99a6d6ed5ec6f
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +27,15 @@ ActiveRecord::Schema.define(version: 2020_04_01_223359) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> ee674ae357b515c5f7baebc722e99a6d6ed5ec6f
   create_table "chart_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.integer "quantity"
@@ -59,6 +72,15 @@ ActiveRecord::Schema.define(version: 2020_04_01_223359) do
     t.index ["store_id"], name: "index_freight_zones_on_store_id"
   end
 
+  create_table "offer_products", force: :cascade do |t|
+    t.bigint "offer_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_offer_products_on_offer_id"
+    t.index ["product_id"], name: "index_offer_products_on_product_id"
+  end
+
   create_table "offers", force: :cascade do |t|
     t.bigint "store_id"
     t.integer "stock"
@@ -67,6 +89,33 @@ ActiveRecord::Schema.define(version: 2020_04_01_223359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_offers_on_store_id"
+  end
+
+  create_table "product_photos", force: :cascade do |t|
+    t.string "url"
+    t.string "name"
+    t.string "size"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_photos_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "weight"
+    t.string "flavor"
+    t.string "ean"
+    t.string "description"
+    t.integer "api_code"
+    t.bigint "brand_id"
+    t.bigint "category_id"
+    t.bigint "subcategory_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -78,6 +127,14 @@ ActiveRecord::Schema.define(version: 2020_04_01_223359) do
     t.datetime "updated_at", null: false
     t.integer "owner_id"
     t.index ["owner_id"], name: "index_stores_on_owner_id"
+  end
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
   create_table "user_ratings", force: :cascade do |t|
@@ -122,7 +179,14 @@ ActiveRecord::Schema.define(version: 2020_04_01_223359) do
   add_foreign_key "freight_rules", "freight_zones"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_zones", "stores"
+  add_foreign_key "offer_products", "offers"
+  add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"
+  add_foreign_key "product_photos", "products"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "subcategories"
+  add_foreign_key "subcategories", "categories"
   add_foreign_key "user_ratings", "stores"
   add_foreign_key "user_ratings", "users"
   add_foreign_key "user_stores", "stores"

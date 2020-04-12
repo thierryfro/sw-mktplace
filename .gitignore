@@ -32,7 +32,12 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+<<<<<<< HEAD
 
 
 # igonre envoirment variables
 .env*
+=======
+.env
+
+>>>>>>> ee674ae357b515c5f7baebc722e99a6d6ed5ec6f
