@@ -2,12 +2,14 @@
 <p>Find me in app/views/offers/new.html.erb</p>
 
   <%= simple_form_for @offer do |f| %>
-    <%= f.simple_fields_for :offer_products do |m| %>
-      <%= m.input :product_id, collection: @products %>
+    <%= f.simple_fields_for :offer_products do |product| %>
+      <%#= m.input :product_id, collection: @products %>
+      <%= render 'product_fields', f: product %>
     <% end %>
+    <%= link_to_add_association 'Add', f, :offer_products, partial: 'product_fields' %>
     <%= f.input :store_id, collection: Store.where(owner_id: current_user) %>
     <%= f.input :stock %>
     <%= f.input :price %>
-    <%= f.input :active %>
+    <%= f.input :active, checked: true %>
     <%= f.submit %>
   <% end %>
