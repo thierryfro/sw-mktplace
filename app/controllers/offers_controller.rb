@@ -3,7 +3,12 @@ class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @offers = Offer.all
+    if params[:query].present?
+      products = Product.search_products(params[:query])
+      @offers = Offer.includes(:products).where(products: {id: products})
+    else
+      @offers = Offer.all
+    end
   end
 
   def show
