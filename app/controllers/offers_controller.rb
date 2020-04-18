@@ -45,10 +45,6 @@ class OffersController < ApplicationController
     # redirect_to offers_path
   end
 
-  def product_list
-    @products = Product.order(:name).page params[:page]
-  end
-
   private
 
   def offer_params

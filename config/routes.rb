@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'products/index'
   # root to index
   root to: 'offers#index'
 
   # Offers
   resources :offers, except: %i[ destroy ]
-  get "/produtos", to: "offers#product_list"
+  resources :products, only: %i[ index ]
+
   # Stores
   resources :stores, except: %i[ destroy ]
 
