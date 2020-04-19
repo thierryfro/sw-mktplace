@@ -4,7 +4,7 @@
   <%= simple_form_for @offer do |f| %>
     <div id="offer_product_fields">
       <%= f.simple_fields_for :offer_products do |product| %>
-        <%= render 'offer_product_fields', f: product, class: 'select2' %>
+        <%= render 'offer_product_fields', f: product %>
         <div class="links">
           <%= link_to_add_association 'Add', f, :offer_products %>
         </div>
