@@ -34,7 +34,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'mechanize', '~> 2.7'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem "cocoon"
+gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'pg_search', '~> 2.3.0'
@@ -45,6 +46,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Custom gems for project
 gem 'validates_cpf_cnpj' # validate cnpj from stores
 gem "valid_email2" #validate email from users and sotres
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
