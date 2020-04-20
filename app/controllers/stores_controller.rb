@@ -1,6 +1,7 @@
 class StoresController < ApplicationController
 
   before_action :set_store, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_admin
 
   def index
     @stores = Store.all

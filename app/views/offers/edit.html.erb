@@ -1,13 +1,18 @@
 <h1>Offers#edit</h1>
 <p>Find me in app/views/offers/edit.html.erb</p>
 
-  <%= simple_form_for @offer do |f| %>
-    <%= f.simple_fields_for :offer_products do |m| %>
-      <%= m.input :product_id, collection: @products %>
+<%= simple_form_for @offer do |f| %>
+  <div id="offer_product_fields">
+    <%= f.simple_fields_for :offer_products do |product| %>
+      <%= render 'offer_product_fields', f: product %>
+      <div class="links">
+        <%= link_to_add_association 'Add', f, :offer_products %>
+      </div>
     <% end %>
-    <%= f.input :store_id, collection: Store.where(owner_id: current_user) %>
-    <%= f.input :stock %>
-    <%= f.input :price %>
-    <%= f.input :active %>
-    <%= f.submit %>
-  <% end %>
+  </div>
+  <%= f.input :store_id, collection: Store.where(owner_id: current_user), input_html: { class: 'select2'} %>
+  <%= f.input :stock %>
+  <%= f.input :price %>
+  <%= f.input :active, checked: true %>
+  <%= f.submit %>
+<% end %>
