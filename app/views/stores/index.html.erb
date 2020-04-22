@@ -3,7 +3,9 @@
 <% else %>
   <h4>Suas lojas!</h4>
   <% @stores.each do |store| %>
-    <p> - <%=link_to store.comercial_name, store_path(store.id) %> <%= link_to 'Editar loja', edit_store_path(store.id)  %> <%= link_to 'Deletar loja', store_path(store.id), method: :delete, data: { confirm: 'Are you sure?' }  %></p>
+    <p> - <%=link_to store.comercial_name, store_path(store.id) %> <%= link_to 'Editar loja', edit_store_path(store.id) %> </p>
   <% end %>
 <% end %>
+
+<%= link_to 'Voltar para home', root_path %>
 

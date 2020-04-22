@@ -1,0 +1,15 @@
+<%= simple_form_for @offer do |f| %>
+  <div id="offer_product_fields">
+    <%= f.simple_fields_for :offer_products do |product| %>
+      <%= render 'offer_product_fields', f: product %>
+      <div class="links">
+        <%= link_to_add_association 'Add', f, :offer_products %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.input :store_id, collection: @stores, input_html: { class: 'select2'} %>
+  <%= f.input :stock %>
+  <%= f.input :price %>
+  <%= f.input :active, checked: true %>
+  <%= f.submit %>
+<% end %>

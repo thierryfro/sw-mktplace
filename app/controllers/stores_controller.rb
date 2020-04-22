@@ -4,7 +4,11 @@ class StoresController < ApplicationController
   skip_before_action :require_admin
 
   def index
-    @stores = Store.all
+    if current_user && current_user.admin?
+      @stores = Store.all
+    else
+      @stores = Store.where(owner_id: current_user)
+    end
   end
 
   def show
@@ -16,11 +20,6 @@ class StoresController < ApplicationController
 
   def create
     @store = Store.new(store_params)
-    # if current_user && current_user.admin?
-    #   @store.owner = params[:owner_id]
-    # else
-    #   @store.owner = current_user
-    # end
     unless current_user && current_user.admin?
       @store.owner = current_user
       raise
@@ -35,6 +34,10 @@ class StoresController < ApplicationController
   end
 
   def edit
+    if @store.owner != current_user || !current_user.admin?
+      flash[:notice] = "Você não tem permissão para fazer isso!"
+      redirect_to root_path
+    end
   end
 
   def update
@@ -42,6 +45,7 @@ class StoresController < ApplicationController
     redirect_to store_path(@store)
   end
 
+  # Ver com Bruno, acho que nao poderá deletar store
   def destroy
     @store.destroy
     redirect_to root_path
