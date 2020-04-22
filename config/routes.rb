@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
   # Admin
   scope 'admin' do
-    get '/admins', to: 'admin#admins'
-    get '/offers', to: 'admin#offers'
-    get 'new_offer', to: 'admin#new_offer'
-    get 'new_store', to: 'admin#new_store'
+    get '/dashboard', to: 'admin#dashboard'
+    get '/offers', to: 'admin#offers', as: 'all_offers'
+    get 'new_offer', to: 'admin#new_offer', as: 'new_offers'
+    get 'new_store', to: 'admin#new_store', as: 'new_stores'
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -2,12 +2,11 @@ class AdminController < ApplicationController
 
   # before_action :set_offer, only: [:show, :edit, :update, :destroy]
 
-  def admins
-    @admins = User.where(admin: true)
+  def dashboard
   end
 
   def offers
-    @offers = Offer.all
+    @offers = Offer.order(:store_id).page params[:page]
   end
 
   def new_offer

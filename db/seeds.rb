@@ -15,7 +15,7 @@ if Rails.env == 'development'
   hugo = User.create!(email: 'hugo@sw.com', name: 'Hugo', last_name: 'Branquinho', password: 'swpass', birthdate: DateTime.now - 33.years, admin: true)
   thierry = User.create!(email: 'thierry@sw.com', name: 'Thierry', last_name: 'Fernando', password: 'swpass', birthdate: DateTime.now - 34.years, admin: true)
   bruno = User.create!(email: 'bruno@sw.com', name: 'Bruno', last_name: 'Tostes', password: 'swpass', birthdate: DateTime.now - 50.years, admin: true)
-  manoel = User.create!(email: 'manoel@sw.com', name: 'Manoel', last_name: 'Tabet', password: 'swpass', birthdate: DateTime.now - 40.years, admin: true)
+  manoel = User.create!(email: 'manoel@sw.com', name: 'Manoel', last_name: 'Tabet', password: 'swpass', birthdate: DateTime.now - 40.years )
   puts "Usuários: #{User.count}"
   puts ""
 

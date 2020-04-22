@@ -1,11 +1,21 @@
-<% @offers.each do |offer| %>
-  <%= link_to offer_path(offer.id), target: "_blank" do %>
-    <div style="border: 1px solid black; margin: 20px auto; padding: 50px;">
-      <p> Loja: <%= offer.store.name %></p>
-      <p> Dono: <%= offer.store.owner.name %></p>
-      <p> Produtos em oferta: <%= offer.products.count %></p>
-      <p> Oferta: <%= offer.active? ? 'Ativa' : 'Inativa' %></p>
-    </div>
+<h2>Ofertas</h2>
+
+<%= link_to 'Voltar Área de Admin',  dashboard_path %> <br>
+
+<%= paginate @offers %>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+  <% @offers.each do |offer| %>
+    <%= link_to offer_path(offer.id), target: "_blank" do %>
+      <div style="border: 1px solid black; margin: 20px; padding: 50px; width: 250px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <p> Loja: <%= offer.store.name %></p>
+        <p> Dono: <%= offer.store.owner.name %></p>
+        <p> Produtos em oferta: <%= offer.products.count %></p>
+        <p> Oferta: <%= offer.active? ? 'Ativa' : 'Inativa' %></p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+
+<%= paginate @offers %>
 
