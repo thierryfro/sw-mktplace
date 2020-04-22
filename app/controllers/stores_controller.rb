@@ -16,7 +16,15 @@ class StoresController < ApplicationController
 
   def create
     @store = Store.new(store_params)
-    @store.owner = current_user # Mudar para current_user.id depois que a parte de cadastro usuario tiver ok
+    # if current_user && current_user.admin?
+    #   @store.owner = params[:owner_id]
+    # else
+    #   @store.owner = current_user
+    # end
+    unless current_user && current_user.admin?
+      @store.owner = current_user
+      raise
+    end
     if @store.save
       redirect_to @store
       flash[:notice] = "Loja criada com sucesso!"

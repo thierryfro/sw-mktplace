@@ -14,12 +14,17 @@ class OffersController < ApplicationController
     @offer = Offer.new
     @offer.offer_products.build
     @products = Product.all
+    if current_user && current_user.admin?
+      @stores = Store.all
+    else
+      @stores = Store.where(owner_id: current_user)
+    end
   end
 
   def create
     @offer = Offer.new(offer_params)
     if @offer.save
-      flash[:notice] = "Loja criada com sucesso!"
+      flash[:notice] = "Oferta criada com sucesso!"
       redirect_to @offer
     else
       flash[:notice] = "Algo errado não está certo!"
@@ -29,6 +34,11 @@ class OffersController < ApplicationController
 
   def edit
     @products = Product.all
+    if current_user && current_user.admin?
+      @stores = Store.all
+    else
+      @stores = Store.where(owner_id: current_user)
+    end
   end
 
   def update

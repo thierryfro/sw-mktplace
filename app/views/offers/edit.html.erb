@@ -10,7 +10,7 @@
       </div>
     <% end %>
   </div>
-  <%= f.input :store_id, collection: Store.where(owner_id: current_user), input_html: { class: 'select2'} %>
+  <%= f.input :store_id, collection: @stores, input_html: { class: 'select2'} %>
   <%= f.input :stock %>
   <%= f.input :price %>
   <%= f.input :active, checked: true %>
