@@ -25,7 +25,7 @@ if Rails.env == 'development'
   vendinha = Store.create!(name: 'Vendinha', email: 'vendinha@bomba.com', cnpj: '16.453.309/0001-77', comercial_name: 'Vendinha Ltda', owner: hugo)
   budega = Store.create!(name: 'Budega', email: 'budega@bomba.com', cnpj: '24.655.223/0001-55', comercial_name: 'Budega Ltda', owner: thierry)
   marombas = Store.create!(name: 'Marombas', email: 'marombas@bomba.com', cnpj: '00.660.772/0001-50', comercial_name: 'Marombas Ltda', owner: bruno)
-  savewhey = Store.create!(name: 'Savewhey', email: 'savewhey@bomba.com', cnpj: '00.660.772/0001-50', comercial_name: 'Marombas Ltda', owner: manoel)
+  savewhey = Store.create!(name: 'Savewhey', email: 'savewhey@bomba.com', cnpj: '97.491.634/0001-26', comercial_name: 'Marombas Ltda', owner: manoel)
   puts "Stores: #{Store.count}"
   puts ""
 
