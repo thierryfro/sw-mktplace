@@ -1,9 +1,14 @@
 class StoresController < ApplicationController
 
   before_action :set_store, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_admin
 
   def index
-    @stores = Store.all
+    if current_user && current_user.admin?
+      @stores = Store.all
+    else
+      @stores = Store.where(owner_id: current_user)
+    end
   end
 
   def show
@@ -15,7 +20,10 @@ class StoresController < ApplicationController
 
   def create
     @store = Store.new(store_params)
-    @store.owner = current_user # Mudar para current_user.id depois que a parte de cadastro usuario tiver ok
+    unless current_user && current_user.admin?
+      @store.owner = current_user
+      raise
+    end
     if @store.save
       redirect_to @store
       flash[:notice] = "Loja criada com sucesso!"
@@ -26,6 +34,10 @@ class StoresController < ApplicationController
   end
 
   def edit
+    if @store.owner != current_user || !current_user.admin?
+      flash[:notice] = "Você não tem permissão para fazer isso!"
+      redirect_to root_path
+    end
   end
 
   def update
@@ -33,6 +45,7 @@ class StoresController < ApplicationController
     redirect_to store_path(@store)
   end
 
+  # Ver com Bruno, acho que nao poderá deletar store
   def destroy
     @store.destroy
     redirect_to root_path
