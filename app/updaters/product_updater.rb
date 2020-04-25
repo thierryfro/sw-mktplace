@@ -27,6 +27,15 @@ class ProductUpdater
     if db_product.nil?
       product.except!('id', 'brand', 'category', 'subcategory')
       p = Product.create!(product)
+      tags = []
+      tags << p.brand&.name if p.brand
+      tags << p.category&.name if p.category
+      tags << p.weight if p.weight
+      tags << p.subcategory&.name if p.subcategory
+      # p.tag_list = [ p.brand&.name, p.category&.name, p.weight, p.subcategory&.name ]
+      p.tag_list = tags
+
+      p.save
       puts "#{p.name} - #{p.weight} - #{p.flavor} created on DB"
     else
       puts "#{db_product.name} - #{db_product.weight} - #{db_product.flavor} already on DB"

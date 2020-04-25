@@ -5,5 +5,9 @@ class ProductsController < ApplicationController
     else
       @products = Product.order(:name).page params[:page]
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end

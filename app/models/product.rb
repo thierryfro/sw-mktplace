@@ -28,4 +28,14 @@ class Product < ApplicationRecord
       tsearch: { prefix: true }
     }
 
+    acts_as_taggable
+    acts_as_taggable_on :tags
+    # acts_as_taggable_on :category
+    # acts_as_taggable_on :brand
+
+    # $flavors = Product.all.where.not(flavor: nil).pluck(:flavor).uniq
+    $brands = Brand.all.pluck(:name).uniq
+    $categories = Category.all.pluck(:name).uniq
+    $subcategories = Subcategory.all.pluck(:name).uniq
+    $weight = Product.all.pluck(:weight).uniq
 end

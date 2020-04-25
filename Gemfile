@@ -44,7 +44,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Custom gems for project
 gem 'validates_cpf_cnpj' # validate cnpj from stores
-gem "valid_email2" #validate email from users and sotres
+gem "valid_email2" # validate email from users and sotres
+gem 'acts-as-taggable-on', '~> 6.0' # gema para pesquisa customizazda
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
