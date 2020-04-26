@@ -4,7 +4,22 @@ class OffersController < ApplicationController
   skip_before_action :require_admin
 
   def index
-    @offers = Offer.all
+    if params["search"]
+
+      @filter = [params["search"]["categories"]].concat([params["search"]["brands"]]).
+                                              concat([params["search"]["subcategories"]]).
+                                              concat([params["search"]["weight"]]).
+                                              concat([params['search']['query']]).flatten.reject(&:blank?)
+
+      products = @filter.empty? ? Product.all : Product.search_products("#{@filter}")
+      @offers = Offer.includes(:products).where(products: {id: products.pluck(:id)})
+    else
+      @offers = Offer.all
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -53,10 +68,6 @@ class OffersController < ApplicationController
   def destroy
     # @offer.destroy
     # redirect_to offers_path
-  end
-
-  def product_list
-    @products = Product.order(:name).page params[:page]
   end
 
   private
