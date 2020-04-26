@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'pages/home'
   get 'products/index'
   # root to index
-  root to: 'offers#index'
+  root to: 'pages#home'
 
   # Offers
   resources :offers, except: %i[ destroy ]
