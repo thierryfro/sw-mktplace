@@ -31,9 +31,13 @@ class Product < ApplicationRecord
     acts_as_taggable
     acts_as_taggable_on :tags
 
-    # $flavors = Product.all.where.not(flavor: nil).pluck(:flavor).uniq
-    $brands = Brand.all.pluck(:name).uniq
-    $categories = Category.all.pluck(:name).uniq
-    $subcategories = Subcategory.all.pluck(:name).uniq
+
+    # get information to use on filter form
+    products_ids = OfferProduct.all.pluck(:product_id).uniq # takes the product identifier that contains offers
+    products = Product.where(id: products_ids).uniq # get products
+
+    $brands = Brand.where(id: products.pluck(:brand_id)).pluck(:name).uniq
+    $categories = Category.where(id: products.pluck(:category_id)).pluck(:name).uniq
+    $subcategories = Subcategory.where(id: products.pluck(:subcategory_id)).pluck(:name).uniq
     $weight = Product.all.pluck(:weight).uniq
 end
