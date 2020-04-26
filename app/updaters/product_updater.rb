@@ -32,7 +32,6 @@ class ProductUpdater
       tags << p.category&.name if p.category
       tags << p.weight if p.weight
       tags << p.subcategory&.name if p.subcategory
-      # p.tag_list = [ p.brand&.name, p.category&.name, p.weight, p.subcategory&.name ]
       p.tag_list = tags
 
       p.save

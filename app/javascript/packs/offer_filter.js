@@ -1,6 +1,5 @@
 const offerFilter = () => {
   const offersIndex = document.getElementById('offers');
-  console.log(offersIndex);
   if ( offersIndex ) {
     var checkBoxes = document.querySelectorAll(".form-check-input");
     var form = document.querySelector('form');

@@ -30,8 +30,6 @@ class Product < ApplicationRecord
 
     acts_as_taggable
     acts_as_taggable_on :tags
-    # acts_as_taggable_on :category
-    # acts_as_taggable_on :brand
 
     # $flavors = Product.all.where.not(flavor: nil).pluck(:flavor).uniq
     $brands = Brand.all.pluck(:name).uniq

@@ -5,15 +5,6 @@
 <%= link_to 'Login',  new_user_session_path %> <br>
 <%= link_to 'Área de Admin',  dashboard_path %> <br>
 
-<%#= simple_form_for :search, url: offers_path, method: "GET", remote: true do |f| %>
-  <%#= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Procure uma oferta"
-  %>
-  <%#= submit_tag "Busca", class: "btn btn-primary" %>
-<%# end %>
-
 <%= simple_form_for :search, url: offers_path, method: "GET", remote: true do |f| %>
   <%= f.input :query, label: "Pesquisa" %>
   <%= f.input :brands, label: "Marcas", collection: $brands, as: :check_boxes %>
@@ -28,11 +19,6 @@
   <%= link_to "Reset", root_path  %>
 <% end %>
 <br>
-<%#= simple_form_for :search, url: offers_path, method: "GET", remote: true do |f| %>
-  <%#= f.input :name, input_html: {value: ""} %>
-  <%#= f.submit "Buscar", class: "btn btn-primary" %>
-  <%#= link_to "Reset", root_path  %>
-<%# end %>
 
 <%= link_to 'Lista de Produtos', products_path %>
 
