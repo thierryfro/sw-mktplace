@@ -60,10 +60,10 @@ if Rails.env == 'development'
 
   # cleaning products section
 
-  puts "Products #{Product.count}"
-  puts "Brands #{Brand.count}"
-  puts "Categories #{Category.count}"
-  puts "Subcategories #{Subcategory.count}"
+  puts "Products antigos #{Product.count}"
+  puts "Brands antigos #{Brand.count}"
+  puts "Categories antigos #{Category.count}"
+  puts "Subcategories antigos #{Subcategory.count}"
   puts ""
 
   Brand.destroy_all
