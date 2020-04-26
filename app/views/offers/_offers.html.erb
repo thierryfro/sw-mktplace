@@ -1,10 +1,12 @@
 <% offers.each do |offer| %>
-  <h3><%= offer.products.first. name %></h3>
-  <p><%= offer.products.first.description %></p>
-  <button class="btn-primary">
-    <%= offer.products.first.flavor %>
-  </button>
-  <button class="btn-danger">
-    <%= offer.products.first.category.name %>
-  </button>
+  <%= link_to(offer) do %>
+    <h3><%= offer.products.first. name %></h3>
+    <p><%= offer.products.first.description %></p>
+    <button class="btn-primary">
+      <%= offer.products.first.flavor %>
+    </button>
+    <button class="btn-danger">
+      <%= offer.products.first.category.name %>
+    </button>
+  <% end %>
 <% end %>
