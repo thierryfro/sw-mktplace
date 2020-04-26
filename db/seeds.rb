@@ -15,6 +15,7 @@ if Rails.env == 'development'
   hugo = User.create!(email: 'hugo@sw.com', name: 'Hugo', last_name: 'Branquinho', password: 'swpass', birthdate: DateTime.now - 33.years, admin: true)
   thierry = User.create!(email: 'thierry@sw.com', name: 'Thierry', last_name: 'Fernando', password: 'swpass', birthdate: DateTime.now - 34.years, admin: true)
   bruno = User.create!(email: 'bruno@sw.com', name: 'Bruno', last_name: 'Tostes', password: 'swpass', birthdate: DateTime.now - 50.years, admin: true)
+  manoel = User.create!(email: 'manoel@sw.com', name: 'Manoel', last_name: 'Tabet', password: 'swpass', birthdate: DateTime.now - 40.years )
   puts "Usuários: #{User.count}"
   puts ""
 
@@ -24,6 +25,7 @@ if Rails.env == 'development'
   vendinha = Store.create!(name: 'Vendinha', email: 'vendinha@bomba.com', cnpj: '16.453.309/0001-77', comercial_name: 'Vendinha Ltda', owner: hugo)
   budega = Store.create!(name: 'Budega', email: 'budega@bomba.com', cnpj: '24.655.223/0001-55', comercial_name: 'Budega Ltda', owner: thierry)
   marombas = Store.create!(name: 'Marombas', email: 'marombas@bomba.com', cnpj: '00.660.772/0001-50', comercial_name: 'Marombas Ltda', owner: bruno)
+  savewhey = Store.create!(name: 'Savewhey', email: 'savewhey@bomba.com', cnpj: '97.491.634/0001-26', comercial_name: 'Marombas Ltda', owner: manoel)
   puts "Stores: #{Store.count}"
   puts ""
 
@@ -39,6 +41,9 @@ if Rails.env == 'development'
 
   FreightZone.create!(zone: 'Leste', store: marombas)
   FreightZone.create!(zone: 'Sul', store: marombas)
+
+  FreightZone.create!(zone: 'Norte', store: savewhey)
+
   puts "Zonas de frete #{FreightZone.count}"
   puts ""
 

@@ -1,0 +1,10 @@
+  <%= simple_form_for @store do |f| %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :owner_id, collection: @owners, input_html: { class: 'select2'} %>
+    <%= f.input :cnpj %>
+    <%= f.input :comercial_name %>
+    <%= f.submit %>
+  <% end %>
+
+<%= link_to 'Voltar Área de Admin',  dashboard_path %> <br>

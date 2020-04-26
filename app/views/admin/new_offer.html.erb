@@ -1,6 +1,3 @@
-<h1>Offers#new</h1>
-<p>Find me in app/views/offers/new.html.erb</p>
-
   <%= simple_form_for @offer do |f| %>
     <div id="offer_product_fields">
       <%= f.simple_fields_for :offer_products do |product| %>
@@ -17,3 +14,4 @@
     <%= f.submit %>
   <% end %>
 
+  <%= link_to 'Voltar Área de Admin',  dashboard_path %> <br>
