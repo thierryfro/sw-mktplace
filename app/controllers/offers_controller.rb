@@ -6,9 +6,9 @@ class OffersController < ApplicationController
   def index
     if params["search"]
 
-      @filter = params["search"]["categories"].concat(params["search"]["brands"]).
-                                              concat(params["search"]["subcategories"]).
-                                              concat(params["search"]["weight"]).
+      @filter = [params["search"]["categories"]].concat([params["search"]["brands"]]).
+                                              concat([params["search"]["subcategories"]]).
+                                              concat([params["search"]["weight"]]).
                                               concat([params['search']['query']]).flatten.reject(&:blank?)
 
       products = @filter.empty? ? Product.all : Product.search_products("#{@filter}")

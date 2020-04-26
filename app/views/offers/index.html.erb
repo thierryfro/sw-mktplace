@@ -7,13 +7,13 @@
 
 <%= simple_form_for :search, url: offers_path, method: "GET", remote: true do |f| %>
   <%= f.input :query, label: "Pesquisa" %>
-  <%= f.input :brands, label: "Marcas", collection: $brands, as: :check_boxes %>
+  <%= f.input :brands, label: "Marcas", collection: $brands, input_html: { class: 'select2'}  %>
   <br>
-  <%= f.input :categories, label: "Categorias", collection: $categories, as: :check_boxes %>
+  <%= f.input :categories, label: "Categorias", collection: $categories, input_html: { class: 'select2'} %>
   <br>
-  <%= f.input :subcategories, label: "Subcategorias",  collection: $subcategories, as: :check_boxes %>
+  <%= f.input :subcategories, label: "Subcategorias",  collection: $subcategories, input_html: { class: 'select2'} %>
   <br>
-  <%= f.input :weight, label: "Quantidade",  collection: $weight, as: :check_boxes %>
+  <%= f.input :weight, label: "Quantidade",  collection: $weight, input_html: { class: 'select2'} %>
   <br>
   <%= f.submit "Search", class: "btn btn-primary" %>
   <%= link_to "Reset", root_path  %>
