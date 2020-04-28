@@ -16,6 +16,9 @@ class OffersController < ApplicationController
     else
       @offers = Offer.all
     end
+    if @offers.empty?
+      redirect_to offers_path
+    end
     respond_to do |format|
       format.html
       format.js
