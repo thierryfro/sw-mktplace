@@ -1,17 +1,20 @@
 class ChartsOffersController < ApplicationController
 
+  skip_before_action :require_admin
+
 
   def create
-    @chart_offer = ChartOffer.create(chart_offer_params)
+    @chart_offer = ChartOffer.create(offer_id: params[:offer_id])
     @chart_offer.quantity = 0
-    @chart_offer.chart = @cart
-    if @chart_offer.save?
-      redirect_to 'charts#show'
-      raise
+    if @chart_offer.save
+      # Analisar aqui -> Pode ter mais de uma chartoffer?
+      session[:chart_offer_id] = @chart_offer.id
+      flash[:notice] = "Oferta adicionada!"
+      redirect_to '/chart'
     else
+      raise
       flash[:notice] = "Erro, nao foi possivel adicionar a oferta"
       redirect_to root_path
-      raise
     end
   end
 
