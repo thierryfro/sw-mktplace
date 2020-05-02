@@ -28,6 +28,6 @@ Rails.application.routes.draw do
   #Cart
   post '/chart_offer/:offer_id', to: 'charts_offers#create', as: 'create_cart_offer'
   get '/chart', to: 'charts#show'
-
+  get '/checkout', to: 'charts#checkout'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

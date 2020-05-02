@@ -1,4 +1,11 @@
-<h1>AAAAA</h1>
+<h1>Meu carrinho</h1>
 
-<%= @chart_offers %>
-<% raise %>
+Quantidade de ofertas no carrinho: <%= @chart_offers.count %> <br>
+<% @chart_offers.each do |offer| %>
+  Quantidade: <%= offer.quantity %>
+<% end %> <br>
+
+<%= link_to 'Checkout', checkout_path %> <br>
+<%= link_to 'Continuar comprando', root_path %>
+
+<%# raise %>
