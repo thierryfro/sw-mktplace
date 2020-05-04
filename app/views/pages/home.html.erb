@@ -1,0 +1,4 @@
+<%= simple_form_for :search, url: offers_path, method: "GET" do |f| %>
+  <%= f.input :query, label: "Pesquisa" %>
+  <%= f.submit "Search", class: "btn btn-primary" %>
+<% end %>

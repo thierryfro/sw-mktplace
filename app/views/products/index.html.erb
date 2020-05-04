@@ -1,5 +1,16 @@
 <h4>Lista de produtos</h4>
 
+<%= form_tag products_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Procure um produto"
+  %>
+  <%= submit_tag "Busca", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to 'Voltar', root_path %>
+
 <%# Mostrando 25 produtos por pagina %>
 <%= paginate @products %>
 
