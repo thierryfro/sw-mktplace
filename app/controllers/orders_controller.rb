@@ -3,7 +3,8 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def return
-    raise
+    set_new_cart
+    redirect_to offers_path
   end
 
 end

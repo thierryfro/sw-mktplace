@@ -11,7 +11,7 @@
 <%= link_to 'Login',  new_user_session_path %> <br>
 <%= link_to 'Logout', destroy_user_session_path, method: :delete %> <br>
 <%= link_to 'Área de Admin', dashboard_path %> <br>
-<%= link_to 'Meu Carrinho', chart_path %> <br>
+<%= link_to 'Meu Carrinho', chart_path if @cart %> <br>
 
 <%= simple_form_for :search, url: offers_path, method: "GET", remote: true do |f| %>
   <%= f.input :query, label: "Pesquisa" %>

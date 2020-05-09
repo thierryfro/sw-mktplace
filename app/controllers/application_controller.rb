@@ -11,22 +11,15 @@ class ApplicationController < ActionController::Base
   end
 
   # Cart methods
-  def set_user_cart(cart)
-    if current_user
-      # cart.user = current_user
-    end
-  end
-
   def set_new_cart
     @cart = Chart.create
+    @cart.update(user: current_user) if current_user
     session[:chart_id] = @cart.id
   end
 
   def set_cart
     @cart = Chart.find(session[:chart_id])
-    if @cart.user.nil?
-      set_user_cart(@cart)
-    end
+    @cart.update(user: current_user) if @cart&.user.nil? && current_user
   rescue ActiveRecord::RecordNotFound
     set_new_cart
   end

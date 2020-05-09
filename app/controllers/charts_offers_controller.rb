@@ -21,9 +21,8 @@ class ChartsOffersController < ApplicationController
       flash[:notice] = "Oferta adicionada!"
       redirect_to '/chart'
     else
-      raise
       flash[:notice] = "Erro, nao foi possivel adicionar a oferta"
-      redirect_to root_path
+      redirect_to offers_path
     end
   end
 
@@ -39,7 +38,7 @@ class ChartsOffersController < ApplicationController
     if @chart_offer.quantity > 1
       @chart_offer.quantity -= 1
     else
-      flash[:notice] = "Quantidade minima, favor remover o produto do carrinho"
+      @chart_offer.destroy
     end
     @chart_offer.save
     redirect_to '/chart'

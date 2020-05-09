@@ -4,7 +4,8 @@ Quantidade de ofertas no carrinho: <%= @chart_offers.count %> <br>
 <% @chart_offers.each do |chart_offer| %>
   Quantidade: <%= chart_offer.quantity %> <%= link_to '+', add_cart_path(chart_offer.id), method: :post %> <%= link_to '-', decrease_cart_path(chart_offer.id), method: :post %>
 <% end %> <br>
-
-<%= link_to 'Checkout', checkout_path %> <br>
-<%= link_to 'Continuar comprando', root_path %>
+<% if @chart_offers.size > 0 %>
+  <%= link_to 'Checkout', checkout_path %> <br>
+<% end %>
+<%= link_to 'Continuar comprando', offers_path %>
 
