@@ -11,4 +11,7 @@
 <% end %>
 <%= link_to 'Auditar oferta', edit_offer_path(@offer.id) if current_user && current_user.admin? %>
 
-<%= link_to 'Voltar', root_path %>
+<%= link_to 'Voltar', root_path %> <br>
+
+<%= link_to 'Adicionar ao carrinho', create_cart_offer_path(@offer), method: :post %>
+<%# raise %>

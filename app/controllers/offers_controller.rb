@@ -51,7 +51,7 @@ class OffersController < ApplicationController
   end
 
   def edit
-    if @offer.store.owner != current_user || current_user.admin?
+    unless @offer.store.owner != current_user || current_user.admin?
       flash[:notice] = "Você não tem permissão para fazer isso!"
       redirect_to root_path
     end

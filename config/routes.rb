@@ -28,5 +28,11 @@ Rails.application.routes.draw do
     get 'edit_store', to: 'admin#edit_store', as: 'audit_store'
   end
 
+  #Cart
+  post '/chart_offer/:offer_id', to: 'charts_offers#create', as: 'create_cart_offer'
+  get '/chart', to: 'charts#show'
+  get '/checkout', to: 'charts#checkout'
+  post '/chart/:chart_offer_id/add', to: 'charts_offers#add', as: 'add_cart'
+  post '/chart/:chart_offer_id/decrease', to: 'charts_offers#remove', as: 'decrease_cart'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
