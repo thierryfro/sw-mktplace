@@ -22,7 +22,6 @@ class StoresController < ApplicationController
     @store = Store.new(store_params)
     unless current_user && current_user.admin?
       @store.owner = current_user
-      raise
     end
     if @store.save
       redirect_to @store
@@ -34,7 +33,7 @@ class StoresController < ApplicationController
   end
 
   def edit
-    if @store.owner != current_user || !current_user.admin?
+    unless @store.owner != current_user || current_user.admin?
       flash[:notice] = "Você não tem permissão para fazer isso!"
       redirect_to root_path
     end
