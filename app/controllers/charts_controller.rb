@@ -7,16 +7,26 @@ class ChartsController < ApplicationController
 
   def show
     if current_user
-      @cart = Chart.find_by(user_id: current_user)
+      @cart = Chart.find(current_user.chart_id)
       @chart_offers = @cart.chart_offers
     else
       @chart_offers = ChartOffer.where(chart_id: session[:chart_id])
     end
   end
 
+  def session_offers
+    # Guardas as ofertas escolhidas no cart da session
+    session_offers = []
+    @cart.chart_offers do |offer|
+      session_offers << offer
+    end
+  end
+
   def checkout
     # Atribuir user ao cart
-    @cart.update(user: current_user) if @cart.user.nil?
+    current_user.chart_id = @cart.id if current_user.chart_id.nil?
+    # Passar as ofertas da session pro cart
+    # @car.chart_offers = session_offers()
     # Começo da Order
     # Configura credenciais
     $mp = MercadoPago.new(ENV['PROD_ACCESS_TOKEN'])

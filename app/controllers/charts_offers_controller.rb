@@ -4,16 +4,17 @@ class ChartsOffersController < ApplicationController
 
 
   def create
-    @chartoffers_tooked = ChartOffer.where(offer_id: params[:offer_id], chart_id: @cart.id).pluck(:id) # Offer que ja estao no chart
+    # @chartoffer_tooked = ChartOffer.where(offer_id: params[:offer_id], chart_id: @cart.id).pluck(:id) # Offer que ja estao no chart
+    @chartoffer_tooked = ChartOffer.find_by(chart_id: @cart, offer_id: params[:offer_id]);
     if @cart.chart_offers.empty?
       @chart_offer = ChartOffer.create(offer_id: params[:offer_id], quantity: 1, chart_id: @cart.id)
-    elsif @cart.chart_offers.pluck(:id) == (@chartoffers_tooked)
-      @chart_offer = ChartOffer.find_by(id: @chartoffers_tooked)
+    elsif @cart.chart_offers.include?(@chartoffer_tooked)
+      @chart_offer = ChartOffer.find_by(id: @chartoffer_tooked)
       @chart_offer.quantity += 1
     else
       @chart_offer = ChartOffer.create(offer_id: params[:offer_id], quantity: 1, chart_id: @cart.id)
     end
-    @cart.user = current_user if current_user # Se user ja estiver logado, ja atribui o cart para current_user, senao sera feito no checkout
+    # @cart.user = current_user if current_user # Se user ja estiver logado, ja atribui o cart para current_user, senao sera feito no checkout
     @cart.save
     if @chart_offer.save
       # Analisar aqui -> Pode ter mais de uma chartoffer?

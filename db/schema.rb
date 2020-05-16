@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_154264) do
+ActiveRecord::Schema.define(version: 2020_05_16_184706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,8 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
   end
 
   create_table "charts", force: :cascade do |t|
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_charts_on_user_id"
   end
 
   create_table "freight_rules", force: :cascade do |t|
@@ -106,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.bigint "subcategory_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parsed_weight"
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
@@ -189,15 +188,14 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
+    t.bigint "chart_id"
+    t.index ["chart_id"], name: "index_users_on_chart_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "chart_offers", "charts"
   add_foreign_key "chart_offers", "offers"
-  add_foreign_key "charts", "users"
   add_foreign_key "freight_rules", "freight_zones"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_zones", "stores"
@@ -214,4 +212,5 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
   add_foreign_key "user_ratings", "users"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
+  add_foreign_key "users", "charts"
 end
