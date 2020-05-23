@@ -10,15 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_04_01_223359) do
-=======
-ActiveRecord::Schema.define(version: 2020_04_11_142019) do
->>>>>>> ee674ae357b515c5f7baebc722e99a6d6ed5ec6f
-=======
+
 ActiveRecord::Schema.define(version: 2020_04_18_154264) do
->>>>>>> bf907ea32fe4309b2352ac1ef6aecf56344c5945
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,15 +25,12 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-=======
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
->>>>>>> ee674ae357b515c5f7baebc722e99a6d6ed5ec6f
   create_table "chart_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.integer "quantity"
