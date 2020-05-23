@@ -4,8 +4,8 @@ class Store < ApplicationRecord
 
   has_many :user_stores, dependent: :destroy
   has_many :user_ratings, dependent: :destroy
-  has_many :freight_zones, dependent: :destroy
-  has_many :freight_rules, dependent: :destroy
+  # has_many :freight_zones, dependent: :destroy
+  # has_many :freight_rules, dependent: :destroy
   has_many :offers, dependent: :destroy
   has_many :users, through: :user_stores
   has_many :users, through: :user_ratings

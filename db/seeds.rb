@@ -29,34 +29,34 @@ if Rails.env == 'development'
   puts "Stores: #{Store.count}"
   puts ""
 
-  # create freight zones
-  puts 'Criando Zonas de frete'
-  FreightZone.destroy_all
-  FreightZone.create!(zone: 'Sul', store: vendinha)
-  FreightZone.create!(zone: 'Oeste', store: vendinha)
-  FreightZone.create!(zone: 'Norte', store: vendinha)
+  # # create freight zones
+  # puts 'Criando Zonas de frete'
+  # FreightZone.destroy_all
+  # FreightZone.create!(zone: 'Sul', store: vendinha)
+  # FreightZone.create!(zone: 'Oeste', store: vendinha)
+  # FreightZone.create!(zone: 'Norte', store: vendinha)
 
-  FreightZone.create!(zone: 'Norte', store: budega)
-  FreightZone.create!(zone: 'Leste', store: budega)
+  # FreightZone.create!(zone: 'Norte', store: budega)
+  # FreightZone.create!(zone: 'Leste', store: budega)
 
-  FreightZone.create!(zone: 'Leste', store: marombas)
-  FreightZone.create!(zone: 'Sul', store: marombas)
+  # FreightZone.create!(zone: 'Leste', store: marombas)
+  # FreightZone.create!(zone: 'Sul', store: marombas)
 
-  FreightZone.create!(zone: 'Norte', store: savewhey)
+  # FreightZone.create!(zone: 'Norte', store: savewhey)
 
-  puts "Zonas de frete #{FreightZone.count}"
-  puts ""
+  # puts "Zonas de frete #{FreightZone.count}"
+  # puts ""
 
-  # criando freight rules
-  puts "Criando regras de frete"
-  zones = FreightZone.last(4)
-  FreightRule.destroy_all
-  FreightRule.create!(limit_price: 120.00, discount: 20, store: vendinha)
-  zones.each do |zone|
-    FreightRule.create!(limit_price: 100.00, discount: 20, freight_zone: zone)
-  end
-  puts "Regras de frete criadas #{FreightZone.count}"
-  puts ''
+  # # criando freight rules
+  # puts "Criando regras de frete"
+  # zones = FreightZone.last(4)
+  # FreightRule.destroy_all
+  # FreightRule.create!(limit_price: 120.00, discount: 20, store: vendinha)
+  # zones.each do |zone|
+  #   FreightRule.create!(limit_price: 100.00, discount: 20, freight_zone: zone)
+  # end
+  # puts "Regras de frete criadas #{FreightZone.count}"
+  # puts ''
 
   # cleaning products section
 

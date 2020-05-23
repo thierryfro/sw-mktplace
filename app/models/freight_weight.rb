@@ -1,0 +1,2 @@
+class FreightWeight < ApplicationRecord
+end

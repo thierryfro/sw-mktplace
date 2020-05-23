@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_04_18_154264) do
-
+ActiveRecord::Schema.define(version: 2020_05_23_200747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,22 +47,23 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
   end
 
   create_table "freight_rules", force: :cascade do |t|
-    t.float "limit_price"
-    t.float "discount"
-    t.bigint "freight_zone_id"
+    t.integer "price"
+    t.string "name"
     t.bigint "store_id"
+    t.bigint "zip_code_zone_id"
+    t.bigint "freight_weight_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["freight_zone_id"], name: "index_freight_rules_on_freight_zone_id"
+    t.index ["freight_weight_id"], name: "index_freight_rules_on_freight_weight_id"
     t.index ["store_id"], name: "index_freight_rules_on_store_id"
+    t.index ["zip_code_zone_id"], name: "index_freight_rules_on_zip_code_zone_id"
   end
 
-  create_table "freight_zones", force: :cascade do |t|
-    t.string "zone"
-    t.bigint "store_id"
+  create_table "freight_weights", force: :cascade do |t|
+    t.integer "min_weight"
+    t.integer "max_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_freight_zones_on_store_id"
   end
 
   create_table "offer_products", force: :cascade do |t|
@@ -102,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.string "flavor"
     t.string "ean"
     t.string "description"
+    t.integer "parsed_weight"
     t.integer "api_code"
     t.bigint "brand_id"
     t.bigint "category_id"
@@ -191,18 +191,23 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "zip_code_zones", force: :cascade do |t|
+    t.string "start_zip_code"
+    t.string "end_zip_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "chart_offers", "charts"
   add_foreign_key "chart_offers", "offers"
   add_foreign_key "charts", "users"
-  add_foreign_key "freight_rules", "freight_zones"
+  add_foreign_key "freight_rules", "freight_weights"
   add_foreign_key "freight_rules", "stores"
-  add_foreign_key "freight_zones", "stores"
+  add_foreign_key "freight_rules", "zip_code_zones"
   add_foreign_key "offer_products", "offers"
   add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"

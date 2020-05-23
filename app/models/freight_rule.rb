@@ -1,0 +1,2 @@
+class FreightRule < ApplicationRecord
+end
