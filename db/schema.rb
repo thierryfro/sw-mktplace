@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_23_200747) do
+ActiveRecord::Schema.define(version: 2020_05_24_003117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,20 +50,18 @@ ActiveRecord::Schema.define(version: 2020_05_23_200747) do
     t.integer "price"
     t.string "name"
     t.bigint "store_id"
-    t.bigint "zip_code_zone_id"
-    t.bigint "freight_weight_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["freight_weight_id"], name: "index_freight_rules_on_freight_weight_id"
     t.index ["store_id"], name: "index_freight_rules_on_store_id"
-    t.index ["zip_code_zone_id"], name: "index_freight_rules_on_zip_code_zone_id"
   end
 
   create_table "freight_weights", force: :cascade do |t|
     t.integer "min_weight"
     t.integer "max_weight"
+    t.bigint "freight_rule_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["freight_rule_id"], name: "index_freight_weights_on_freight_rule_id"
   end
 
   create_table "offer_products", force: :cascade do |t|
@@ -205,9 +203,8 @@ ActiveRecord::Schema.define(version: 2020_05_23_200747) do
   add_foreign_key "chart_offers", "charts"
   add_foreign_key "chart_offers", "offers"
   add_foreign_key "charts", "users"
-  add_foreign_key "freight_rules", "freight_weights"
   add_foreign_key "freight_rules", "stores"
-  add_foreign_key "freight_rules", "zip_code_zones"
+  add_foreign_key "freight_weights", "freight_rules"
   add_foreign_key "offer_products", "offers"
   add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"

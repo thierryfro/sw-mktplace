@@ -1,3 +1,4 @@
+require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
@@ -29,34 +30,49 @@ if Rails.env == 'development'
   puts "Stores: #{Store.count}"
   puts ""
 
-  # # create freight zones
-  # puts 'Criando Zonas de frete'
-  # FreightZone.destroy_all
-  # FreightZone.create!(zone: 'Sul', store: vendinha)
-  # FreightZone.create!(zone: 'Oeste', store: vendinha)
-  # FreightZone.create!(zone: 'Norte', store: vendinha)
+  # creating freight rules
+  puts "Criando regras de frete"
 
-  # FreightZone.create!(zone: 'Norte', store: budega)
-  # FreightZone.create!(zone: 'Leste', store: budega)
+  Store.all.each do |store|
+    names = ["Jato", "Foguete", "Pesado", "Rapida"]
+    3.times do
+      name = names.sample
+      names.delete(name)
+      FreightRule.create(
+        freight_weight: FreightWeight.all.sample,
+        zip_code_zone: ZipCodeZone.all.sample,
+        store: store,
+        price: rand(5..10),
+        name: names.sample
+      )
+    end
+  end
 
-  # FreightZone.create!(zone: 'Leste', store: marombas)
-  # FreightZone.create!(zone: 'Sul', store: marombas)
+  # creating freight zones
+  puts "Criando zonas de frete"
+  ZipCodeZone.destroy_all
+  csv_options = { col_sep: ',', headers: :first_row }
+  filepath    = File.dirname(__FILE__) + '/range_ceps.csv'
+  CSV.foreach(filepath, csv_options) do |row|
+    ZipCodeZone.create!(
+      name: row["Zona"],
+      district: row["Bairros"].match(/\A[A-ZÃÕÁÓÉÍÚÂÊÇ]+(\s(E|DO))?(\s[A-ZÃÕÁÓÍÉÚÂÊÇ]+)?/).to_s.strip,
+      start_zip_code: "#{row["Start_Code"]}000",
+      end_zip_code: "#{row["End_Code"]}999"
+    )
+  end
+  puts '-' * 15
 
-  # FreightZone.create!(zone: 'Norte', store: savewhey)
-
-  # puts "Zonas de frete #{FreightZone.count}"
-  # puts ""
-
-  # # criando freight rules
-  # puts "Criando regras de frete"
-  # zones = FreightZone.last(4)
-  # FreightRule.destroy_all
-  # FreightRule.create!(limit_price: 120.00, discount: 20, store: vendinha)
-  # zones.each do |zone|
-  #   FreightRule.create!(limit_price: 100.00, discount: 20, freight_zone: zone)
-  # end
-  # puts "Regras de frete criadas #{FreightZone.count}"
-  # puts ''
+  # creating freight zones
+  puts "Criando regras de peso"
+  FreightWeight.destroy_all
+  10.times do
+    FreightWeight.create!(
+      min_weight: rand(1..3) * 100,
+      max_weight: rand(4..6) * 100
+    )
+  end
+  puts '-' * 15
 
   # cleaning products section
 
