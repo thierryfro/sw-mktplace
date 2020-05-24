@@ -36,10 +36,11 @@ if Rails.env == 'development'
   csv_options = { col_sep: ',', headers: :first_row }
   filepath    = File.dirname(__FILE__) + '/range_ceps.csv'
   zip_code_zones = []
+  district_pattern = /\A[A-ZÃÕÁÓÉÍÚÂÊÇ]+(\s(E|DO))?(\s[A-ZÃÕÁÓÍÉÚÂÊÇ]+)?/
   CSV.foreach(filepath, csv_options) do |row|
     zip_code_zones << {
       name: row['Zona'],
-      district: row['Bairros'].match(/\A[A-ZÃÕÁÓÉÍÚÂÊÇ]+(\s(E|DO))?(\s[A-ZÃÕÁÓÍÉÚÂÊÇ]+)?/).to_s.strip,
+      district: row['Bairros'].match(district_pattern).to_s.strip,
       start_zip_code: "#{row['Start_Code']}000",
       end_zip_code: "#{row['End_Code']}999"
     }
