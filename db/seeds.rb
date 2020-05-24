@@ -62,67 +62,67 @@ if Rails.env == 'development'
     end
   end
 
-  #   # cleaning products section
+  # cleaning products section
 
-  #   puts "Products antigos #{Product.count}"
-  #   puts "Brands antigos #{Brand.count}"
-  #   puts "Categories antigos #{Category.count}"
-  #   puts "Subcategories antigos #{Subcategory.count}"
-  #   puts ""
+  puts "Products antigos #{Product.count}"
+  puts "Brands antigos #{Brand.count}"
+  puts "Categories antigos #{Category.count}"
+  puts "Subcategories antigos #{Subcategory.count}"
+  puts ""
 
-  #   Brand.destroy_all
-  #   puts "Products #{Product.count}"
-  #   puts "Brands #{Brand.count}"
+  Brand.destroy_all
+  puts "Products #{Product.count}"
+  puts "Brands #{Brand.count}"
 
-  #   Category.destroy_all
-  #   puts "Categories #{Category.count}"
+  Category.destroy_all
+  puts "Categories #{Category.count}"
 
-  #   Subcategory.destroy_all
-  #   puts "Subcategories #{Subcategory.count}"
-  #   puts ''
+  Subcategory.destroy_all
+  puts "Subcategories #{Subcategory.count}"
+  puts ''
 
-  #   # create products section
-  #   puts "Criando sessão de produtos"
+  # create products section
+  puts "Criando sessão de produtos"
 
-  #   Rake::Task['seed_product_db'].invoke
-  #   puts "Brands #{Brand.count}"
-  #   puts ''
-  #   puts "Categories #{Category.count}"
-  #   puts ''
-  #   puts "Subcategories #{Subcategory.count}"
-  #   puts ''
-  #   puts "Products #{Product.count}"
-  #   puts ''
-  #   puts "Product photos #{ProductPhoto.count}"
-  #   puts ''
+  Rake::Task['seed_product_db'].invoke
+  puts "Brands #{Brand.count}"
+  puts ''
+  puts "Categories #{Category.count}"
+  puts ''
+  puts "Subcategories #{Subcategory.count}"
+  puts ''
+  puts "Products #{Product.count}"
+  puts ''
+  puts "Product photos #{ProductPhoto.count}"
+  puts ''
 
-  #   # create offers
-  #   puts 'Criando ofertas'
-  #   Offer.destroy_all
+  # create offers
+  puts 'Criando ofertas'
+  Offer.destroy_all
 
-  #   products = Product.all
+  products = Product.all
 
-  #   20.times do
-  #     offer = Offer.create!(store: vendinha, stock: 40, price: 80.00, active: true)
-  #     OfferProduct.create(offer: offer, product: products.sample)
-  #     OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
-  #   end
+  20.times do
+    offer = Offer.create!(store: vendinha, stock: 40, price: 80.00, active: true)
+    OfferProduct.create(offer: offer, product: products.sample)
+    OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
+  end
 
-  #   20.times do
-  #     offer = Offer.create!(store: budega, stock: 50, price: 60.00, active: true)
-  #     OfferProduct.create(offer: offer, product: products.sample)
-  #     OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
-  #   end
+  20.times do
+    offer = Offer.create!(store: budega, stock: 50, price: 60.00, active: true)
+    OfferProduct.create(offer: offer, product: products.sample)
+    OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
+  end
 
-  #   20.times do
-  #     offer = Offer.create!(store: marombas, stock: 20, price: 120.00, active: true)
-  #     OfferProduct.create(offer: offer, product: products.sample)
-  #     OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
-  #   end
+  20.times do
+    offer = Offer.create!(store: marombas, stock: 20, price: 120.00, active: true)
+    OfferProduct.create(offer: offer, product: products.sample)
+    OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
+  end
 
-  #   puts "Offers #{Offer.count}"
-  #   puts "Offer Products #{OfferProduct.count}"
+  puts "Offers #{Offer.count}"
+  puts "Offer Products #{OfferProduct.count}"
 
-  #   puts "End of seed"
+  puts "End of seed"
 
 end
