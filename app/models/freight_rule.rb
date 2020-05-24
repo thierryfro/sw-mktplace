@@ -1,11 +1,11 @@
 class FreightRule < ApplicationRecord
-    belongs_to :freight_weight
-    belongs_to :zip_code_zone
-    belongs_to :store
+  belongs_to :store
+  has_many :freight_weights, dependent: :destroy
+  has_many :zip_code_zones, dependent: :destroy
 
-    accepts_nested_attributes_for :zip_code_zone,
-                                  :freight_weight
+  accepts_nested_attributes_for :zip_code_zones, allow_destroy: true
+  accepts_nested_attributes_for :freight_weights, allow_destroy: true
 
-    validates :price, presence: true
-    validates :zip_code_zone_id, uniqueness: {scope: :freight_weight_id}
+  validates :price, presence: true
+  validates_uniqueness_of :price, scope: %i[freight_weights zip_code_zones]
 end

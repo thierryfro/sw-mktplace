@@ -194,10 +194,14 @@ ActiveRecord::Schema.define(version: 2020_05_24_003117) do
   end
 
   create_table "zip_code_zones", force: :cascade do |t|
+    t.string "name"
+    t.string "district"
     t.string "start_zip_code"
     t.string "end_zip_code"
+    t.bigint "freight_rule_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["freight_rule_id"], name: "index_zip_code_zones_on_freight_rule_id"
   end
 
   add_foreign_key "chart_offers", "charts"
@@ -218,4 +222,5 @@ ActiveRecord::Schema.define(version: 2020_05_24_003117) do
   add_foreign_key "user_ratings", "users"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
+  add_foreign_key "zip_code_zones", "freight_rules"
 end
