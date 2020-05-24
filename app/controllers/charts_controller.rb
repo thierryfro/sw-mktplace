@@ -14,18 +14,22 @@ class ChartsController < ApplicationController
     end
   end
 
-  def session_offers
-    # Guardas as ofertas escolhidas no cart da session
-    session_offers = []
-    @cart.chart_offers do |offer|
-      session_offers << offer
-    end
-  end
+  # def session_offers
+  #   # Guardas as ofertas escolhidas no cart da session
+  #   session_offers = []
+  #   @cart.chart_offers do |offer|
+  #     session_offers << offer
+  #   end
+  # end
 
   def checkout
     # Atribuir user ao cart
     current_user.chart_id = @cart.id if current_user.chart_id.nil?
     # Passar as ofertas da session pro cart
+    if @cart
+      current_user.cart.cart_offers.destroy_all # limpa o carrinho velho
+      @cart.cart_offers.each{ |cart_offer| cart_offer.cart = current_user.cart } # muda os produtos para o carrinho certo
+    end
     # @car.chart_offers = session_offers()
     # Começo da Order
     # Configura credenciais
