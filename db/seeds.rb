@@ -47,19 +47,37 @@ if Rails.env == 'development'
   end
 
   Store.all.each do |store|
-    names = %w[Jato Semi Pesado]
+    freights = [
+      {
+        name: 'Jato',
+        freight_weight_attributes: {
+          min_weight: 0,
+          max_weight: 1000
+        }
+      },
+      {
+        name: 'Semi',
+        freight_weight_attributes: {
+          min_weight: 1000,
+          max_weight: 3000
+        }
+      },
+      {
+        name: 'Pesado',
+        freight_weight_attributes: {
+          min_weight: 3000,
+          max_weight: 100_000
+        }
+      }
+    ]
     store_shipping_zones = zip_code_zones.sample(rand(5..15))
-    names.each_with_index do |name, index|
-      FreightRule.create!(
-        store: store,
-        price: (index + 1) * 5,
-        name: name,
-        freight_weights_attributes: [{
-          min_weight: (index + 2) * 100,
-          max_weight: (index + 4) * 200
-        }],
-        zip_code_zones_attributes: store_shipping_zones
-      )
+    freights.each_with_index do |freight, index|
+      freight.merge!({
+                       store: store,
+                       price: (index + 1) * 5,
+                       zip_code_zones_attributes: store_shipping_zones
+                     })
+      FreightRule.create!(freight)
     end
   end
 
@@ -69,7 +87,7 @@ if Rails.env == 'development'
   puts "Brands antigos #{Brand.count}"
   puts "Categories antigos #{Category.count}"
   puts "Subcategories antigos #{Subcategory.count}"
-  puts ""
+  puts ''
 
   Brand.destroy_all
   puts "Products #{Product.count}"
@@ -83,7 +101,7 @@ if Rails.env == 'development'
   puts ''
 
   # create products section
-  puts "Criando sessão de produtos"
+  puts 'Criando sessão de produtos'
 
   Rake::Task['seed_product_db'].invoke
   puts "Brands #{Brand.count}"
@@ -106,24 +124,30 @@ if Rails.env == 'development'
   20.times do
     offer = Offer.create!(store: vendinha, stock: 40, price: 80.00, active: true)
     OfferProduct.create(offer: offer, product: products.sample)
-    OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
+    if rand(100) < 50
+      OfferProduct.create(offer: offer, product: products.sample)
+    end
   end
 
   20.times do
     offer = Offer.create!(store: budega, stock: 50, price: 60.00, active: true)
     OfferProduct.create(offer: offer, product: products.sample)
-    OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
+    if rand(100) < 50
+      OfferProduct.create(offer: offer, product: products.sample)
+    end
   end
 
   20.times do
     offer = Offer.create!(store: marombas, stock: 20, price: 120.00, active: true)
     OfferProduct.create(offer: offer, product: products.sample)
-    OfferProduct.create(offer: offer, product: products.sample) if rand(100) < 50
+    if rand(100) < 50
+      OfferProduct.create(offer: offer, product: products.sample)
+    end
   end
 
   puts "Offers #{Offer.count}"
   puts "Offer Products #{OfferProduct.count}"
 
-  puts "End of seed"
+  puts 'End of seed'
 
 end
