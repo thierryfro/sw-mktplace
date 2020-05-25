@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_003117) do
+ActiveRecord::Schema.define(version: 2020_05_25_141205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2020_05_24_003117) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "freight_rule_id"
+    t.index ["freight_rule_id"], name: "index_charts_on_freight_rule_id"
     t.index ["user_id"], name: "index_charts_on_user_id"
   end
 
@@ -206,6 +208,7 @@ ActiveRecord::Schema.define(version: 2020_05_24_003117) do
 
   add_foreign_key "chart_offers", "charts"
   add_foreign_key "chart_offers", "offers"
+  add_foreign_key "charts", "freight_rules"
   add_foreign_key "charts", "users"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_weights", "freight_rules"

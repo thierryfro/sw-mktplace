@@ -26,10 +26,7 @@ class ChartOffer < ApplicationRecord
         'freight_weights.min_weight <= ? AND freight_weights.max_weight >= ?',
         weight, weight
       )
-      .where(
-        'zip_code_zones.start_zip_code <= ? AND zip_code_zones.end_zip_code >= ?',
-        '02000000', '02000000'
-      )
+      .where('zip_code_zones.start_zip_code <= ? AND zip_code_zones.end_zip_code >= ?','04900000', '04900000')
       .first
   end
 
@@ -39,8 +36,11 @@ class ChartOffer < ApplicationRecord
       total + (offer_weight * current_offer.quantity)
     end
     freight_rule = find_freight_rule(total_weight)
-    puts total_weight
-    puts (freight_rule ? freight_rule.name : "Essa loja não entrega na sua região")
+    if freight_rule
+      chart.update!(freight_rule_id: freight_rule.id)
+    else
+      chart.update!(freight_rule_id: nil)
+      # 'Essa loja não entrega na sua região'
+    end
   end
 end
-
