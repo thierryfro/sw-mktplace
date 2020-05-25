@@ -5,7 +5,7 @@ class ChartsController < ApplicationController
 
   def show
     if current_user
-      @cart = Chart.where(user_id: current_user).first
+      @cart = Chart.find(current_user.id)
       @chart_offers = ChartOffer.where(chart_id: @cart)
     else
       @cart = Chart.find(session[:chart_id])

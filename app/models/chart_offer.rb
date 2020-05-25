@@ -7,7 +7,7 @@ class ChartOffer < ApplicationRecord
   validates :quantity, presence: true
 
   before_save :calculate_freight,
-              unless: proc { |order| order.chart.chart_offers.empty? }
+              unless: proc { |current_offer| current_offer.chart.chart_offers.empty? }
 
   def products
     offer.products
