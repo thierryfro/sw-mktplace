@@ -6,8 +6,7 @@ class ChartOffer < ApplicationRecord
 
   validates :quantity, presence: true
 
-  before_save :calculate_freight,
-              unless: proc { |current_offer| current_offer.chart.chart_offers.empty? }
+  after_save :calculate_freight
 
   def products
     offer.products
@@ -17,8 +16,9 @@ class ChartOffer < ApplicationRecord
     offer.store
   end
 
-  def find_freight_rule(weight)
-    store_freight_rules = offer.store.freight_rules
+  def find_freight_rule
+    weight = chart.total_weight
+    store_freight_rules = store.freight_rules
     store_freight_rules
       .joins(:freight_weight)
       .joins(:zip_code_zones)
@@ -34,13 +34,9 @@ class ChartOffer < ApplicationRecord
   end
 
   def calculate_freight
-    # sum all chart products parsed_weights
-    total_weight = chart.chart_offers.reduce(0) do |total, current_offer|
-      offer_weight = current_offer.products.sum(&:parsed_weight)
-      total + (offer_weight * current_offer.quantity)
-    end
+    return chart.update!(freight_rule_id: nil) if chart.chart_offers.empty?
     # find freight rule to match with weight X zip_code
-    freight_rule = find_freight_rule(total_weight)
+    freight_rule = find_freight_rule
     if freight_rule
       chart.update!(freight_rule_id: freight_rule.id)
     else
