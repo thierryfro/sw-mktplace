@@ -23,13 +23,22 @@ class ChartsController < ApplicationController
   # end
 
   def checkout
-    # Atribuir user ao cart
-    current_user.chart_id = @cart.id if current_user.chart_id.nil?
-    # Passar as ofertas da session pro cart
-    if @cart
-      current_user.cart.cart_offers.destroy_all # limpa o carrinho velho
-      @cart.cart_offers.each{ |cart_offer| cart_offer.cart = current_user.cart } # muda os produtos para o carrinho certo
-    end
+    raise
+    # Sem user chega o @cart == session[:chart_id]
+    # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
+
+    # Se chegar com user logado, limpar o carrinho que ele ja tinha, e colocar os offers novas
+
+    # current_user.chart_id = @cart.id if current_user.chart_id.nil?
+    # # Passar as ofertas da session pro cart
+    # if @cart
+    #   @cart.chart_offers.destroy_all # limpa o carrinho velho
+    #   @cart = Chart.find(current_user.chart_id)
+    #   @cart.chart_offers.each do |cart_offer|
+    #     cart_offer.cart = current_user.cart }
+    #   end
+    # end
+
     # @car.chart_offers = session_offers()
     # Começo da Order
     # Configura credenciais
