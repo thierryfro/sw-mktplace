@@ -6,7 +6,6 @@ class ChartOffer < ApplicationRecord
 
   validates :quantity, presence: true
 
-  # 
   after_save do
     chart.update_freight
   end
