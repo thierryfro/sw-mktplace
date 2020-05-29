@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FreightZoneTest < ActiveSupport::TestCase
+class ZipCodeZoneTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

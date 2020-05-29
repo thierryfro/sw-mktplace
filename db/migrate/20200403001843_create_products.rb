@@ -8,6 +8,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string 'flavor'
       t.string 'ean'
       t.string 'description'
+      t.integer 'parsed_weight'
       t.integer 'api_code'
       t.references :brand, foreign_key: true
       t.references :category, foreign_key: true
