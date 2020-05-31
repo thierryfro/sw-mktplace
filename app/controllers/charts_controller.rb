@@ -7,11 +7,13 @@ class ChartsController < ApplicationController
 
   def show
     if current_user
-      @cart = Chart.find_by(user_id: current_user)
-      @chart_offers = @cart.chart_offers
+      @cart = Chart.find(current_user.id)
+      @chart_offers = ChartOffer.where(chart_id: @cart)
     else
+      @cart = Chart.find(session[:chart_id])
       @chart_offers = ChartOffer.where(chart_id: session[:chart_id])
     end
+    @freight = @cart.freight_rule
   end
 
   def checkout

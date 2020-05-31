@@ -8,3 +8,12 @@ Quantidade de ofertas no carrinho: <%= @chart_offers.count %> <br>
 <% end %>
 <%= link_to 'Continuar comprando', offers_path %>
 
+<% if @freight %>
+  <p>Sua entrega será do tipo <%= "#{@freight.name} e custará R$#{@freight.price}" %></p>
+<% elsif @chart_offers.present? %>
+  <p>Essa loja nao entrega na sua região</p>
+<% end %>
+
+<%= link_to 'Checkout', checkout_path %> <br>
+<%= link_to 'Continuar comprando', root_path %>
+
