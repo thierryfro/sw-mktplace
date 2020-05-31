@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_154264) do
+ActiveRecord::Schema.define(version: 2020_05_31_164509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "street"
+    t.string "number"
+    t.string "neighborhood"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.string "complement"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -82,6 +96,34 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_id"], name: "index_offers_on_store_id"
+  end
+
+  create_table "order_offers", force: :cascade do |t|
+    t.bigint "offer_id"
+    t.bigint "order_id"
+    t.string "recorded_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_order_offers_on_offer_id"
+    t.index ["order_id"], name: "index_order_offers_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "store_id"
+    t.bigint "user_id"
+    t.bigint "address_id"
+    t.string "preference_id"
+    t.string "payment_id"
+    t.string "payment_status"
+    t.string "payment_status_detail"
+    t.string "merchant_order_id"
+    t.string "processing_mode"
+    t.string "merchant_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["store_id"], name: "index_orders_on_store_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_photos", force: :cascade do |t|
@@ -189,12 +231,11 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "chart_offers", "charts"
   add_foreign_key "chart_offers", "offers"
   add_foreign_key "charts", "users"
@@ -204,6 +245,11 @@ ActiveRecord::Schema.define(version: 2020_04_18_154264) do
   add_foreign_key "offer_products", "offers"
   add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"
+  add_foreign_key "order_offers", "offers"
+  add_foreign_key "order_offers", "orders"
+  add_foreign_key "orders", "addresses"
+  add_foreign_key "orders", "stores"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_photos", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"

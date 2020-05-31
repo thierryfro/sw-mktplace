@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'products/index'
   get 'payments/mercado'
-  post 'procesar-pago', to: 'orders#return' # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
+  post 'procesar-pago', to: 'orders#create' # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
 
   # root to index
   root to: 'pages#home'
