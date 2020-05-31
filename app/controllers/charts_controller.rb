@@ -14,32 +14,27 @@ class ChartsController < ApplicationController
     end
   end
 
-  # def session_offers
-  #   # Guardas as ofertas escolhidas no cart da session
-  #   session_offers = []
-  #   @cart.chart_offers do |offer|
+  # def session_offers(chart_offers)
+  #   offers = []
+  #   chart_offers.each do |offer|
   #     session_offers << offer
   #   end
+  #   offers
   # end
 
   def checkout
-    raise
+
     # Sem user chega o @cart == session[:chart_id]
+    @session_cart = Chart.find(session[:chart_id])
+
     # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
+    unless @session_cart.chart_offers.empty?
+      @cart.chart_offers.destroy_all
+      @session_cart.chart_offers.each do |cart_offer|
+        @cart.chart_offers << cart_offer
+      end
+    end
 
-    # Se chegar com user logado, limpar o carrinho que ele ja tinha, e colocar os offers novas
-
-    # current_user.chart_id = @cart.id if current_user.chart_id.nil?
-    # # Passar as ofertas da session pro cart
-    # if @cart
-    #   @cart.chart_offers.destroy_all # limpa o carrinho velho
-    #   @cart = Chart.find(current_user.chart_id)
-    #   @cart.chart_offers.each do |cart_offer|
-    #     cart_offer.cart = current_user.cart }
-    #   end
-    # end
-
-    # @car.chart_offers = session_offers()
     # Começo da Order
     # Configura credenciais
     $mp = MercadoPago.new(ENV['PROD_ACCESS_TOKEN'])
