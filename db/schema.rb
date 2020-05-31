@@ -29,17 +29,17 @@ ActiveRecord::Schema.define(version: 2020_05_16_184706) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "chart_offers", force: :cascade do |t|
+  create_table "cart_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.integer "quantity"
-    t.bigint "chart_id"
+    t.bigint "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["chart_id"], name: "index_chart_offers_on_chart_id"
-    t.index ["offer_id"], name: "index_chart_offers_on_offer_id"
+    t.index ["cart_id"], name: "index_cart_offers_on_cart_id"
+    t.index ["offer_id"], name: "index_cart_offers_on_offer_id"
   end
 
-  create_table "charts", force: :cascade do |t|
+  create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -188,14 +188,14 @@ ActiveRecord::Schema.define(version: 2020_05_16_184706) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "chart_id"
-    t.index ["chart_id"], name: "index_users_on_chart_id"
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_users_on_cart_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "chart_offers", "charts"
-  add_foreign_key "chart_offers", "offers"
+  add_foreign_key "cart_offers", "carts"
+  add_foreign_key "cart_offers", "offers"
   add_foreign_key "freight_rules", "freight_zones"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_zones", "stores"
@@ -212,5 +212,5 @@ ActiveRecord::Schema.define(version: 2020_05_16_184706) do
   add_foreign_key "user_ratings", "users"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
-  add_foreign_key "users", "charts"
+  add_foreign_key "users", "carts"
 end

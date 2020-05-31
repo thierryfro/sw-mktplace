@@ -3,9 +3,9 @@
 one:
   offer: one
   quantity: 1
-  chart: one
+  cart: one
 
 two:
   offer: two
   quantity: 1
-  chart: two
+  cart: two

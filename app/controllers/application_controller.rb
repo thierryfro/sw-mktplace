@@ -13,17 +13,17 @@ class ApplicationController < ActionController::Base
 
   # Cart methods
   def set_new_cart
-    @cart = Chart.create
-    current_user.chart_id = @cart.id if current_user
-    session[:chart_id] = @cart.id
+    @cart = Cart.create
+    current_user.cart_id = @cart.id if current_user
+    session[:cart_id] = @cart.id
   end
 
   def set_cart
     if current_user
-      @cart = Chart.find(current_user.chart_id)
+      @cart = Cart.find(current_user.cart_id)
     else
-      @cart = Chart.find(session[:chart_id])
-    # current_user.chart_id = @cart.id if current_user
+      @cart = Cart.find(session[:cart_id])
+    # current_user.cart_id = @cart.id if current_user
     end
   rescue ActiveRecord::RecordNotFound
     set_new_cart

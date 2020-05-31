@@ -1,0 +1,12 @@
+<h1>Meu carrinho</h1>
+
+Quantidade de ofertas no carrinho: <%= @cart_offers.count %> <br>
+<% @cart_offers.each do |cart_offer| %>
+  Quantidade: <%= cart_offer.quantity %> <%= link_to '+', add_cart_path(cart_offer.id), method: :post %> <%= link_to '-', decrease_cart_path(cart_offer.id), method: :post %>
+<% end %> <br>
+<% if @cart_offers.size > 0 %>
+  <%= link_to 'Checkout', checkout_path %> <br>
+<% end %>
+<%= link_to 'Continuar comprando', offers_path %>
+
+<%# raise %>
