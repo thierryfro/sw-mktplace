@@ -16,7 +16,14 @@ class OrdersController < ApplicationController
     #   merchant_account_id: params[:merchant_account_id]
     # }
     @order.user = current_user
-    @order.address = current_user.address_id
+    @order.address = current_user.address.first
+    @order.store = @cart.offers.first.store
+
+    @order.save!
+
+    @cart.offers.each {|offer| OrderOffer.create(order: @order, offer: offer, recorded_value: offer.price)}
+
+    @cart.destroy
 
     raise
 
