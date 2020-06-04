@@ -1,8 +1,8 @@
 
 
 //  import css libraries
- @import 'select2/dist/css/select2';
-
+@import 'select2/dist/css/select2';
+@import "font-awesome";
 
 // import default config
 @import "config/colors";
@@ -10,7 +10,7 @@
 @import "config/screens";
 
 // import components
-
+@import "components/index";
 
 // default configs
 
@@ -44,4 +44,14 @@ body {
     line-height: 1.6;
     color: var(--color-grey-dark-2);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+}
+
+header, footer {
+    background-color: $color-primary;
 }

@@ -1,0 +1,34 @@
+
+<header class="header">
+    <div class="left-nav">
+        <%= link_to root_path do %> 
+            <%= image_tag 'Logo@2x', alt:"suplemento rápido logo", class:"logo" %>
+        <% end %>
+    </div>
+    <div class="center-nav">
+        <% link_to '#', class:'address' do %> 
+            Av. Oswaldo Cruz, 28
+        <% end %>
+        <form action="#" class="search">
+            <input type="text" class="search_input" placeholder="Search hotels">
+            <button class="search_button">
+            </button>
+        </form>
+    </div>
+    <nav class="right-nav">
+        <div class="nav_session">
+            <div class="nav_session_login">
+                <%= link_to 'Login',  new_user_session_path %> <br>
+            </div>
+            <div class="nav_session_signup">
+                <%= link_to 'Logout', destroy_user_session_path, method: :delete %> <br>
+            </div>
+        </div>
+        <div class="nav_cart">
+            <%= link_to chart_path do %> 
+               <i class="fas fa-shopping-cart"></i>     
+               <span class="nav_cart_qtt">2</span>
+            <% end %>
+        </div>
+    </nav>
+</header>

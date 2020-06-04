@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  .logo {
+    left: 14rem;
+    width: 18.8rem;
+  }
+  .center-nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  .user-nav {
+    display: flex;
+  }
+}
