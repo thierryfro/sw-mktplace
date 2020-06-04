@@ -14,6 +14,14 @@ class CartsController < ApplicationController
     end
   end
 
+  # def session_offers(cart_offers)
+  #   offers = []
+  #   cart_offers.each do |offer|
+  #     session_offers << offer
+  #   end
+  #   offers
+  # end
+
   def checkout
 
     # Sem user chega o @cart == session[:cart_id]

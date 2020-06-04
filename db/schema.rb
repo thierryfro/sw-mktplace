@@ -23,7 +23,13 @@ ActiveRecord::Schema.define(version: 2020_05_16_184706) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cart_offers", force: :cascade do |t|
+create_table "categories", force: :cascade do |t|
+  t.string "name"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end
+
+create_table "cart_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.integer "quantity"
     t.bigint "cart_id"

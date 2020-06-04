@@ -4,6 +4,7 @@ class CartsOffersController < ApplicationController
 
 
   def create
+    # @cartoffer_tooked = CartOffer.where(offer_id: params[:offer_id], cart_id: @cart.id).pluck(:id) # Offer que ja estao no cart
     @cartoffer_tooked = CartOffer.find_by(cart_id: @cart, offer_id: params[:offer_id]);
     if @cart.cart_offers.empty?
       @cart_offer = CartOffer.create(offer_id: params[:offer_id], quantity: 1, cart_id: @cart.id)
