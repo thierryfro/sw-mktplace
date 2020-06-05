@@ -11,13 +11,13 @@
         <%= link_to '#', class:'address' do %> 
             Av. Oswaldo Cruz, 28
         <% end %>
-        <%= form_tag offers_path, method: :get, class: "search" do %>
+        <%= form_tag offers_path, method: :get, class: "nav_search" do %>
             <%= text_field_tag :query,
                 params[:query],
-                class: "search_input",
+                class: "nav_search_input",
                 placeholder: "O que deseja buscar?"
             %>
-            <%= button_tag type: "submit", class: "search_button" do %>
+            <%= button_tag type: "submit", class: "nav_search_button" do %>
                 <i class="fa fa-search"></i>
             <% end %>
         <% end %>
