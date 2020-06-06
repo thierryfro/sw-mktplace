@@ -12,6 +12,7 @@ class CartsController < ApplicationController
     else
       @cart_offers = CartOffer.where(cart_id: session[:cart_id])
     end
+    @freight = @cart.freight_rule
   end
 
   # def session_offers(cart_offers)

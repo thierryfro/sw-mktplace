@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_184706) do
+
+ActiveRecord::Schema.define(version: 2020_05_31_130703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +43,8 @@ create_table "cart_offers", force: :cascade do |t|
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "freight_rule_id"
+    t.index ["freight_rule_id"], name: "index_carts_on_freight_rule_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -51,22 +54,21 @@ create_table "cart_offers", force: :cascade do |t|
   end
 
   create_table "freight_rules", force: :cascade do |t|
-    t.float "limit_price"
-    t.float "discount"
-    t.bigint "freight_zone_id"
+    t.integer "price"
+    t.string "name"
     t.bigint "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["freight_zone_id"], name: "index_freight_rules_on_freight_zone_id"
     t.index ["store_id"], name: "index_freight_rules_on_store_id"
   end
 
-  create_table "freight_zones", force: :cascade do |t|
-    t.string "zone"
-    t.bigint "store_id"
+  create_table "freight_weights", force: :cascade do |t|
+    t.integer "min_weight"
+    t.integer "max_weight"
+    t.bigint "freight_rule_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_freight_zones_on_store_id"
+    t.index ["freight_rule_id"], name: "index_freight_weights_on_freight_rule_id"
   end
 
   create_table "offer_products", force: :cascade do |t|
@@ -104,13 +106,14 @@ create_table "cart_offers", force: :cascade do |t|
     t.string "flavor"
     t.string "ean"
     t.string "description"
+    t.integer "parsed_weight"
     t.integer "api_code"
     t.bigint "brand_id"
     t.bigint "category_id"
     t.bigint "subcategory_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "parsed_weight"
+    t.integer "product_code"
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
@@ -200,11 +203,23 @@ create_table "cart_offers", force: :cascade do |t|
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "zip_code_zones", force: :cascade do |t|
+    t.string "name"
+    t.string "district"
+    t.string "start_zip_code"
+    t.string "end_zip_code"
+    t.bigint "freight_rule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freight_rule_id"], name: "index_zip_code_zones_on_freight_rule_id"
+  end
+
+
   add_foreign_key "cart_offers", "carts"
   add_foreign_key "cart_offers", "offers"
-  add_foreign_key "freight_rules", "freight_zones"
+  add_foreign_key "carts", "freight_rules"
   add_foreign_key "freight_rules", "stores"
-  add_foreign_key "freight_zones", "stores"
+  add_foreign_key "freight_weights", "freight_rules"
   add_foreign_key "offer_products", "offers"
   add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"
@@ -219,4 +234,28 @@ create_table "cart_offers", force: :cascade do |t|
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
   add_foreign_key "users", "carts"
+  add_foreign_key "zip_code_zones", "freight_rules"
+
+
+  # add_foreign_key "carts", "freight_rules"
+  # add_foreign_key "cart_offers", "carts"
+  # add_foreign_key "cart_offers", "offers"
+  # add_foreign_key "freight_rules", "freight_zones"
+  # add_foreign_key "freight_rules", "stores"
+  # add_foreign_key "freight_weights", "freight_rules"
+  # add_foreign_key "offer_products", "offers"
+  # add_foreign_key "offer_products", "products"
+  # add_foreign_key "offers", "stores"
+  # add_foreign_key "product_photos", "products"
+  # add_foreign_key "products", "brands"
+  # add_foreign_key "products", "categories"
+  # add_foreign_key "products", "subcategories"
+  # add_foreign_key "subcategories", "categories"
+  # add_foreign_key "taggings", "tags"
+  # add_foreign_key "user_ratings", "stores"
+  # add_foreign_key "user_ratings", "users"
+  # add_foreign_key "user_stores", "stores"
+  # add_foreign_key "user_stores", "users"
+  # add_foreign_key "users", "carts"
+  # add_foreign_key "zip_code_zones", "freight_rules"
 end

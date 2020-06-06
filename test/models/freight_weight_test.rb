@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FreightZonesControllerTest < ActionDispatch::IntegrationTest
+class FreightWeightTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

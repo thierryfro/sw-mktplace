@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # Cart methods
   def set_new_cart
     @cart = Cart.create
-    current_user.cart_id = @cart.id if current_user
+    current_user.update(cart_id: @cart.id) if current_user
     session[:cart_id] = @cart.id
   end
 
@@ -23,15 +23,13 @@ class ApplicationController < ActionController::Base
       @cart = Cart.find(current_user.cart_id)
     else
       @cart = Cart.find(session[:cart_id])
-    # current_user.cart_id = @cart.id if current_user
+      # current_user.cart_id = @cart.id if current_user
     end
   rescue ActiveRecord::RecordNotFound
     set_new_cart
   end
 
   def custom_param_devise
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:birthdate])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name, :birthdate])
   end
 end
