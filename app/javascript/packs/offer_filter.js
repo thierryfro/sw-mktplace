@@ -1,12 +1,10 @@
 const offerFilter = () => {
-  const offersIndex = document.getElementById('offers');
-  if ( offersIndex ) {
-    var checkBoxes = document.querySelectorAll(".form-check-input");
-    var form = document.querySelector('form');
-
+  const sidebarForm = document.querySelector("#sidebar_form");
+  if (sidebarForm) {
+    const checkBoxes = document.querySelectorAll(".form_check");
     for (const check of checkBoxes) {
-      check.addEventListener( 'change', function() {
-        Rails.fire(form, 'submit');
+      check.addEventListener("click", function () {
+        Rails.fire(sidebarForm, "submit");
       });
     }
   }
