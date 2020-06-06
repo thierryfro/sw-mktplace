@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   get 'pages/home'
   get 'products/index'
+  get 'payments/mercado'
+  post 'procesar-pago', to: 'orders#return' # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
+
   # root to index
   root to: 'pages#home'
 
@@ -26,10 +29,10 @@ Rails.application.routes.draw do
   end
 
   #Cart
-  post '/chart_offer/:offer_id', to: 'charts_offers#create', as: 'create_cart_offer'
-  get '/chart', to: 'charts#show'
-  get '/checkout', to: 'charts#checkout'
-  post '/chart/:chart_offer_id/add', to: 'charts_offers#add', as: 'add_cart'
-  post '/chart/:chart_offer_id/decrease', to: 'charts_offers#remove', as: 'decrease_cart'
+  post '/cart_offer/:offer_id', to: 'carts_offers#create', as: 'create_cart_offer'
+  get '/cart', to: 'carts#show'
+  get '/checkout', to: 'carts#checkout'
+  post '/cart/:cart_offer_id/add', to: 'carts_offers#add', as: 'add_cart'
+  post '/cart/:cart_offer_id/decrease', to: 'carts_offers#remove', as: 'decrease_cart'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

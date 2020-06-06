@@ -47,6 +47,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'validates_cpf_cnpj' # validate cnpj from stores
 gem "valid_email2" # validate email from users and sotres
 gem 'acts-as-taggable-on', '~> 6.0' # gema para pesquisa customizazda
+gem 'mercadopago-sdk' # pagamento
 gem "font-awesome-rails"
 
 

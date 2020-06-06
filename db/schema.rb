@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_05_31_130703) do
 
   # These are extensions that must be enabled in order to support this database
@@ -23,29 +24,33 @@ ActiveRecord::Schema.define(version: 2020_05_31_130703) do
     t.datetime "updated_at", null: false
   end
 
+create_table "categories", force: :cascade do |t|
+  t.string "name"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end
+
+create_table "cart_offers", force: :cascade do |t|
+    t.bigint "offer_id"
+    t.integer "quantity"
+    t.bigint "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_offers_on_cart_id"
+    t.index ["offer_id"], name: "index_cart_offers_on_offer_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "freight_rule_id"
+    t.index ["freight_rule_id"], name: "index_carts_on_freight_rule_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "chart_offers", force: :cascade do |t|
-    t.bigint "offer_id"
-    t.integer "quantity"
-    t.bigint "chart_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chart_id"], name: "index_chart_offers_on_chart_id"
-    t.index ["offer_id"], name: "index_chart_offers_on_offer_id"
-  end
-
-  create_table "charts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "freight_rule_id"
-    t.index ["freight_rule_id"], name: "index_charts_on_freight_rule_id"
-    t.index ["user_id"], name: "index_charts_on_user_id"
   end
 
   create_table "freight_rules", force: :cascade do |t|
@@ -192,6 +197,8 @@ ActiveRecord::Schema.define(version: 2020_05_31_130703) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_users_on_cart_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -207,10 +214,10 @@ ActiveRecord::Schema.define(version: 2020_05_31_130703) do
     t.index ["freight_rule_id"], name: "index_zip_code_zones_on_freight_rule_id"
   end
 
-  add_foreign_key "chart_offers", "charts"
-  add_foreign_key "chart_offers", "offers"
-  add_foreign_key "charts", "freight_rules"
-  add_foreign_key "charts", "users"
+
+  add_foreign_key "cart_offers", "carts"
+  add_foreign_key "cart_offers", "offers"
+  add_foreign_key "carts", "freight_rules"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_weights", "freight_rules"
   add_foreign_key "offer_products", "offers"
@@ -226,5 +233,29 @@ ActiveRecord::Schema.define(version: 2020_05_31_130703) do
   add_foreign_key "user_ratings", "users"
   add_foreign_key "user_stores", "stores"
   add_foreign_key "user_stores", "users"
+  add_foreign_key "users", "carts"
   add_foreign_key "zip_code_zones", "freight_rules"
+
+
+  # add_foreign_key "carts", "freight_rules"
+  # add_foreign_key "cart_offers", "carts"
+  # add_foreign_key "cart_offers", "offers"
+  # add_foreign_key "freight_rules", "freight_zones"
+  # add_foreign_key "freight_rules", "stores"
+  # add_foreign_key "freight_weights", "freight_rules"
+  # add_foreign_key "offer_products", "offers"
+  # add_foreign_key "offer_products", "products"
+  # add_foreign_key "offers", "stores"
+  # add_foreign_key "product_photos", "products"
+  # add_foreign_key "products", "brands"
+  # add_foreign_key "products", "categories"
+  # add_foreign_key "products", "subcategories"
+  # add_foreign_key "subcategories", "categories"
+  # add_foreign_key "taggings", "tags"
+  # add_foreign_key "user_ratings", "stores"
+  # add_foreign_key "user_ratings", "users"
+  # add_foreign_key "user_stores", "stores"
+  # add_foreign_key "user_stores", "users"
+  # add_foreign_key "users", "carts"
+  # add_foreign_key "zip_code_zones", "freight_rules"
 end
