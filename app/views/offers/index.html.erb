@@ -1,4 +1,17 @@
 
+<%= link_to "Landing", root_path  %> <br>
+<br>
+<br>
+<br>
+<%= link_to 'Pagamento', payments_mercado_path if current_user %>
+<br>
+<br>
+<br>
+
+<%= link_to 'Login',  new_user_session_path %> <br>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete %> <br>
+<%= link_to 'Área de Admin', dashboard_path %> <br>
+<%= link_to 'Meu Carrinho', cart_path if @cart %> <br>
 
 <div class="content">
   <nav class="sidebar">
