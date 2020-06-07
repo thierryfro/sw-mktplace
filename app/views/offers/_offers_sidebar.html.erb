@@ -4,27 +4,31 @@
     <div class="check_boxes_area">
       <%= f.input :brands, collection: $brands, as: :check_boxes, input_html: {class: "form_check"}, label: false  %>
     </div>
-    <span class="sidebar_toggler">+</span>
+    <span class="sidebar_toggler plus">+</span>
+    <span class="sidebar_toggler minus">-</span>
   </div>
   <div class="sidebar_form_fields">
     <div class="required form_label">Categorias</div>
     <div class="check_boxes_area">
       <%= f.input :categories, collection: $categories, as: :check_boxes, input_html: {class: "form_check"}, label: false %>
     </div>
-    <span class="sidebar_toggler">+</span>
+    <span class="sidebar_toggler plus">+</span>
+    <span class="sidebar_toggler minus">-</span>
   </div>
   <div class="sidebar_form_fields">
     <div class="required form_label">Produtos</div>
     <div class="check_boxes_area">
       <%= f.input :subcategories,  collection: $subcategories, as: :check_boxes, input_html: {class: "form_check"}, label: false %>
     </div>
-    <span class="sidebar_toggler">+</span>
+    <span class="sidebar_toggler plus">+</span>
+    <span class="sidebar_toggler minus">-</span>
   </div>
   <div class="sidebar_form_fields">
     <div class="required form_label">Tamanhos</div>
     <div class="check_boxes_area">
       <%= f.input :weight,  collection: $weight, as: :check_boxes, input_html: {class: "form_check"}, label: false %>
     </div>
-    <span class="sidebar_toggler">+</span>
+    <span class="sidebar_toggler plus">+</span>
+    <span class="sidebar_toggler minus">-</span>
   </div>
 <% end %>

@@ -32,6 +32,24 @@
       top: 0;
       transition: all 0.3s linear;
       cursor: pointer;
+      &.plus {
+        opacity: 1;
+        transition: 0.3s linear;
+      }
+      &.minus {
+        opacity: 0;
+        transition: 0.3s linear;
+        line-height: 1;
+        font-size: 2.5rem;
+      }
+    }
+    &.active .sidebar_toggler {
+      &.plus {
+        opacity: 0;
+      }
+      &.minus {
+        opacity: 1;
+      }
     }
     .check_boxes {
       display: flex;

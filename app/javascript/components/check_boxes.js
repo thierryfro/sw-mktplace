@@ -14,7 +14,6 @@ const activateToggler = () => {
   if (togglers) {
     togglers.forEach((toggler) => {
       toggler.addEventListener("click", (evt) => {
-        toggler.innerText = toggler.innerText === "+" ? "-" : "+";
         toggler.parentElement.classList.toggle("active");
       });
     });
