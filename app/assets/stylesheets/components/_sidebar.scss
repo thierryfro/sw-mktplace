@@ -16,7 +16,7 @@
       max-height: 0;
       overflow: hidden;
       overflow-y: scroll;
-      transition: all 0.5s linear;
+      transition: all 0.2s linear;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -30,15 +30,15 @@
       font-weight: 600;
       left: 21.5rem;
       top: 0;
-      transition: all 0.3s linear;
+      transition: all 0.1s linear;
       cursor: pointer;
       &.plus {
         opacity: 1;
-        transition: 0.3s linear;
+        transition: 0.1s linear;
       }
       &.minus {
         opacity: 0;
-        transition: 0.3s linear;
+        transition: 0.1s linear;
         line-height: 1;
         font-size: 2.5rem;
       }

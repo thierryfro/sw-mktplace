@@ -1,12 +1,16 @@
-<% offers.each do |offer| %>
-  <%= link_to(offer) do %>
-    <h3><%= offer.products.first. name %></h3>
-    <p><%= offer.products.first.description %></p>
-    <button class="btn-primary">
-      <%= offer.products.first.flavor %>
-    </button>
-    <button class="btn-danger">
-      <%= offer.products.first.category.name %>
-    </button>
+<% if offers.empty? %>
+  <%= "Nenhum produto encontrado" if @empty %>
+<% else %>
+  <% offers.each do |offer| %>
+    <% product = offer.products.first  %>
+    <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
+    <div class="offer">
+      <%= link_to(offer) do %>
+        <%= image_tag product_photo.url %>
+        <%= product.name %>
+        <%= product.brand.name %>
+        R$<%= offer.price %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>

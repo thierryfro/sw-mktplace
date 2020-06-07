@@ -4,22 +4,25 @@
   .main {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    padding-left: 4.6rem;
+    padding-top: 4rem;
+    background-color: $color-grey-light-1;
   }
   .sidebar {
     flex: 0 0 22%;
     background-color: white;
   }
-  .main {
-    flex-grow: 1;
-    align-items: center;
-    background-color: $color-grey-light-1;
-  }
 }
 
-.sidebar {
-  .search {
+.main {
+  .offers {
+    width: 131rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .offer {
+      flex: 0 0 18%;
+    }
   }
 }
