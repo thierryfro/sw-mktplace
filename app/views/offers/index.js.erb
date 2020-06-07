@@ -1,5 +1,5 @@
 function replaceOffers (innerHTML) {
-  const offers = document.getElementById('offers');
+  const offers = document.querySelector('.offers');
   offers.innerHTML = innerHTML;
 }
 replaceOffers("<%= j render 'offers', offers: @offers %>");
