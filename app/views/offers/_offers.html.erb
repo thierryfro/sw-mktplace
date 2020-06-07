@@ -4,13 +4,16 @@
   <% offers.each do |offer| %>
     <% product = offer.products.first  %>
     <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
-    <div class="offer">
-      <%= link_to(offer) do %>
-        <%= image_tag product_photo.url %>
-        <%= product.name %>
-        <%= product.brand.name %>
-        R$<%= offer.price %>
-      <% end %>
-    </div>
+    <%= link_to offer, class:"offer" do %>
+          <%= image_tag product_photo.url, class: "product_image" %>
+          <div class="product_info">
+            <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 23)%></h3>
+            <p class="product_brand"><%= product.brand.name %></p> 
+          </div>
+          <div class="offer_info">
+            <span>A partir de</span>
+            R$<%= offer.price %>
+          </div>
+    <% end %>
   <% end %>
 <% end %>
