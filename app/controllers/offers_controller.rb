@@ -11,7 +11,7 @@ class OffersController < ApplicationController
                                                 .concat([params['search']['query']]).flatten.reject(&:blank?)
 
       products = @filter.empty? ? Product.all : Product.search_products(@filter.to_s)
-      @offers = Offer.includes(:products).where(products: { id: products.pluck(:id) })
+      @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
     else
       @offers = Offer.all
     end
