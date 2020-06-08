@@ -1,0 +1,25 @@
+.content {
+  display: flex;
+  .sidebar,
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar {
+    flex: 0 0 22%;
+    background-color: white;
+  }
+  .main {
+    flex-grow: 1;
+    align-items: center;
+    background-color: $color-grey-light-1;
+  }
+}
+
+.sidebar {
+  .search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
