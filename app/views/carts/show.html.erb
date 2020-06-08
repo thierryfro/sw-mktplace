@@ -1,18 +1,20 @@
-<h1>Meu carrinho</h1>
+<div class="cart">
+  <h1>Meu carrinho</h1>
+  Quantidade de ofertas no carrinho: <%= @cart_offers.count %> <br>
+  <% @cart_offers.each do |cart_offer| %>
+    Quantidade: <%= cart_offer.quantity %> <%= link_to '+', add_cart_path(cart_offer.id), method: :post %> <%= link_to '-', decrease_cart_path(cart_offer.id), method: :post %>
+  <% end %> <br>
+  <% if @cart_offers.size > 0 %>
+    <%= link_to 'Checkout', checkout_path %> <br>
+  <% end %>
+  <%= link_to 'Continuar comprando', offers_path %>
 
-Quantidade de ofertas no carrinho: <%= @cart_offers.count %> <br>
-<% @cart_offers.each do |cart_offer| %>
-  Quantidade: <%= cart_offer.quantity %> <%= link_to '+', add_cart_path(cart_offer.id), method: :post %> <%= link_to '-', decrease_cart_path(cart_offer.id), method: :post %>
-<% end %> <br>
-<% if @cart_offers.size > 0 %>
-  <%= link_to 'Checkout', checkout_path %> <br>
-<% end %>
-<%= link_to 'Continuar comprando', offers_path %>
+  <% if @freight %>
+    <p>Sua entrega será do tipo <%= "#{@freight.name} e custará R$#{@freight.price}" %></p>
+  <% elsif @cart_offers.present? %>
+    <p>Essa loja nao entrega na sua região</p>
+  <% end %>
+</div>
 
-<% if @freight %>
-  <p>Sua entrega será do tipo <%= "#{@freight.name} e custará R$#{@freight.price}" %></p>
-<% elsif @cart_offers.present? %>
-  <p>Essa loja nao entrega na sua região</p>
-<% end %>
 
 <%# raise %>

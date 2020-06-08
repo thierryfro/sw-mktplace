@@ -76,13 +76,13 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          .like,
-          .cart {
+          .like_cart_button,
+          .offer_cart_button {
             font-size: 2.1rem;
             border-radius: 6px;
             transition: all 0.1s linear;
           }
-          .like {
+          .like_cart_button {
             color: $color-grey-light-2;
             border: 1px solid $color-grey-light-2;
             padding: 0 1.3rem;
@@ -90,7 +90,7 @@
               color: $color-primary-light;
             }
           }
-          .cart {
+          .offer_cart_button {
             color: white;
             background-color: $color-primary-light;
             padding: 0 3.3rem;
