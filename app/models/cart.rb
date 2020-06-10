@@ -1,7 +1,7 @@
 class Cart < ApplicationRecord
-  belongs_to :user, optional: true
-  has_many :cart_offers, dependent: :destroy
+  has_one :user
   has_many :offers, through: :cart_offers
+  has_many :cart_offers, dependent: :destroy
   belongs_to :freight_rule, optional: true
 
   def total_weight
