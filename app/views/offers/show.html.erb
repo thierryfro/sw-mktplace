@@ -1,7 +1,6 @@
 <div class="offer_show">
-
   <div class="offer_title">
-    <h4><%= @product.name %></h4><span>(<%= @product.weight %>)</span>
+    <h4><%= @product.name %></h4><span>(<%= @product.weight.first(5) %>)</span>
   </div>
   <div class="offer">
 
@@ -11,27 +10,33 @@
 
     <div class="offer_details">
       <div class="brand_photo">
-        <%= image_tag @product.brand.logo, class: '' %>
+        <%= image_tag @product.brand.logo if @product.brand.logo  %>
       </div>
 
       <div class="details">
-        <h6>Detalhes do produto</h6>
-        <p><%= @product.description if @product.description %></p>
+        <h5>Detalhes do produto</h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae eligendi dolorem non voluptas.
+          Magnam et eum debitis exercitationem unde hic quia, omnis, quo harum soluta consequatur iste voluptatum. Doloremque, neque!
+        </p>
+        <h6>Antes de comprar, escolha ou confira o tamanho e o sabor do seu produto</h6>
       </div>
 
       <div class="price_details">
 
         <div class="store_link">
           <h6>Produto vendido por: <span><%= @offer.store.name %></span></h6>
-          <div>
-            <%= link_to 'Visitar a loja', root_path %>
-          </div>
+          <h4>R$ <%= @offer.price %>0</h4>
         </div>
 
         <div class="price">
-          <h4>R$ <%= @offer.price %>0</h4>
+          <%= link_to root_path do%>
+            <div class="store_btn">
+              Visitar a loja
+            </div>
+          <% end %>
           <%= link_to cart_path do %>
-            <div>
+            <div class="cart_btn">
               <i class="fa fa-shopping-cart"></i>
             </div>
           <% end %>

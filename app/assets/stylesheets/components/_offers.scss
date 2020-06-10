@@ -137,7 +137,7 @@
   }
 
   .offer_title {
-    width: 477px;
+    width: 500px;
     height: 46px;
     display: flex;
     position: relative;
@@ -149,11 +149,10 @@
     }
 
       span {
-        position: absolute;
         font-size: 3rem;
         color: $color-grey-dark-2;
-        right: -2.4rem;
         font-weight: bold;
+        margin-left: 5px;
       }
   }
 
@@ -164,7 +163,7 @@
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill;
     }
   }
 
@@ -178,7 +177,113 @@
     img {
       width: 100%;
       height: 100%;
-      object-fit: fit;
+      object-fit: cover;
     }
+  }
+
+  .offer_details {
+    width: 46rem;
+    height: auto;
+  }
+
+  .details {
+    width: 46rem;
+    height: 17.8rem;
+    margin-bottom: 5.6rem;
+    font-style: italic;
+
+    h5 {
+      font-size: 2.4rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      // Need italic font
+      font-size: 1.6rem;
+      color: $color-grey-light-3;
+      letter-spacing: 0px;
+      margin-bottom: 2.4rem;
+      // font-style: italic;
+    }
+
+    h6 {
+      font-size: 1.4rem;
+      color: $color-grey-dark-2;
+    }
+  }
+
+  .price_details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .store_link {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      font-style: italic;
+
+      h6 {
+        font-size: 1.4rem;
+        color: $color-grey-dark-2;
+        margin-bottom: 3.3rem;
+
+        span {
+          color: $color-primary-light;
+          text-decoration: underline;
+          // font-style: italic;
+        }
+      }
+        h4 {
+          font-size: 4.6rem;
+          color: $color-grey-dark-2;
+          font-weight: bold;
+          margin-bottom: 1.5rem;
+          // font-style: italic;
+        }
+
+
+      }
+      .price {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .store_btn {
+          width: 15.3rem;
+          height: 4.4rem;
+          border: 1px solid $color-grey-light-2;
+          border-radius: 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 2.4rem;
+          color: $color-grey-light-3;
+
+          a {
+            text-decoration: none;
+          }
+        }
+
+        a {
+        .cart_btn {
+          width: 15.3rem;
+          height: 4.4rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          background-color: $color-primary-light;
+          border-radius: 6px;
+
+            text-decoration: none;
+            font-size: 2.6rem;
+          }
+        }
+      }
   }
 }
