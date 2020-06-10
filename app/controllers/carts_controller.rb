@@ -24,16 +24,14 @@ class CartsController < ApplicationController
   # end
 
   def checkout
-
+    
     # Sem user chega o @cart == session[:cart_id]
     @session_cart = Cart.find(session[:cart_id])
-
+    session_offers = @session_cart.cart_offers
     # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
-    unless @session_cart.cart_offers.empty?
+    unless session_offers.empty?
       @cart.cart_offers.destroy_all
-      @session_cart.cart_offers.each do |cart_offer|
-        @cart.cart_offers << cart_offer
-      end
+      @cart.fill_cart(session)
     end
 
     # Começo da Order

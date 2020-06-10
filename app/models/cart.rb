@@ -37,4 +37,11 @@ class Cart < ApplicationRecord
     freight_rule = (zone_rules & weight_rules).first
     update!(freight_rule_id: freight_rule.id)
   end
+
+  def fill_cart(session)
+    session_cart = Cart.find(session[:cart_id])
+    update!(
+      cart_offers: session_cart.cart_offers
+    )
+  end
 end
