@@ -4,11 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :require_admin, unless: :devise_controller?
   before_action :custom_param_devise, if: :devise_controller?
   before_action :set_cart
-  after_action :get_session_cart, if: lambda {
-                                        devise_controller? &&
-                                          session[:cart_id] &&
-                                          current_user
-                                      }
+  # current_use already have a cart but put something on session cart before login
+  after_action :get_session_cart, if: :user_buying_unsigned?
 
   def require_admin
     unless current_user&.admin
@@ -18,13 +15,12 @@ class ApplicationController < ActionController::Base
   end
 
   def get_session_cart
-    # current_use already have a cart but put something on session cart before login
-    @cart.fill_cart(session) 
+    @cart.fill_cart(session)
   end
-  
+
   # Cart methods
   def set_new_cart
-    @cart = Cart.create 
+    @cart = Cart.create
     # get offers from session chart when authentication happens
     # if current_user has no cart - his cart is created for the first time
     if current_user
@@ -48,5 +44,14 @@ class ApplicationController < ActionController::Base
 
   def custom_param_devise
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name last_name birthdate])
+  end
+
+  def user_buying_unsigned?
+    if session[:cart_id]
+      cart = Cart.find(session[:cart_id])
+      devise_controller? && current_user && cart&.cart_offers.present?
+    else
+      false
+    end
   end
 end
