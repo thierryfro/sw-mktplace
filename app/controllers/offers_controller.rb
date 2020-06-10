@@ -22,7 +22,9 @@ class OffersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @product = @offer.products.first
+  end
 
   def new
     @offer = Offer.new

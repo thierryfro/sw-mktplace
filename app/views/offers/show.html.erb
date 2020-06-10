@@ -1,17 +1,74 @@
-<%= link_to "Landing", root_path  %> <br>
-<%= simple_form_for :search, url: offers_path, method: "GET" do |f| %>
-  <%= f.input :query, label: "Pesquisa" %>
-  <%= f.submit "Search", class: "btn btn-primary" %>
-<% end %>
-<br>
+<div class="offer_show">
 
-<% @offer.products.each do |product| %>
-  <%= image_tag product.product_photos.where(name: "Principal").first.url %>
-  <p>- <%= product.name %></p>
-<% end %>
-<%= link_to 'Auditar oferta', edit_offer_path(@offer.id) if current_user && current_user.admin? %>
+  <div class="offer_title">
+    <h4><%= @product.name %></h4><span>(<%= @product.weight %>)</span>
+  </div>
+  <div class="offer">
 
-<%= link_to 'Voltar', root_path %> <br>
+    <div class="offer_photos">
+      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: '' %>
+    </div>
 
-<%= link_to 'Adicionar ao carrinho', create_cart_offer_path(@offer), method: :post %>
-<%# raise %>
+    <div class="offer_details">
+      <div class="brand_photo">
+        <%= image_tag @product.brand.logo, class: '' %>
+      </div>
+
+      <div class="details">
+        <h6>Detalhes do produto</h6>
+        <p><%= @product.description if @product.description %></p>
+      </div>
+
+      <div class="price_details">
+
+        <div class="store_link">
+          <h6>Produto vendido por: <span><%= @offer.store.name %></span></h6>
+          <div>
+            <%= link_to 'Visitar a loja', root_path %>
+          </div>
+        </div>
+
+        <div class="price">
+          <h4>R$ <%= @offer.price %>0</h4>
+          <%= link_to cart_path do %>
+            <div>
+              <i class="fa fa-shopping-cart"></i>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+
+    <%# raise %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%#= link_to "Landing", root_path  %> <br>
+<%#= simple_form_for :search, url: offers_path, method: "GET" do |f| %>
+  <%#= f.input :query, label: "Pesquisa" %>
+  <%#= f.submit "Search", class: "btn btn-primary" %>
+<%# end %>
+<%# <br> %>
+
+<%# @offer.products.each do |product| %>
+  <%#= image_tag product.product_photos.where(name: "Principal").first.url %>
+  <p>- <%#= product.name %></p>
+<%# end %>
+<%#= link_to 'Auditar oferta', edit_offer_path(@offer.id) if current_user && current_user.admin? %>
+
+<%#= link_to 'Voltar', root_path %> <br>
+
+<%#= link_to 'Adicionar ao carrinho', create_cart_offer_path(@offer), method: :post %>
