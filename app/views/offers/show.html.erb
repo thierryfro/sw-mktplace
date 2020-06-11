@@ -5,7 +5,16 @@
   <div class="offer">
 
     <div class="offer_photos">
-      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: '' %>
+      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'main_photo' %>
+
+      <div class="photos_preview">
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview first_small' %>
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview second_small' %>
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview third_small' %>
+        <%= image_tag @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200").first.url, class: 'preview fourth_small' %>
+        <%= image_tag @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200").first.url, class: 'preview fifth_small' %>
+      </div>
+
     </div>
 
     <div class="offer_details">
@@ -14,7 +23,9 @@
       </div>
 
       <div class="details">
-        <h5>Detalhes do produto</h5>
+        <div>
+          <h5>Detalhes do produto</h5>
+        </div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae eligendi dolorem non voluptas.
           Magnam et eum debitis exercitationem unde hic quia, omnis, quo harum soluta consequatur iste voluptatum. Doloremque, neque!

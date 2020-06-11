@@ -164,6 +164,18 @@
       width: 100%;
       height: 100%;
       object-fit: fill;
+
+    }
+
+    .photos_preview {
+      width: 500px;
+
+      .preview {
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+        border: 1px solid $color-grey-light-2;
+      }
     }
   }
 
@@ -173,6 +185,7 @@
     position: absolute;
     top: 67px;
     right: 136px;
+    margin-bottom: 2rem;
 
     img {
       width: 100%;
@@ -182,8 +195,12 @@
   }
 
   .offer_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 46rem;
     height: auto;
+    margin-top: 2rem;
   }
 
   .details {
