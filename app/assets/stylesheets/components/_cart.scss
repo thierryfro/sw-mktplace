@@ -1,13 +1,131 @@
+// MAIN STYLES TO CART
 .cart {
-    width: 108rem;
-    background-color: white;
-    margin: auto;
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    font-size: 2rem;
-    h1 {
-        font-size: 2.8rem;
+  width: 56%;
+  background-color: white;
+  margin: 4.2rem auto;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  border: 1px solid $color-grey-light-2;
+  .cart_title {
+    font-size: 2.8rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+}
+
+// OFFERS PART ON CART - HEADERS AND LAYOUT
+
+.cart_main {
+  display: flex;
+  width: 100%;
+  .cart_offers {
+    flex: 0 0 63%;
+    border-top: 1px solid $color-grey-light-2;
+    border-right: 1px solid $color-grey-light-2;
+    border-left: 1px solid $color-grey-light-2;
+    .offer_headers {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      height: 3.1rem;
+      border-bottom: 1px solid $color-grey-light-2;
+      h4.product_column {
+        flex: 0 0 30%;
+      }
+      h4 {
         font-style: italic;
+        font-size: 1.4rem;
+        text-align: center;
+      }
     }
+  }
+}
+
+// OFFERS BODY STYLES
+
+.cart {
+  .cart_offers {
+    .offers_body {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .offer {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid $color-grey-light-2;
+        .offer_product {
+          flex: 0 0 43%;
+          display: flex;
+          align-items: center;
+          img {
+            width: 10rem;
+            height: 10rem;
+          }
+          .product_info {
+            align-self: start;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            .product_title {
+              font-size: 1.4rem;
+              font-style: italic;
+              font-weight: 700;
+              word-wrap: break-word;
+            }
+            .product_flavor {
+              font-size: 1.2rem;
+              color: $color-grey-light-3;
+              font-style: italic;
+            }
+          }
+        }
+        .offer_info {
+          display: flex;
+          width: 100%;
+          & > * {
+            flex: 0 0 33%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            margin-top: 2rem;
+          }
+          .offer_price,
+          .offer_total {
+            font-size: 1.4rem;
+          }
+          .offer_qtt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 1.5rem;
+            .offer_qtties {
+              width: 100%;
+              display: flex;
+              justify-content: space-around;
+              font-size: 1.5rem;
+              font-weight: bolder;
+              margin-top: 0.5rem;
+              .qtt_button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bolder;
+                font-size: 1.4rem;
+                color: $color-grey-dark-2;
+              }
+            }
+            .remove_button {
+              font-size: 1.2rem;
+              font-style: italic;
+              color: $color-grey-dark-2;
+            }
+          }
+        }
+      }
+    }
+  }
 }

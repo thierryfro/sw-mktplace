@@ -34,5 +34,6 @@ Rails.application.routes.draw do
   get '/checkout', to: 'carts#checkout'
   post '/cart/:cart_offer_id/add', to: 'carts_offers#add', as: 'add_cart'
   post '/cart/:cart_offer_id/decrease', to: 'carts_offers#remove', as: 'decrease_cart'
+  resources :carts_offers, only: %i[ destroy ]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

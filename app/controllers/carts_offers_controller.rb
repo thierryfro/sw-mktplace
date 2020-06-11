@@ -45,6 +45,12 @@ class CartsOffersController < ApplicationController
     redirect_to '/cart'
   end
 
+  def destroy
+    @cart_offer = CartOffer.find(params[:id])
+    @cart_offer.destroy
+    redirect_to '/cart'
+  end
+
   private
 
   def cart_offer_params
