@@ -14,6 +14,7 @@ class CartsController < ApplicationController
       @cart_offers = CartOffer.where(cart_id: session[:cart_id]).order(created_at: :desc)
     end
     @freight = @cart.freight_rule
+    @subtotal = @cart.calc_subtotal if @cart_offers
   end
 
   # def session_offers(cart_offers)
@@ -51,4 +52,5 @@ class CartsController < ApplicationController
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
     @preference_id = preference['response']['id']
   end
+
 end

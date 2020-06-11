@@ -1,19 +1,20 @@
 <div class="cart">
   <h2 class="cart_title">Meu carrinho</h2>
   <div class="cart_main">
-    <div class="cart_offers">
-      <div class="offer_headers">
-        <h4 class="product_column">Produto</h4>
-        <h4>Preço</h4>
-        <h4>Quantidade</h4>
-        <h4>Total</h4>
-      </div>
-      <div class="offers_body">
-        <% @cart_offers.each do |cart_offer| %>
-          <% product = cart_offer.products.first %>
-          <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
-          <% offer =  cart_offer.offer %>
-          <div class="offer">
+    <% if @cart_offers.present? %>
+      <div class="cart_offers">
+        <div class="offer_headers">
+          <h4 class="product_column">Produto</h4>
+          <h4>Preço</h4>
+          <h4>Quantidade</h4>
+          <h4>Total</h4>
+        </div>
+        <div class="offers_body">
+          <% @cart_offers.each do |cart_offer| %>
+            <% product = cart_offer.products.first %>
+            <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
+            <% offer =  cart_offer.offer %>
+            <div class="offer">
               <div class="offer_product">
                 <%= image_tag product_photo.url %>
                 <div class="product_info">
@@ -36,37 +37,51 @@
                     <%= link_to decrease_cart_path(cart_offer.id), method: :post, class:"qtt_button" do %>
                       <i class="fa fa-minus-circle"></i>
                     <% end %>
-                    <p><%= cart_offer.quantity %></p>  
+                    <p><%= cart_offer.quantity %></p>
                     <%= link_to add_cart_path(cart_offer.id), method: :post, class:"qtt_button" do %>
                       <i class="fa fa-plus-circle"></i>
                     <% end %>
                   </div>
                   <%= link_to "Remover", 
-                    carts_offer_path(cart_offer), 
-                    method: :delete, 
-                    class:"remove_button" 
-                  %>
+                      carts_offer_path(cart_offer), 
+                      method: :delete, 
+                      class:"remove_button" 
+                    %>
                 </div>
                 <div class="offer_total">
                   R$<%= sprintf('%.2f', offer.price * cart_offer.quantity) %>
                 </div>
               </div>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="cart_order">
-      <% if @freight %>
-        <p>Sua entrega será do tipo <%= "#{@freight.name} e custará R$#{@freight.price}" %></p>
-      <% elsif @cart_offers.present? %>
-        <p>Essa loja nao entrega na sua região</p>
-      <% end %>
-    </div>
+      <div class="cart_checkout">
+        <div class="cart_order">
+          <h4 class="order_header">Resumo do Pedido</h4>
+          <div class="order_info">
+            <div class="subtotal">
+              <span>Subtotal</span>
+              <span><%= @subtotal %></span>
+            </div>
+            <% if @freight %>
+              <div class="freight">
+                  <span>Frete</span>
+                  <span><%= "R$#{@freight.price}" %></span>
+              </div>
+              <div class="total">
+                <span>TOTAL</span>
+                <%= "R$#{@freight.price + @subtotal}" %>
+              </div>
+            <% else %>
+              <div class="uncovered_area">
+                Essa loja não entrega na sua região
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%= link_to 'FINALIZAR PEDIDO', checkout_path, class: "checkout_button" %>
+      </div>
+    <% end %>
   </div>
 </div>
-<%# raise %>
-
-      <% if @cart_offers.size > 0 %>
-        <%= link_to 'Checkout', checkout_path %> <br>
-      <% end %>
-      <%= link_to 'Continuar comprando', offers_path %>
