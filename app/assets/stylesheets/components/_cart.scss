@@ -8,10 +8,25 @@
   flex-direction: column;
   font-size: 2rem;
   border: 1px solid $color-grey-light-2;
-  .cart_title {
-    font-size: 2.5rem;
+  .cart_title,
+  .sugestions_title {
+    font-size: 2rem;
     font-style: italic;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    color: $color-grey-dark-2;
+  }
+  .sugestions_title {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 0rem;
+  }
+  .sold_by {
+    font-size: 1.2rem;
+    font-style: italic;
+    .store_link {
+      color: $color-primary-light;
+      font-weight: 600;
+    }
   }
 }
 
@@ -229,3 +244,6 @@
     }
   }
 }
+
+// CART SUGESTIONS
+

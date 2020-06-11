@@ -1,7 +1,7 @@
 <div class="cart">
   <h2 class="cart_title">Meu carrinho</h2>
-  <div class="cart_main">
-    <% if @cart_offers.present? %>
+  <% if @cart_offers.present? %>
+    <div class="cart_main">
       <div class="cart_offers">
         <div class="offer_headers">
           <h4 class="product_column">Produto</h4>
@@ -92,6 +92,13 @@
         <% end %>
         <%= link_to 'FINALIZAR PEDIDO', checkout_path, class: "checkout_button" %>
       </div>
-    <% end %>
-  </div>
+    </div>
+    <h2 class="sugestions_title">APROVEITE O FRETE E LEVE TAMBÉM</h2>
+    <p class="sold_by">Vendido por
+      <% store = @cart.cart_store %>
+      <%= link_to "#{store.name}", store_path(store), class: "store_link" %>
+    </p>
+    <div class="cart_sugestions">
+    </div>
+  <% end %>
 </div>
