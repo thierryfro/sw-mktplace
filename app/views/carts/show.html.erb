@@ -80,6 +80,16 @@
             <% end %>
           </div>
         </div>
+        <%= form_tag '#', method: :get, class: "coupon_form" do %>
+          <%= text_field_tag :coupon,
+              params[:coupn],
+              class: "coupon_input",
+              placeholder: "Código de desconto"
+          %>
+          <%= button_tag type: "submit", class: "coupon_submit" do %>
+              <i class="fa fa-angle-right"></i>
+          <% end %>
+        <% end %>
         <%= link_to 'FINALIZAR PEDIDO', checkout_path, class: "checkout_button" %>
       </div>
     <% end %>
