@@ -22,7 +22,7 @@ class Cart < ApplicationRecord
 
     store = cart_offers.first.store
     # given a zip code find store rules
-    zone_rules = store.find_zone_rules('03000000')
+    zone_rules = store.find_zone_rules('02399999')
     if zone_rules.blank?
       update!(freight_rule_id: nil)
       return 'Essa loja não entrega na sua região'
@@ -43,5 +43,15 @@ class Cart < ApplicationRecord
     update!(
       cart_offers: session_cart.cart_offers
     )
+  end
+
+  def calc_subtotal
+    cart_offers.reduce(0) do |subtotal, cart_offer|
+      subtotal + (cart_offer.offer.price * cart_offer.quantity)
+    end
+  end
+
+  def cart_store 
+    cart_offers.first.store
   end
 end

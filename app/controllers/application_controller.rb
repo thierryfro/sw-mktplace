@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_session_cart
+    # get offers from session cart
     @cart.fill_cart(session)
   end
 
@@ -33,12 +34,16 @@ class ApplicationController < ActionController::Base
 
   def set_cart
     @cart = if current_user
+              # user already has a cart 
               Cart.find(current_user.cart_id)
             else
+              # session already has a cart
               Cart.find(session[:cart_id])
               # current_user.cart_id = @cart.id if current_user
             end
   rescue ActiveRecord::RecordNotFound
+    # if there is no cart, create a new one
+    # session just started or user authentication for first time
     set_new_cart
   end
 
@@ -46,11 +51,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name last_name birthdate])
   end
 
+  # check if user has offers on session before authentication
   def user_buying_unsigned?
     if session[:cart_id]
       cart = Cart.find(session[:cart_id])
+      # if current and devise the user just logged
+      # and only gets session cart, if there is cart_offers in it  
       devise_controller? && current_user && cart&.cart_offers.present?
     else
+      # if session has not cart_id, the user just logged out
       false
     end
   end

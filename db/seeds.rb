@@ -124,25 +124,16 @@ if Rails.env == 'development'
   20.times do
     offer = Offer.create!(store: vendinha, stock: 40, price: 80.00, active: true)
     OfferProduct.create(offer: offer, product: products.sample)
-    if rand(100) < 50
-      OfferProduct.create(offer: offer, product: products.sample)
-    end
   end
 
   20.times do
     offer = Offer.create!(store: budega, stock: 50, price: 60.00, active: true)
     OfferProduct.create(offer: offer, product: products.sample)
-    if rand(100) < 50
-      OfferProduct.create(offer: offer, product: products.sample)
-    end
   end
 
   20.times do
     offer = Offer.create!(store: marombas, stock: 20, price: 120.00, active: true)
     OfferProduct.create(offer: offer, product: products.sample)
-    if rand(100) < 50
-      OfferProduct.create(offer: offer, product: products.sample)
-    end
   end
 
   puts "Offers #{Offer.count}"
