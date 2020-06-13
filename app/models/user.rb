@@ -1,5 +1,6 @@
-class User < ApplicationRecord
+# frozen_string_literal: true
 
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,6 +14,6 @@ class User < ApplicationRecord
 
   has_many :address, dependent: :destroy
 
-  has_one :cart, dependent: :destroy
+  belongs_to :cart, optional: true
   # has_many :stores, as: :owner, dependent: :destroy
 end

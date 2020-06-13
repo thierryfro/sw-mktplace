@@ -1,7 +1,7 @@
 class Cart < ApplicationRecord
-  belongs_to :user, optional: true
-  has_many :cart_offers, dependent: :destroy
+  has_one :user
   has_many :offers, through: :cart_offers
+  has_many :cart_offers, dependent: :destroy
   belongs_to :freight_rule, optional: true
 
   def total_weight
@@ -36,5 +36,12 @@ class Cart < ApplicationRecord
     # intersection between two selections
     freight_rule = (zone_rules & weight_rules).first
     update!(freight_rule_id: freight_rule.id)
+  end
+
+  def fill_cart(session)
+    session_cart = Cart.find(session[:cart_id])
+    update!(
+      cart_offers: session_cart.cart_offers
+    )
   end
 end

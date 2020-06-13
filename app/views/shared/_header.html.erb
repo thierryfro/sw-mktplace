@@ -11,28 +11,34 @@
         <%= link_to '#', class:'address' do %> 
             Av. Oswaldo Cruz, 28
         <% end %>
-        <%= form_tag offers_path, method: :get, class: "search" do %>
+        <%= form_tag offers_path, method: :get, class: "nav_search" do %>
             <%= text_field_tag :query,
                 params[:query],
-                class: "search_input",
+                class: "nav_search_input",
                 placeholder: "O que deseja buscar?"
             %>
-            <%= button_tag type: "submit", class: "search_button" do %>
+            <%= button_tag type: "submit", class: "nav_search_button" do %>
                 <i class="fa fa-search"></i>
             <% end %>
         <% end %>
     </div>
     <nav class="right-nav">
         <div class="nav_session">
-            <div class="nav_session_login">
-                <%= link_to 'Entrar',  new_user_session_path %>
-            </div>
-            <div class="nav_session_signup">
-                <%= link_to 'Cadastrar-se',  new_user_registration_path %>
-            </div>
+            <% if current_user %>
+                <div class="nav_session_logout">
+                    <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+                </div>
+            <% else %>
+                <div class="nav_session_login">
+                    <%= link_to 'Entrar',  new_user_session_path %>
+                </div>
+                <div class="nav_session_signup">
+                    <%= link_to 'Cadastrar-se',  new_user_registration_path %>
+                </div>
+            <% end %>
         </div>
         <div class="nav_cart">
-            <%= link_to chart_path do %> 
+            <%= link_to cart_path do %> 
                <i class="fa fa-shopping-cart"></i>     
                <span class="nav_cart_qtt">2</span>
             <% end %>

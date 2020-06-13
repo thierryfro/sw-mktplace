@@ -1,49 +1,14 @@
-
-<%= link_to "Landing", root_path  %> <br>
-<br>
-<br>
-<br>
-<%= link_to 'Pagamento', payments_mercado_path if current_user %>
-<br>
-<br>
-<br>
-
-<%= link_to 'Login',  new_user_session_path %> <br>
-<%= link_to 'Logout', destroy_user_session_path, method: :delete %> <br>
-<%= link_to 'Área de Admin', dashboard_path %> <br>
-<%= link_to 'Meu Carrinho', cart_path if @cart %> <br>
-
-<%= simple_form_for :search, url: offers_path, method: "GET", remote: true do |f| %>
-  <%= f.input :query, label: "Pesquisa" %>
-  <%= f.input :brands, label: "Marcas", collection: $brands, input_html: { class: 'select2'}  %>
-  <br>
-  <%= f.input :categories, label: "Categorias", collection: $categories, input_html: { class: 'select2'} %>
-  <br>
-  <%= f.input :subcategories, label: "Subcategorias",  collection: $subcategories, input_html: { class: 'select2'} %>
-  <br>
-  <%= f.input :weight, label: "Quantidade",  collection: $weight, input_html: { class: 'select2'} %>
-  <br>
-  <%= f.submit "Search", class: "btn btn-primary" %>
-  <%= link_to "Reset", offers_path  %>
-<% end %>
-<br>
-
-<%= link_to 'Lista de Produtos', products_path %>
-
-<%= "Nenhum produto encontrado" if @empty %>
-
-<% if @offers.empty? %>
-  <h4>Você nao tem nenhuma offer criada!</h4>
-<% else %>
-  <h4>Suas ofertas!</h4>
-  <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-8 offset-sm-2">
-      <div id="offers">
-        <%= render 'offers', offers: @offers %>
-      </div>
+<div class="content">
+  <nav class="sidebar">
+    <%= render "sidebar_form" %>
+  </nav>
+  <div class="main">
+    <div class="offers">
+      <%= render 'offers', offers: @offers %>    
     </div>
   </div>
+</div>
 
-<% end %>
+
+
 

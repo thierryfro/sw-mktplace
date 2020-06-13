@@ -1,0 +1,105 @@
+.content {
+  display: flex;
+  .sidebar,
+  .main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: 4rem;
+    background-color: $color-grey-light-1;
+  }
+  .sidebar {
+    flex: 0 0 22%;
+    background-color: white;
+  }
+}
+
+.main {
+  padding-left: 4.6rem;
+  min-height: 90vh;
+  .offers {
+    width: 87%;
+    display: grid;
+    grid-template-columns: repeat(5, 19%);
+    grid-column-gap: 3rem;
+    .offer {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 4px;
+      border: 1px solid $color-grey-light-2;
+      margin-bottom: 3rem;
+      img.product_image {
+        width: 80%;
+        height: 17rem;
+        object-fit: contain;
+        margin: 1rem;
+      }
+      .product_info {
+        padding: 0 1.8rem;
+        width: 100%;
+        color: $color-grey-dark-2;
+        margin-bottom: 1rem;
+        .product_title {
+          font-size: 1.8rem;
+          font-style: italic;
+          font-weight: 700;
+        }
+        .product_brand {
+          font-size: 1.4rem;
+        }
+      }
+      .offer_info {
+        width: 100%;
+        border-top: 0.5px solid $color-grey-light-2;
+        padding: 1rem 1.7rem;
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        .offer_price {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          span {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: $color-grey-light-3;
+          }
+          .price_number {
+            color: $color-grey-dark-2;
+            font-size: 2.4rem;
+            font-weight: 700;
+          }
+        }
+        .buy_box {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .like_cart_button,
+          .offer_cart_button {
+            font-size: 2.1rem;
+            border-radius: 6px;
+            transition: all 0.1s linear;
+          }
+          .like_cart_button {
+            color: $color-grey-light-2;
+            border: 1px solid $color-grey-light-2;
+            padding: 0 1.3rem;
+            &:hover i {
+              color: $color-primary-light;
+            }
+          }
+          .offer_cart_button {
+            color: white;
+            background-color: $color-primary-light;
+            padding: 0 3.3rem;
+            &:hover {
+              background-color: $color-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}

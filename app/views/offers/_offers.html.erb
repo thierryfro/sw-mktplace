@@ -1,12 +1,34 @@
-<% offers.each do |offer| %>
-  <%= link_to(offer) do %>
-    <h3><%= offer.products.first. name %></h3>
-    <p><%= offer.products.first.description %></p>
-    <button class="btn-primary">
-      <%= offer.products.first.flavor %>
-    </button>
-    <button class="btn-danger">
-      <%= offer.products.first.category.name %>
-    </button>
+<% if offers.empty? %>
+  <%= "Nenhum produto encontrado" if @empty %>
+<% else %>
+  <% offers.each do |offer| %>
+    <% product = offer.products.first  %>
+    <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
+
+    <div class="offer">
+      <%= link_to offer do %>
+        <%= image_tag product_photo.url, class: "product_image" %>
+        <div class="product_info">
+          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 18)%></h3>
+          <p class="product_brand"><%= product.brand.name %></p> 
+        </div>
+      <% end %>
+      <div class="offer_info">
+        <div class="offer_price">
+          <span>A partir de</span>
+          <span class="price_number">R$<%= sprintf('%.2f', offer.price) %></span>
+        </div>
+        <div class="buy_box">
+          <span class="like_cart_button">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </span>
+          <%= link_to create_cart_offer_path(offer), method: :post do %>
+            <span class="offer_cart_button">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </span>
+          <% end %> 
+        </div>
+      </div>
+    </div>
   <% end %>
 <% end %>
