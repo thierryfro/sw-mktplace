@@ -1,19 +1,18 @@
 <%= simple_form_for :search, url: offers_path, method: "GET", remote: true, html: { id: 'sidebar_form' }  do |f| %>
   <% fields = [
-    { name: "Marcas", collection: @brands, field_name: :brands   },
-    { name: "Categorias", collection: @categories, field_name: :categories   },
-    { name: "Produtos", collection: @subcategories, field_name: :subcategories   },
-    { name: "Tamanhos", collection: @weight, field_name: :weight   }
+    { name: "Marcas", collection: $brands },
+    { name: "Categorias", collection: $categories },
+    { name: "Produtos", collection: $subcategories },
+    { name: "Tamanhos", collection: $weight }
   ] %>
   <% fields.each do |field| %>
     <div class="sidebar_form_fields">
       <div class="required form_label"><%= field[:name] %></div>
       <div class="check_boxes_area">
-        <%= f.input field[:field_name], collection: field[:collection], as: :check_boxes, input_html: {class: "form_check"}, label: false  %>
+        <%= f.input :brands, collection: field[:collection], as: :check_boxes, input_html: {class: "form_check"}, label: false  %>
       </div>
       <span class="sidebar_toggler plus">+</span>
-      <span class="sidebar_toggler minus">-</span> 
+      <span class="sidebar_toggler minus">-</span>
     </div>
   <% end %>
 <% end %>     
-
