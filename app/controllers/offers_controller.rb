@@ -1,7 +1,7 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[show edit update destroy]
-  before_action :sidebar_params, only: %i[index]
   skip_before_action :require_admin
+
   def index
     if params['search']
 
@@ -20,7 +20,6 @@ class OffersController < ApplicationController
       format.html
       format.js
     end
-    
   end
 
   def show; end
@@ -78,14 +77,5 @@ class OffersController < ApplicationController
 
   def set_offer
     @offer = Offer.find(params[:id])
-  end
-
-  def sidebar_params
-    products_ids = OfferProduct.all&.pluck(:product_id)&.uniq # takes the product identifier that contains offers
-    products = Product.where(id: products_ids)&.uniq # 
-    @brands = Brand.where(id: products&.pluck(:brand_id))&.pluck(:name)&.reject(&:blank?)&.uniq
-    @categories = Category.where(id: products&.pluck(:category_id))&.pluck(:name)&.reject(&:blank?)&.uniq
-    @subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.pluck(:name)&.reject(&:blank?)&.uniq
-    @weight = products&.pluck(:weight)&.reject(&:blank?)&.uniq
   end
 end
