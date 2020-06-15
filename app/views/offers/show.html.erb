@@ -8,11 +8,10 @@
       <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'main_photo' %>
 
       <div class="photos_preview">
-        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview first_small' %>
-        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview second_small' %>
-        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview third_small' %>
-        <%= image_tag @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200").first.url, class: 'preview fourth_small' %>
-        <%= image_tag @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200").first.url, class: 'preview fifth_small' %>
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200").first.url, class: 'preview' %>
       </div>
 
     </div>

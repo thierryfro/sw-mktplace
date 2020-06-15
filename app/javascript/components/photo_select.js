@@ -6,12 +6,9 @@ const photoSelector = () => {
 
   photoPreviews.forEach(photo => {
     photo.addEventListener('click', (event) => {
-
       mainPhoto.src = event.currentTarget.src;
-
     });
   })
 }
-
 
 export { photoSelector };
