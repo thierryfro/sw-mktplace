@@ -2,8 +2,8 @@
 .cart {
   width: 56%;
   background-color: white;
-  margin: 4.2rem auto;
-  padding: 2.5rem;
+  margin: 2rem auto;
+  padding: 1.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   font-size: 2rem;
@@ -28,7 +28,7 @@
       font-weight: 600;
     }
   }
-    @media only screen and (max-width: $bp-largest) {
+  @media only screen and (max-width: $bp-largest) {
     width: 70%;
   }
 }
@@ -52,6 +52,11 @@
       border-bottom: 1px solid $color-grey-light-2;
       h4.product_column {
         flex: 0 0 30%;
+      }
+      .product_infos {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
       }
       h4 {
         font-style: italic;
@@ -264,7 +269,7 @@
       align-items: center;
       border-radius: 4px;
       border: 1px solid $color-grey-light-2;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
       & > a {
         display: flex;
         flex-direction: column;
@@ -283,7 +288,7 @@
         color: $color-grey-dark-2;
         margin-bottom: 1rem;
         .product_title {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
           font-style: italic;
           font-weight: 700;
           text-align: center;
@@ -309,7 +314,7 @@
           }
           .price_number {
             color: $color-grey-dark-2;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
           }
         }
@@ -332,9 +337,13 @@
             }
           }
           .offer_cart_button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 55%;
             color: white;
             background-color: $color-primary-light;
-            padding: 0 3rem;
+            padding: 0.65rem 3.3rem;
             &:hover {
               background-color: $color-primary;
             }

@@ -8,6 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import { initSelect2 } from '../components/init_select2';
+import { initFilter } from "../components/filter_toggler";
 import { offerFilter } from "./offer_filter"
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 
@@ -23,6 +24,7 @@ initSelect2();
 offerFilter();
 styleCheckBoxes();
 activateToggler();
+initFilter();
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */

@@ -54,6 +54,17 @@ body {
   background-color: $color-grey-light-1;
 }
 
+.html-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    .main-body {
+        height: 89%;
+        margin-top: auto;
+    }
+}
+
 main {
   display: flex;
 }

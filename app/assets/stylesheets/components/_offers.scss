@@ -1,16 +1,81 @@
 .content {
   display: flex;
+  .filter {
+    position: absolute;
+    font-size: 3.5rem;
+    border-radius: 50%;
+    margin: 2rem 1rem;
+    background-color: white;
+    box-shadow: 0px 0px 2px $color-grey-light-3;
+    color: $color-primary;
+    width: 5rem;
+    height: 5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    position: fixed;
+    i.filter-icon {
+      display: block;
+      opacity: 1;
+    }
+    i.close-icon {
+      display: none;
+      opacity: 0;
+      font-size: 3rem;
+    }
+    &.toggled {
+      color: white;
+      background-color: $color-primary;
+      i.filter-icon {
+        display: none;
+        opacity: 0;
+      }
+      i.close-icon {
+        opacity: 1;
+        display: block;
+      }
+    }
+  }
   .sidebar,
   .main {
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    padding-top: 4rem;
+  }
+  .main {
+    width: 78%;
+    margin-left: auto;
     background-color: $color-grey-light-1;
   }
   .sidebar {
-    flex: 0 0 22%;
+    height: 89%;
+    width: 22%;
+    position: fixed;
     background-color: white;
+  }
+  @media only screen and (max-width: $bp-small) {
+    flex-direction: column;
+    .filter {
+      display: flex;
+    }
+    .main,
+    .sidebar {
+      width: 100%;
+    }
+    .sidebar {
+      max-height: 0;
+      opacity: 0;
+      height: auto;
+      transition: 0.2s ease;
+      &.toggled {
+        opacity: 1;
+        height: auto;
+        max-height: fit-content;
+        background-color: white;
+      }
+    }
   }
 }
 
@@ -114,6 +179,18 @@
       width: 100%;
       grid-template-columns: repeat(4, 22%);
       grid-column-gap: 2rem;
+    }
+  }
+  @media only screen and (max-width: $bp-medium) {
+    .offers {
+      width: 100%;
+      grid-template-columns: repeat(3, 30%);
+    }
+  }
+  @media only screen and (max-width: $bp-medium) {
+    .offers {
+      width: 100%;
+      grid-template-columns: repeat(2, 40%);
     }
   }
 }
