@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cart < ApplicationRecord
   has_one :user
   has_many :offers, through: :cart_offers
@@ -51,7 +53,7 @@ class Cart < ApplicationRecord
     end
   end
 
-  def cart_store 
-    cart_offers.first.store
+  def cart_store
+    cart_offers.first.store if cart_offers.present?
   end
 end
