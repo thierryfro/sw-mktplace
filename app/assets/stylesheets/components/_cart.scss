@@ -29,7 +29,11 @@
     }
   }
   @media only screen and (max-width: $bp-largest) {
-    width: 70%;
+    width: 80%;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    width: 100%;
   }
 }
 
@@ -160,6 +164,13 @@
           font-size: 1.8rem;
         }
       }
+    }
+  }
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+    .cart_offers {
+      width: 100%;
+      margin-bottom: 1rem;
     }
   }
 }
