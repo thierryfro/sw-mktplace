@@ -20,8 +20,8 @@
   .offers {
     width: 87%;
     display: grid;
-    grid-template-columns: repeat(5, 19%);
-    grid-column-gap: 3rem;
+    grid-template-columns: repeat(5, 20%);
+    grid-column-gap: 2rem;
     .offer {
       background-color: white;
       border-radius: 4px;
@@ -46,7 +46,7 @@
         color: $color-grey-dark-2;
         margin-bottom: 1rem;
         .product_title {
-          font-size: 1.8rem;
+          font-size: 1.6rem;
           font-style: italic;
           font-weight: 700;
         }
@@ -72,7 +72,7 @@
           }
           .price_number {
             color: $color-grey-dark-2;
-            font-size: 2.4rem;
+            font-size: 2rem;
             font-weight: 700;
           }
         }

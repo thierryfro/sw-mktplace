@@ -9,7 +9,7 @@
       <%= link_to offer do %>
         <%= image_tag (product_photo.present? ? product_photo.url : 'placeholder.jpg'), class: "product_image" %>
         <div class="product_info">
-          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 18)%></h3>
+          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
           <p class="product_brand"><%= product.brand.name %></p> 
         </div>
       <% end %>

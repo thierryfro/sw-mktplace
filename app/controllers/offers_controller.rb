@@ -15,6 +15,7 @@ class OffersController < ApplicationController
     else
       @offers = Offer.all
     end
+    @offers = @offers.sample(25) 
     redirect_to offers_path if @offers.empty?
     respond_to do |format|
       format.html
