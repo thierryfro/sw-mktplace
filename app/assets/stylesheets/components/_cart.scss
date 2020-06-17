@@ -28,6 +28,9 @@
       font-weight: 600;
     }
   }
+    @media only screen and (max-width: $bp-largest) {
+    width: 70%;
+  }
 }
 
 // OFFERS PART ON CART - HEADERS AND LAYOUT
@@ -178,17 +181,17 @@
           }
           .product_info {
             align-self: start;
-            margin-top: 1.2rem;
+            margin: auto;
             display: flex;
             flex-direction: column;
             .product_title {
-              font-size: 1.3rem;
+              font-size: 1.1rem;
               font-style: italic;
               font-weight: 700;
               word-wrap: break-word;
             }
             .product_flavor {
-              font-size: 1.2rem;
+              font-size: 0.9rem;
               color: $color-grey-light-3;
               font-style: italic;
             }
