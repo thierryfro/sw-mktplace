@@ -269,9 +269,12 @@
 
 .cart {
   .cart_sugestions {
-    display: grid;
-    grid-template-columns: repeat(4, 24%);
-    justify-content: space-between;
+    // display: grid;
+    // grid-template-columns: repeat(4, 24%);
+    // justify-content: space-between;
+    .slick-slide {
+      margin: 0.5rem;
+    }
     width: 100%;
     .offer {
       background-color: white;

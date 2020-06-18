@@ -9,6 +9,7 @@
 
 import { initSelect2 } from '../components/init_select2';
 import { initFilter } from "../components/filter_toggler";
+import { initSlicker } from "../components/slick";
 import { offerFilter } from "./offer_filter"
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 
@@ -25,6 +26,7 @@ offerFilter();
 styleCheckBoxes();
 activateToggler();
 initFilter();
+initSlicker();
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */

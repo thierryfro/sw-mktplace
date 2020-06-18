@@ -100,7 +100,7 @@
       <% store = @cart.cart_store %>
       <%= link_to "#{store.name}", store_path(store), class: "store_link" %>
     </p>
-    <div class="cart_sugestions">
+    <div id="cart-slider" class="cart_sugestions slider-wrapper">
         <% @sugested_offers.each do |offer| %>
           <% product = offer.products.first  %>
           <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
