@@ -3,8 +3,6 @@
 require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-
-
 puts ''
 puts "Environment #{Rails.env}"
 puts 'Iniciando o seed'
@@ -72,10 +70,10 @@ Store.all.each do |store|
   store_shipping_zones = zip_code_zones.sample(rand(5..15))
   freights.each_with_index do |freight, index|
     freight.merge!({
-                      store: store,
-                      price: (index + 1) * 5,
-                      zip_code_zones_attributes: store_shipping_zones
-                    })
+                     store: store,
+                     price: (index + 1) * 5,
+                     zip_code_zones_attributes: store_shipping_zones
+                   })
     FreightRule.create!(freight)
   end
 end
@@ -117,22 +115,51 @@ puts ''
 # create offers
 puts 'Criando ofertas'
 Offer.destroy_all
+puts 'Criando ofertas'
+Offer.destroy_all
 
-products = Product.all
 
-20.times do
-  offer = Offer.create!(store: vendinha, stock: 40, price: 80.00, active: true)
-  OfferProduct.create(offer: offer, product: products.sample)
+def offer_product_exists?(store, product)
+  OfferProduct
+  .joins(:offer)
+  .where(
+    product: product,
+    offers: { store: store }
+  )
+  .present?
 end
 
-20.times do
-  offer = Offer.create!(store: budega, stock: 50, price: 60.00, active: true)
-  OfferProduct.create(offer: offer, product: products.sample)
+def get_product(store)
+  product = Product.all.sample
+  get_product(store) if offer_product_exists?(store, product)
+  product.product_code
 end
 
-20.times do
-  offer = Offer.create!(store: marombas, stock: 20, price: 120.00, active: true)
-  OfferProduct.create(offer: offer, product: products.sample)
+def set_product_variations(store, product_code)
+  Product.where(product_code: product_code).each do |product|
+    next unless rand(100) < 80
+
+    offer = Offer.create!(
+      store: store,
+      stock: rand(10..30),
+      price: rand(50..150),
+      active: true
+    )
+    OfferProduct.create(offer: offer, product: product)
+
+    puts "#{store.name} - offer #{product.name} - #{product.weight} created on DB"
+  end
+end
+
+def create_store_offer(store)
+  product_code = get_product(store)
+  set_product_variations(store, product_code)
+end
+
+Store.all.each do |store|
+  20.times do
+    create_store_offer(store)
+  end
 end
 
 puts "Offers #{Offer.count}"
