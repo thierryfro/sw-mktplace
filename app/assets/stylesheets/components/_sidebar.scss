@@ -91,6 +91,8 @@
       margin: auto;
       height: 0.5rem;
       margin-top: 3rem;
+      background-color: $color-grey-dark-1;
+      box-shadow: inset 0 1px 1px $color-grey-dark-2;
       .noUi-handle {
         width: 1.5rem;
         height: 1.5rem;
