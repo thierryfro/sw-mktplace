@@ -1,9 +1,9 @@
-<%= simple_form_for :search, url: offers_path, method: "GET", remote: true, html: { id: 'sidebar_form' }  do |f| %>
+<%= simple_form_for :search, url: offers_path, method: "GET", html: { id: 'sidebar_form' }  do |f| %>
   <% fields = [
     { name: "Marcas", collection: @brands, field_name: :brands   },
     { name: "Categorias", collection: @categories, field_name: :categories   },
     { name: "Produtos", collection: @subcategories, field_name: :subcategories   },
-    { name: "Tamanhos", collection: @weight, field_name: :weight   }
+    { name: "Tamanhos", collection: @weights, field_name: :weights   }
   ] %>
   <% fields.each do |field| %>
     <div class="sidebar_form_fields">
@@ -15,5 +15,6 @@
       <span class="sidebar_toggler minus">-</span> 
     </div>
   <% end %>
+  <%= f.button :submit %>
 <% end %>     
 
