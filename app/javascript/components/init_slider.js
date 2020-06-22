@@ -1,4 +1,5 @@
 import noUiSlider from "nouislider";
+import wNumb from "wnumb";
 import "nouislider/distribute/nouislider.css";
 
 const checkMarkers = (limit, status) => (status === 0 ? limit : status);
@@ -15,13 +16,19 @@ const initSlider = () => {
     var slider = noUiSlider.create(formSlider, {
       start: [currentStart, currentEnd],
       connect: true,
-      tooltips: true,
+      tooltips: [true, true],
       range: {
         min: start,
         max: end,
       },
+      format: wNumb({
+        decimals: 2,
+        thousand: ".",
+        prefix: "R$",
+      }),
     });
-    const sidebarForm = document.querySelector("#sidebar_form")
+
+    const sidebarForm = document.querySelector("#sidebar_form");
     slider.on("change", function () {
       document
         .getElementById("sliderValueInput")

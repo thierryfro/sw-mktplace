@@ -66,6 +66,7 @@ class OffersController < ApplicationController
 
   def handle_prices(prices)
     prices = prices.split(',')
+    prices.map! { |price| price.gsub(/\D/, '') }
     set_prices(prices[0], prices[1])
     @offers.where('price >= ? AND price <= ?', prices[0], prices[1])
   end
@@ -82,7 +83,7 @@ class OffersController < ApplicationController
       prices = filters['prices'] if filters['prices'].present?
     end
     products = products.search_products(params['query']) if params['query'].present?
-    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })  
+    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
     @offers = handle_prices(prices) if prices
   end
 
