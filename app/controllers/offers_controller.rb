@@ -69,10 +69,10 @@ class OffersController < ApplicationController
     filters = params['search']
     if filters.present?
       filters.keys.each { |filter| filters[filter].reject!(&:blank?) }
-      products = products.where(brand_id: filters["brands"]) if filters["brands"].present?
-      products = products.where(category_id: filters["categories"]) if filters["categories"].present?
-      products = products.where(subcategory_id: filters["subcategories"]) if filters["subcategories"].present?
-      products = products.where(weight: filters["weights"]) if filters["weights"].present?
+      products = products.where(brand_id: filters['brands']) if filters['brands'].present?
+      products = products.where(category_id: filters['categories']) if filters['categories'].present?
+      products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
+      products = products.where(weight: filters['weights']) if filters['weights'].present?
     end
     products = products.search_products(params['query']) if params['query'].present?
     @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
@@ -89,9 +89,9 @@ class OffersController < ApplicationController
   def sidebar_params
     products_ids = OfferProduct.all&.pluck(:product_id)&.uniq # takes the product identifier that contains offers
     products = Product.where(id: products_ids)&.uniq #
-    @brands = Brand.where(id: products&.pluck(:brand_id))&.pluck([:name, :id])&.reject(&:blank?)&.uniq
-    @categories = Category.where(id: products&.pluck(:category_id))&.pluck([:name, :id])&.reject(&:blank?)&.uniq
-    @subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.pluck([:name, :id])&.reject(&:blank?)&.uniq
+    @brands = Brand.where(id: products&.pluck(:brand_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
+    @categories = Category.where(id: products&.pluck(:category_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
+    @subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
     @weights = products&.pluck(:weight)&.reject(&:blank?)&.uniq
   end
 end
