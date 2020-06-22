@@ -64,18 +64,26 @@ class OffersController < ApplicationController
 
   private
 
+  def handle_prices(prices)
+    prices = prices.split(',')
+    set_prices(prices[0], prices[1])
+    @offers.where('price >= ? AND price <= ?', prices[0], prices[1])
+  end
+
   def set_offers
     products = Product.all
     filters = params['search']
     if filters.present?
-      filters.keys.each { |filter| filters[filter].reject!(&:blank?) }
+      filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
       products = products.where(brand_id: filters['brands']) if filters['brands'].present?
       products = products.where(category_id: filters['categories']) if filters['categories'].present?
       products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
       products = products.where(weight: filters['weights']) if filters['weights'].present?
+      prices = filters['prices'] if filters['prices'].present?
     end
     products = products.search_products(params['query']) if params['query'].present?
-    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
+    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })  
+    @offers = handle_prices(prices) if prices
   end
 
   def offer_params
@@ -93,5 +101,15 @@ class OffersController < ApplicationController
     @categories = Category.where(id: products&.pluck(:category_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
     @subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
     @weights = products&.pluck(:weight)&.reject(&:blank?)&.uniq
+    set_prices
+  end
+
+  def set_prices(start_price = nil, end_price = nil)
+    @prices = [{
+      start: Offer.all.order(:price).first.price,
+      end: Offer.all.order(price: :desc).first.price,
+      current_start: start_price.to_i,
+      current_end: end_price.to_i
+    }].to_json
   end
 end

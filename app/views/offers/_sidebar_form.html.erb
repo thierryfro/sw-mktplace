@@ -1,4 +1,4 @@
-<%= simple_form_for :search, url: offers_path, method: "GET", remote: true, html: { id: 'sidebar_form' }  do |f| %>
+<%= simple_form_for :search, url: offers_path, method: "GET", remote: true,  html: { id: 'sidebar_form' }  do |f| %>
   <% fields = [
     { name: "Marcas", collection: @brands, field_name: :brands   },
     { name: "Categorias", collection: @categories, field_name: :categories   },
@@ -15,4 +15,10 @@
       <span class="sidebar_toggler minus">-</span>
     </div>
   <% end %>
+  <div class="sidebar_form_fields">
+    <div class="required form_label">Preço</div>
+    <div id="form-slider" class="form-slider" data-values="<%= @prices %>" > 
+      <%= f.input :prices, as: :hidden, input_html: { id: "sliderValueInput" } %>
+    </div>
+  </div>
 <% end %>
