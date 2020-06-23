@@ -7,10 +7,11 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import { initSelect2 } from '../components/init_select2';
+import { initSelect2 } from "../components/init_select2";
 import { initFilter } from "../components/filter_toggler";
 import { initSlicker } from "../components/slick";
-import { offerFilter } from "./offer_filter"
+import { initSlider } from "../components/init_slider";
+import { offerFilter } from "./offer_filter";
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -20,16 +21,15 @@ import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-
 initSelect2();
 offerFilter();
 styleCheckBoxes();
 activateToggler();
 initFilter();
 initSlicker();
+initSlider();
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */
   initSelect2();
 });
-

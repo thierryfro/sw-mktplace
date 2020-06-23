@@ -1,27 +1,18 @@
+# frozen_string_literal: true
+
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[show edit update destroy]
   before_action :sidebar_params, only: %i[index]
+  before_action :set_offers, only: %i[index]
+
   skip_before_action :require_admin
+
   def index
-    if params['search']
-
-      @filter = [params['search']['categories']].concat([params['search']['brands']])
-                                                .concat([params['search']['subcategories']])
-                                                .concat([params['search']['weight']])
-                                                .concat([params['search']['query']]).flatten.reject(&:blank?)
-
-      products = @filter.empty? ? Product.all : Product.search_products(@filter.to_s)
-      @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
-    else
-      @offers = Offer.all
-    end
-    @offers = @offers.sample(25) 
-    redirect_to offers_path if @offers.empty?
+    @offers = @offers.sample(25)
     respond_to do |format|
       format.html
       format.js
     end
-    
   end
 
   def show; end
@@ -73,6 +64,29 @@ class OffersController < ApplicationController
 
   private
 
+  def handle_prices(prices)
+    prices = prices.split(',')
+    prices.map! { |price| price.gsub(/\D/, '') }
+    set_prices(prices[0], prices[1])
+    @offers.where('price >= ? AND price <= ?', prices[0], prices[1])
+  end
+
+  def set_offers
+    products = Product.all
+    filters = params['search']
+    if filters.present?
+      filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
+      products = products.where(brand_id: filters['brands']) if filters['brands'].present?
+      products = products.where(category_id: filters['categories']) if filters['categories'].present?
+      products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
+      products = products.where(weight: filters['weights']) if filters['weights'].present?
+      prices = filters['prices'] if filters['prices'].present?
+    end
+    products = products.search_products(params['query']) if params['query'].present?
+    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
+    @offers = handle_prices(prices) if prices
+  end
+
   def offer_params
     params.require(:offer).permit(:store_id, :stock, :price, :active, offer_products_attributes: %i[product_id _destroy])
   end
@@ -83,10 +97,20 @@ class OffersController < ApplicationController
 
   def sidebar_params
     products_ids = OfferProduct.all&.pluck(:product_id)&.uniq # takes the product identifier that contains offers
-    products = Product.where(id: products_ids)&.uniq # 
-    @brands = Brand.where(id: products&.pluck(:brand_id))&.pluck(:name)&.reject(&:blank?)&.uniq
-    @categories = Category.where(id: products&.pluck(:category_id))&.pluck(:name)&.reject(&:blank?)&.uniq
-    @subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.pluck(:name)&.reject(&:blank?)&.uniq
-    @weight = products&.pluck(:weight)&.reject(&:blank?)&.uniq
+    products = Product.where(id: products_ids)&.uniq #
+    @brands = Brand.where(id: products&.pluck(:brand_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
+    @categories = Category.where(id: products&.pluck(:category_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
+    @subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.order(:name).pluck(%i[name id])&.reject(&:blank?)&.uniq
+    @weights = products&.pluck(:weight)&.reject(&:blank?)&.uniq
+    set_prices
+  end
+
+  def set_prices(start_price = nil, end_price = nil)
+    @prices = [{
+      start: Offer.all.order(:price).first.price,
+      end: Offer.all.order(price: :desc).first.price,
+      current_start: start_price.to_i,
+      current_end: end_price.to_i
+    }].to_json
   end
 end
