@@ -7,10 +7,10 @@
 
     <div class="offer">
       <%= link_to offer do %>
-        <%= image_tag product_photo.url, class: "product_image" %>
+        <%= image_tag (product_photo.present? ? product_photo.url : 'placeholder.jpg'), class: "product_image" %>
         <div class="product_info">
-          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 18)%></h3>
-          <p class="product_brand"><%= product.brand.name %></p> 
+          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
+          <p class="product_brand"><%= product.brand.name.titleize %></p> 
         </div>
       <% end %>
       <div class="offer_info">
@@ -22,10 +22,8 @@
           <span class="like_cart_button">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
           </span>
-          <%= link_to create_cart_offer_path(offer), method: :post do %>
-            <span class="offer_cart_button">
+          <%= link_to create_cart_offer_path(offer), method: :post, class: "offer_cart_button" do %>
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </span>
           <% end %> 
         </div>
       </div>

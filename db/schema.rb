@@ -38,13 +38,7 @@ ActiveRecord::Schema.define(version: 2020_05_31_164509) do
     t.datetime "updated_at", null: false
   end
 
-create_table "categories", force: :cascade do |t|
-  t.string "name"
-  t.datetime "created_at", null: false
-  t.datetime "updated_at", null: false
-end
-
-create_table "cart_offers", force: :cascade do |t|
+  create_table "cart_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.integer "quantity"
     t.bigint "cart_id"
@@ -256,7 +250,6 @@ create_table "cart_offers", force: :cascade do |t|
     t.index ["freight_rule_id"], name: "index_zip_code_zones_on_freight_rule_id"
   end
 
-
   add_foreign_key "cart_offers", "carts"
   add_foreign_key "cart_offers", "offers"
   add_foreign_key "carts", "freight_rules"
@@ -282,27 +275,4 @@ create_table "cart_offers", force: :cascade do |t|
   add_foreign_key "user_stores", "users"
   add_foreign_key "users", "carts"
   add_foreign_key "zip_code_zones", "freight_rules"
-
-
-  # add_foreign_key "carts", "freight_rules"
-  # add_foreign_key "cart_offers", "carts"
-  # add_foreign_key "cart_offers", "offers"
-  # add_foreign_key "freight_rules", "freight_zones"
-  # add_foreign_key "freight_rules", "stores"
-  # add_foreign_key "freight_weights", "freight_rules"
-  # add_foreign_key "offer_products", "offers"
-  # add_foreign_key "offer_products", "products"
-  # add_foreign_key "offers", "stores"
-  # add_foreign_key "product_photos", "products"
-  # add_foreign_key "products", "brands"
-  # add_foreign_key "products", "categories"
-  # add_foreign_key "products", "subcategories"
-  # add_foreign_key "subcategories", "categories"
-  # add_foreign_key "taggings", "tags"
-  # add_foreign_key "user_ratings", "stores"
-  # add_foreign_key "user_ratings", "users"
-  # add_foreign_key "user_stores", "stores"
-  # add_foreign_key "user_stores", "users"
-  # add_foreign_key "users", "carts"
-  # add_foreign_key "zip_code_zones", "freight_rules"
 end
