@@ -2,12 +2,14 @@
   display: flex;
   align-items: center;
   padding-top: 4rem;
+  #sidebar_form {
+    width: 70%;
+  }
   .sidebar_form_fields {
-    width: 23rem;
     position: relative;
     margin-bottom: 0.6rem;
     .form_label {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-style: italic;
       font-weight: 600;
       margin-bottom: 0.6rem;
@@ -28,7 +30,7 @@
       position: absolute;
       font-size: 2rem;
       font-weight: 600;
-      left: 21.5rem;
+      right: 1%;
       top: 0;
       transition: all 0.1s linear;
       cursor: pointer;
@@ -83,6 +85,11 @@
           line-height: 15px;
         }
       }
+    }
+  }
+  @media only screen and (max-width: $bp-largest) {
+    #sidebar_form {
+      width: 80%;
     }
   }
 }

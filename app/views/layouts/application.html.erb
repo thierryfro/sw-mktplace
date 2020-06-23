@@ -9,11 +9,15 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-    <%= render 'shared/footer' %>
+    <div class="html-content">
+      <%= render 'shared/header' %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <div class="main-body">
+        <%= yield %>
+      </div>
+      <%= render 'shared/footer' %>
+    </div>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>

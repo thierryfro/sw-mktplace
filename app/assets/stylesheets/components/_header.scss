@@ -2,8 +2,16 @@
 
 header.header {
   display: flex;
-  height: 12.1rem;
   align-items: center;
+  position: fixed;
+  height: 11%;
+  width: 100%;
+  .main-navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
   a {
     font-size: 1.4rem;
     color: white;
@@ -11,10 +19,8 @@ header.header {
     font-weight: 600;
   }
   .left-nav {
-    flex: 0 0 22%;
-    min-width: 32.4rem;
+    flex: 0 1 22%;
     .logo-box {
-      width: 32.4rem;
       display: flex;
       justify-content: flex-end;
       .logo {
@@ -37,6 +43,10 @@ header.header {
     justify-content: flex-start;
     flex-grow: 1;
     height: 5rem;
+    margin-right: 4%;
+    @media only screen and (max-width: $bp-largest) {
+      margin-right: 3%;
+    }
   }
 }
 
@@ -44,7 +54,7 @@ header.header {
 
 .nav_search {
   display: flex;
-  width: 62.5rem;
+  width: 65%;
   margin-right: 2.3rem;
   .nav_search_input {
     border: 1px solid $color-grey-light-3;
@@ -83,7 +93,7 @@ header.header {
   }
   .nav_session_login {
     padding-right: 1rem;
-    border-right: solid 1px white ;
+    border-right: solid 1px white;
   }
   .nav_session_signup {
     padding-left: 1rem;
@@ -93,7 +103,7 @@ header.header {
 // NAV CART
 
 .nav_cart {
-  margin-left: 8rem;
+  margin-left: auto;
   position: relative;
   display: flex;
   align-items: center;
@@ -106,7 +116,30 @@ header.header {
     padding: 2px 8px;
     background-color: $color-grey-dark-2;
     border-radius: 50%;
-    right: -15px;
-    top: -8px;
+    right: -1.8rem;
+    top: -0.6rem;
+  }
+}
+
+// Responsive navbar
+
+.navbar_toggler {
+  font-size: 3rem;
+  color: white;
+  width: 7rem;
+  text-align: center;
+  display: none;
+}
+
+@media only screen and (max-width: $bp-medium) {
+  header {
+    padding: 0 1rem;
+    .navbar_toggler {
+      display: inline-block;
+    }
+  }
+  .center-nav,
+  .nav_session {
+    display: none !important;
   }
 }
