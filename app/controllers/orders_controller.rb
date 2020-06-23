@@ -17,15 +17,13 @@ class OrdersController < ApplicationController
     # }
     @order.user = current_user
     @order.address = current_user.address.first
-    @order.store = @cart.offers.first.store
+    @order.store = @cart.cart_offers.first.store
 
-    @order.save!
+    if @order.save!
+      @cart.cart_offers.each {|cart_offer| OrderOffer.create(order: @order, offer: cart_offer.offer, recorded_value: cart_offer.offer.price)}
+    end
+    @cart.cart_offers.destroy_all
 
-    @cart.offers.each {|offer| OrderOffer.create(order: @order, offer: offer, recorded_value: offer.price)}
-
-    @cart.destroy
-
-    raise
 
     puts "ORDER + #{@order}"
     redirect_to offers_path

@@ -4,3 +4,4 @@
 <p>Email: <%= @store.email  %></p>
 <p>CPNJ: <%= @store.cnpj %></p>
 
+<%= link_to "Link com MercadoPago", "https://auth.mercadopago.com.br/authorization?client_id=8887914689962136&response_type=code&platform_id=mp&redirect_uri=https://e427b78f65c2.ngrok.io/stores/#{@store.id}/credentials/banana" %>

@@ -1,6 +1,7 @@
 class StoresController < ApplicationController
 
-  before_action :set_store, only: [:show, :edit, :update, :destroy]
+  before_action :set_store, only: %i[show edit update destroy]
+  before_action :set_store_with_id, only: %i[credentials]
   skip_before_action :require_admin
 
   def index
@@ -50,6 +51,35 @@ class StoresController < ApplicationController
     redirect_to root_path
   end
 
+  def credentials
+
+    # url = 'https://api.mercadopago.com/oauth/token'
+    # user_serialized = open(url).read
+    # user = JSON.parse(user_serialized)
+
+    # puts "#{user['name']} - #{user['bio']}"
+
+    url = "https://api.mercadopago.com/oauth/token"
+
+    headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'accept': 'application/json'
+    }
+    body = {
+      'client_secret': ENV["PROD_ACCESS_TOKEN"],
+      'grant_type': "authorization_code",
+      'code': "#{params[:code]}",
+      'redirect_uri': "https://264f3981b3e2.ngrok.io/stores/#{@store.id}/credentials"
+    }
+
+    # Create the HTTP objects
+    response = RestClient.post(url, body, headers)
+
+    # Send the request
+    byebug
+
+  end
+
   private
 
   def store_params
@@ -58,6 +88,10 @@ class StoresController < ApplicationController
 
   def set_store
     @store = Store.find(params[:id])
+  end
+
+  def set_store_with_id
+    @store = Store.find(params[:store_id])
   end
 
 end
