@@ -41,25 +41,6 @@ header.admin-header {
   }
 }
 
-// NAV SESSION
-header.admin-header {
-  .admin-nav_session {
-    display: flex;
-    width: 13rem;
-    margin-left: 1.6rem;
-    > * {
-      display: flex;
-      align-items: center;
-    }
-    .nav_session_login {
-      padding-right: 1rem;
-    }
-    .nav_session_signup {
-      padding-left: 1rem;
-    }
-  }
-}
-
 // Responsive navbar
 header.admin-header {
   .navbar_toggler {

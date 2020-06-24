@@ -48,6 +48,7 @@ class Product < ApplicationRecord
   end
 
   def index_photo
-    product_photos.find_by(name: 'Principal', size: '300x300')
+    product_photo = product_photos.find_by(name: 'Principal', size: '300x300')
+    product_photo.present? ? product_photo.url : 'placeholder.jpg'
   end
 end

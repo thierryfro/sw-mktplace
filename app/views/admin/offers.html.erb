@@ -2,7 +2,15 @@
   <% @offers.each do |offer| %>
     <% product = offer.products.first  %>
     <% product_photo = product.index_photo %>
+
     <div class="admin-offer">
+      <div class="offer-head">
+        <%= image_tag product_photo, class: "product_image" %>
+        <div class="product_info">
+          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
+          <p class="product_brand"><%= product.brand.name.titleize %></p> 
+        </div>
+      </div>
       <p> Loja: <%= offer.store.name %></p>
       <p> Dono: <%= offer.store.owner.name %></p>
       <p> Produtos em oferta: <%= offer.products.count %></p>
@@ -10,4 +18,6 @@
     </div>
   <% end %>
 </div>
+
 <%= paginate @offers %>
+
