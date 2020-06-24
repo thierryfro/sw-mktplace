@@ -5,7 +5,7 @@
   <div class="offer">
 
     <div class="offer_photos">
-      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'main_photo' %>
+      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'main_photo', id: 'image' %>
 
       <div class="photos_preview">
         <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>

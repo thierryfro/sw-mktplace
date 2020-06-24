@@ -11,7 +11,7 @@ import { initSelect2 } from '../components/init_select2';
 import { offerFilter } from "./offer_filter"
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 import { photoSelector } from "../components/photo_select"
-
+import { viewerJS } from '../components/viewer';
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -25,6 +25,7 @@ offerFilter();
 styleCheckBoxes();
 activateToggler();
 photoSelector();
+viewerJS();
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */
