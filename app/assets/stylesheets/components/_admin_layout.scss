@@ -47,13 +47,13 @@
   .main {
     width: 78%;
     margin-left: auto;
-    background-color: $color-grey-light-1;
+    background-color: white;
   }
   .admin-sidebar {
     height: 89%;
     width: 22%;
     position: fixed;
-    background-color: white;
+    background-color: $color-grey-light-1;
   }
   @media only screen and (max-width: $bp-small) {
     flex-direction: column;
@@ -61,10 +61,10 @@
       display: flex;
     }
     .main,
-    .sidebar {
+    .admin-sidebar {
       width: 100%;
     }
-    .sidebar {
+    .admin-sidebar {
       max-height: 0;
       opacity: 0;
       height: auto;
@@ -82,7 +82,6 @@
 }
 
 .admin-content {
-
     .main {
       min-height: 90vh;
       .offers {
