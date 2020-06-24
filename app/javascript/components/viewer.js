@@ -3,12 +3,13 @@ import Viewer from 'viewerjs';
 import 'viewerjs/dist/viewer.css';
 
 const viewerJS = () => {
-  const viewer = new Viewer(document.getElementById('image'), {
-    modal: true,
-    viewed() {
-      viewer.zoomTo(1);
-    },
-  });
+  const viewer = document.getElementById('image')
+  if (viewer) {
+    new Viewer( viewer, {
+      modal: true,
+      viewed() {},
+    });
+  }
 }
 // View an image
 

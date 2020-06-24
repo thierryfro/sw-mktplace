@@ -17,8 +17,26 @@
     </div>
 
     <div class="offer_details">
-      <div class="brand_photo">
-        <%= image_tag @product.brand.logo if @product.brand.logo  %>
+
+      <div class="store_link">
+        <h6>Produto vendido por: <span><%= @offer.store.name %></span></h6>
+        <h6>Antes de comprar, escolha ou confira o tamanho e o sabor do seu produto</h6>
+        <div class="selector_size">
+          <div>
+            <form action="">
+              <input type="dropdown">
+              <input type="dropdown">
+            </form>
+          </div>
+          <div>
+            <h4>R$ <%= @offer.price %>0</h4>
+            <%= link_to cart_path do %>
+              <div class="cart_btn">
+                <i class="fa fa-shopping-cart"></i>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
 
       <div class="details">
@@ -29,27 +47,15 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae eligendi dolorem non voluptas.
           Magnam et eum debitis exercitationem unde hic quia, omnis, quo harum soluta consequatur iste voluptatum. Doloremque, neque!
         </p>
-        <h6>Antes de comprar, escolha ou confira o tamanho e o sabor do seu produto</h6>
       </div>
 
       <div class="price_details">
 
-        <div class="store_link">
-          <h6>Produto vendido por: <span><%= @offer.store.name %></span></h6>
-          <h4>R$ <%= @offer.price %>0</h4>
-        </div>
-
         <div class="price">
-          <%= link_to root_path do%>
-            <div class="store_btn">
-              Visitar a loja
-            </div>
-          <% end %>
-          <%= link_to cart_path do %>
-            <div class="cart_btn">
-              <i class="fa fa-shopping-cart"></i>
-            </div>
-          <% end %>
+
+          <div class="brand_photo">
+            <%= image_tag @product.brand.logo if @product.brand.logo  %>
+          </div>
         </div>
 
       </div>
@@ -57,6 +63,35 @@
     <%# raise %>
     </div>
   </div>
+</div>
+
+<div class="offer_show">
+  <div class="product_score">
+
+    <div class="score">
+      <h4>Avaliação Média do Produto</h4>
+      <div>
+        <h6>4.3</h6>
+        <p>35 avaliações</p>
+      </div>
+    </div>
+
+    <div class="stars_section">
+    </div>
+
+  </div>
+
+  <div class="testimonys">
+    <div class="testimonys_cards">
+      foto
+      <div>
+        <h6>Hugo LitleWhite Da Silva</h6>
+        <span>⭐️⭐️⭐️⭐️</span>
+      </div>
+      <p>'Este produto é uma merda, eu nem malho, não sei pq comprei saporra!'</p>
+    </div>
+  </div>
+
 </div>
 
 
