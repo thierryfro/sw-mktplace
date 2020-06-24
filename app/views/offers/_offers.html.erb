@@ -3,7 +3,7 @@
 <% else %>
   <% offers.each do |offer| %>
     <% product = offer.products.first  %>
-    <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
+    <% product_photo = product.index_photo %>
 
     <div class="offer">
       <%= link_to offer do %>

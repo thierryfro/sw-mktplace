@@ -1,43 +1,5 @@
 .admin-content {
   display: flex;
-  .filter {
-    position: absolute;
-    font-size: 2.5rem;
-    border-radius: 50%;
-    margin: 2rem 1rem;
-    background-color: white;
-    box-shadow: 0px 0px 2px $color-grey-light-3;
-    color: $color-primary;
-    width: 3rem;
-    height: 3rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1;
-    position: fixed;
-    i.filter-icon {
-      display: block;
-      opacity: 1;
-    }
-    i.close-icon {
-      display: none;
-      opacity: 0;
-      font-size: 2rem;
-    }
-    &.toggled {
-      color: white;
-      background-color: $color-primary;
-      i.filter-icon {
-        display: none;
-        opacity: 0;
-      }
-      i.close-icon {
-        opacity: 1;
-        display: block;
-      }
-    }
-  }
   .admin-sidebar,
   .main {
     padding-top: 2rem;
@@ -45,13 +7,13 @@
     flex-direction: column;
   }
   .main {
-    width: 78%;
+    width: 83%;
     margin-left: auto;
     background-color: white;
   }
   .admin-sidebar {
     height: 89%;
-    width: 22%;
+    width: 17%;
     position: fixed;
     background-color: $color-grey-light-1;
   }
@@ -197,4 +159,48 @@
         }
       }
     }
+}
+
+
+// FILTERS CONTENT
+
+.admin-content {
+  .filter {
+    position: absolute;
+    font-size: 2.5rem;
+    border-radius: 50%;
+    margin: 2rem 1rem;
+    background-color: white;
+    box-shadow: 0px 0px 2px $color-grey-light-3;
+    color: $color-primary;
+    width: 3rem;
+    height: 3rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    position: fixed;
+    i.filter-icon {
+      display: block;
+      opacity: 1;
+    }
+    i.close-icon {
+      display: none;
+      opacity: 0;
+      font-size: 2rem;
+    }
+    &.toggled {
+      color: white;
+      background-color: $color-primary;
+      i.filter-icon {
+        display: none;
+        opacity: 0;
+      }
+      i.close-icon {
+        opacity: 1;
+        display: block;
+      }
+    }
+  }
 }
