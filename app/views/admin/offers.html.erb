@@ -1,23 +1,32 @@
 <div class="admin-offers">
-  <% @offers.each do |offer| %>
+    <% @offers.each do |offer| %>
     <% product = offer.products.first  %>
     <% product_photo = product.index_photo %>
 
     <div class="admin-offer">
-      <div class="offer-head">
-        <%= image_tag product_photo, class: "product_image" %>
-        <div class="product_info">
-          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
-          <p class="product_brand"><%= product.brand.name.titleize %></p> 
-        </div>
-      </div>
-      <p> Loja: <%= offer.store.name %></p>
-      <p> Dono: <%= offer.store.owner.name %></p>
-      <p> Produtos em oferta: <%= offer.products.count %></p>
-      <p> Oferta: <%= offer.active? ? 'Ativa' : 'Inativa' %></p>
+        <div class="offer-head">
+            <%= image_tag product_photo, class: "product-image" %>
+            <div class="product_info">
+                <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
+                <p class="product_brand"><%= product.brand.name.titleize %></p>
+            </div>
+        </div> 
+        <%= simple_form_for offer do |f| %>
+            <div class="form-field">
+                <span class="form_label">
+                    Preço
+                </span>
+                <%= f.input :stock, label: false, input_html: { class: "form_input" }%>
+            </div>
+            <div class="form-field">
+                <span class="form_label">
+                    Quantidade
+                </span>
+                <%= f.input :price, label: false, input_html: { class: "form_input" } %>
+            </div>
+        <% end %>
     </div>
-  <% end %>
+    <% end %>
 </div>
 
 <%= paginate @offers %>
-
