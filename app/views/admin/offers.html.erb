@@ -13,16 +13,26 @@
         </div> 
         <%= simple_form_for offer do |f| %>
             <div class="form-field">
-                <span class="form_label">
+                <span class="form-label">
                     Preço
                 </span>
-                <%= f.input :stock, label: false, input_html: { class: "form_input" }%>
+                <%= f.input :price, as: :currency, label: false, 
+                    input_html: { 
+                        value: sprintf('%.2f', offer.price),
+                        class: offer.price / 100 < 1 ? "form_input" : "form_input-larger",
+                        disabled: true 
+                    } %>
             </div>
             <div class="form-field">
-                <span class="form_label">
+                <span class="form-label">
                     Quantidade
                 </span>
-                <%= f.input :price, label: false, input_html: { class: "form_input" } %>
+                <%= f.input :stock, label: false, 
+                input_html: { 
+                    class: "form_input",
+                    disabled: true
+                    }
+                %>
             </div>
         <% end %>
     </div>

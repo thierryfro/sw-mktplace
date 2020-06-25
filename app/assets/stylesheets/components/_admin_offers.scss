@@ -41,20 +41,40 @@
       flex-direction: column;
       align-items: center;
       flex: 0 0 47%;
+      width: 100%;
       .form-field {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         height: 50%;
-        padding: 0 10%;
         border-top: 1px solid $color-grey-light-2;
+        padding: 0 7%;
+        .form-label {
+          color: $color-grey-light-3;
+          font-style: italic;
+          font-size: 1.2rem;
+        }
         .input {
           display: flex;
           justify-content: flex-end;
         }
         .form_input {
-          width: 40%;
+          width: 4rem;
+        }
+        .form_input-larger {
+          width: 4.7rem;
+        }
+        .currency,
+        .form_input {
+          text-align: end;
+          border: none;
+          font-style: italic;
+          font-size: 1.5rem;
+          font-weight: bolder;
+          .currency-real {
+            font-size: 1.55rem;
+          }
         }
       }
     }
