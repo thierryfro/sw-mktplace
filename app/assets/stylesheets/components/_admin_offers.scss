@@ -9,6 +9,29 @@
     flex-direction: column;
     align-items: center;
     border: solid 1px $color-grey-light-2;
+    position: relative;
+    .form-toggler {
+      position: absolute;
+      font-size: 2rem;
+      color: $color-primary-light;
+      right: 1rem;
+      top: .7rem;
+      transition: 0.3s linear;
+      .fa-check {
+        display: none;
+      }
+      .fa-pencil-square-o {
+        display: block;
+      }
+    }
+    .form-toggler.toggled {
+      .fa-check {
+        display: block;
+      }
+      .fa-pencil-square-o {
+        display: none;
+      }
+    }
     .offer-head {
       display: flex;
       align-items: center;

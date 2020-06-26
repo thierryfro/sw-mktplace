@@ -4,6 +4,10 @@
     <% product_photo = product.index_photo %>
 
     <div class="admin-offer">
+        <span class="form-toggler" data-offer="<%= product.id %>">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
         <div class="offer-head">
             <%= image_tag product_photo, class: "product-image" %>
             <div class="product_info">
@@ -11,7 +15,7 @@
                 <p class="product_brand"><%= product.brand.name.titleize %></p>
             </div>
         </div> 
-        <%= simple_form_for offer do |f| %>
+        <%= simple_form_for offer, url: audit_offer_path,  remote: true, html: { id: product.id } do |f| %>
             <div class="form-field">
                 <span class="form-label">
                     Preço
@@ -20,7 +24,7 @@
                     input_html: { 
                         value: sprintf('%.2f', offer.price),
                         class: offer.price / 100 < 1 ? "form_input" : "form_input-larger",
-                        disabled: true 
+                        disabled: true
                     } %>
             </div>
             <div class="form-field">
@@ -31,8 +35,7 @@
                 input_html: { 
                     class: "form_input",
                     disabled: true
-                    }
-                %>
+                }%>
             </div>
         <% end %>
     </div>
