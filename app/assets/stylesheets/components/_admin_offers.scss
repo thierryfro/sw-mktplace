@@ -15,7 +15,7 @@
       font-size: 2rem;
       color: $color-primary-light;
       right: 1rem;
-      top: .7rem;
+      top: 0.7rem;
       transition: 0.3s linear;
       .fa-check {
         display: none;
@@ -82,10 +82,12 @@
         .input {
           display: flex;
           justify-content: flex-end;
-          background-color: white;
         }
         .form_input {
           width: 4rem;
+          &:disabled {
+            background-color: white;
+          }
         }
         .form_input-larger {
           width: 4.7rem;
