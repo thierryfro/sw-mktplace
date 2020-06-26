@@ -12,7 +12,7 @@ class AdminController < ApplicationController
 
     @offers = Offer.includes(:products).where(store: @store).order(:price)
     query = params[:admin_query]
-    search_offers(query) if query
+    search_offers(query) if query.present?
     @offers = @offers.page params[:page]
   end
 
