@@ -9,7 +9,7 @@ class AdminController < ApplicationController
 
   def offers
     @store = Store.find_by(owner_id: current_user.id)
-    @offers = Offer.where(store: @store).page params[:page]
+    @offers = Offer.where(store: @store).order(:price).page params[:page]
   end
 
   def new_offer

@@ -19,6 +19,7 @@
       transition: 0.3s linear;
       .fa-check {
         display: none;
+        color: $color-sucess;
       }
       .fa-pencil-square-o {
         display: block;
@@ -81,6 +82,7 @@
         .input {
           display: flex;
           justify-content: flex-end;
+          background-color: white;
         }
         .form_input {
           width: 4rem;

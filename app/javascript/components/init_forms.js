@@ -1,17 +1,18 @@
-const disableForm = (currentForm) => {
+const disableForm = (currentForm, toggler) => {
     currentForm
         .querySelectorAll(".form_input , .form_input-larger")
         .forEach((form) => {
-            enableForm(form)
             form.disabled = true
+            toggler.classList.remove("toggled")
+            enableForm(toggler)
         })
 }
 
 const setToggler = (toggler, currentForm) => {
-    toggler.classList.add = "toggled"
+    toggler.classList.add("toggled")
     toggler.addEventListener("click", () => {
         Rails.fire(currentForm, "submit");
-        disableForm(currentForm)
+        disableForm(currentForm, toggler)
     })
 }
 
@@ -23,8 +24,8 @@ const enableForm = (toggler) => {
             .forEach((form) => {
                 form.disabled = false
             })
+        setToggler(toggler, currentForm)
     })
-    setToggler(toggler, currentForm)
 }
 
 const initForms = () => {

@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     get 'new_offer', to: 'admin#new_offer', as: 'new_offers'
     get 'new_store', to: 'admin#new_store', as: 'new_stores'
     get 'edit_offer', to: 'admin#edit_offer', as: 'audit_offer'
-    resources :offers, only: %i[update]
     get 'edit_store', to: 'admin#edit_store', as: 'audit_store'
   end
 

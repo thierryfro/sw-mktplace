@@ -15,7 +15,7 @@
                 <p class="product_brand"><%= product.brand.name.titleize %></p>
             </div>
         </div> 
-        <%= simple_form_for offer, url: audit_offer_path,  remote: true, html: { id: product.id } do |f| %>
+        <%= simple_form_for offer, remote: true, html: { id: product.id } do |f| %>
             <div class="form-field">
                 <span class="form-label">
                     Preço

@@ -53,8 +53,17 @@ class OffersController < ApplicationController
   end
 
   def update
-    @offer.update(offer_params)
-    redirect_to offer_path(@offer)
+    puts params
+    unless @offer.store.owner != current_user || current_user.admin?
+      flash[:notice] = 'Você não tem permissão para fazer isso!'
+      redirect_to root_path
+    end
+    if @offer.update!(offer_params)
+      flash[:notice] = 'Sua oferta foi atualizada com sucesso!'
+    else
+      flash[:notice] = 'Algo deu errado'
+      redirect_to all_offers
+    end
   end
 
   def destroy

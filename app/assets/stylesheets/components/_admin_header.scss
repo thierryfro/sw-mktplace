@@ -6,6 +6,7 @@ header.admin-header {
   position: fixed;
   height: 11%;
   width: 100%;
+  z-index: 1;
   .main-navbar {
     display: flex;
     align-items: center;
