@@ -2,11 +2,11 @@
   display: flex;
   .admin-sidebar,
   .main {
-    padding-top: 2rem;
     display: flex;
     flex-direction: column;
   }
   .main {
+    padding-top: 2rem;
     width: 83%;
     margin-left: auto;
     background-color: white;
@@ -32,11 +32,11 @@
       height: auto;
       transition: 0.2s ease;
       &.toggled {
+        z-index: 1; 
         opacity: 1;
         height: auto;
         max-height: fit-content;
         background-color: white;
-        padding-bottom: 3rem;
         box-shadow: 0px 0px 5px $color-grey-light-3;
       }
     }
@@ -159,48 +159,4 @@
         }
       }
     }
-}
-
-
-// FILTERS CONTENT
-
-.admin-content {
-  .filter {
-    position: absolute;
-    font-size: 2.5rem;
-    border-radius: 50%;
-    margin: 2rem 1rem;
-    background-color: white;
-    box-shadow: 0px 0px 2px $color-grey-light-3;
-    color: $color-primary;
-    width: 3rem;
-    height: 3rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1;
-    position: fixed;
-    i.filter-icon {
-      display: block;
-      opacity: 1;
-    }
-    i.close-icon {
-      display: none;
-      opacity: 0;
-      font-size: 2rem;
-    }
-    &.toggled {
-      color: white;
-      background-color: $color-primary;
-      i.filter-icon {
-        display: none;
-        opacity: 0;
-      }
-      i.close-icon {
-        opacity: 1;
-        display: block;
-      }
-    }
-  }
 }

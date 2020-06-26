@@ -50,18 +50,13 @@ header.admin-header {
     width: 7rem;
     text-align: center;
     display: none;
+    cursor: pointer;
   }
 
   @media only screen and (max-width: $bp-small) {
-    header {
-      padding: 0 1rem;
-      .navbar_toggler {
-        display: inline-block;
-      }
-    }
-    .center-nav,
-    .nav_session {
-      display: none !important;
+    padding: 0 1rem;
+    .navbar_toggler {
+      display: inline-block;
     }
   }
 }
