@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   # Admin
   scope 'admin' do
+    get '/profile', to:'admin#profile', as: 'admin_profile'
     get '/dashboard', to: 'admin#dashboard'
     get '/offers', to: 'admin#offers', as: 'all_offers'
     get 'new_offer', to: 'admin#new_offer', as: 'new_offers'

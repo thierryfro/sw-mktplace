@@ -1,0 +1,51 @@
+.admin-profile {
+  height: 100%;
+  width: 100%;
+  padding: 12% 10%;
+  .forms-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .form-box {
+      flex: 0 0 23%;
+      height: 20rem;
+      display: flex;
+      flex-direction: column;
+      border: solid 1px $color-grey-light-2;
+      position: relative;
+      .form-info-toggler {
+        position: absolute;
+        font-size: 2rem;
+        color: $color-primary-light;
+        right: 1rem;
+        top: 0.7rem;
+        transition: 0.3s linear;
+        .fa-check {
+          display: none;
+          color: $color-sucess;
+        }
+        .fa-pencil-square-o {
+          color: $color-primary-light;
+          display: block;
+        }
+      }
+      .form-info-toggler.toggled {
+        .fa-check {
+          display: block;
+        }
+        .fa-pencil-square-o {
+          display: none;
+        }
+      }
+      h3.form-title {
+        background-color: $color-grey-light-2;
+        width: 100%;
+        padding: 1rem;
+        font-style: italic;
+        font-weight: bolder;
+        text-align: center;
+      }
+    }
+  }
+}
