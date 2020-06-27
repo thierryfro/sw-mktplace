@@ -56,4 +56,8 @@ class CartsController < ApplicationController
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
     @preference_id = preference['response']['id']
   end
+
+  def sucess
+  end
+
 end
