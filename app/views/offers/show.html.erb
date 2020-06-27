@@ -30,7 +30,8 @@
           </div>
           <div>
             <h4>R$ <%= @offer.price %>0</h4>
-            <%= link_to cart_path do %>
+
+            <%= link_to create_cart_offer_path(@offer), method: :post do %>
               <div class="cart_btn">
                 <i class="fa fa-shopping-cart"></i>
               </div>
