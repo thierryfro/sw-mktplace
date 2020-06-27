@@ -13,6 +13,7 @@ import { initSlicker } from "../components/slick";
 import { initForms } from "../components/init_forms";
 import { initSlider } from "../components/init_slider";
 import { initAdminSidebar } from "../components/admin_sidebar";
+import { initDatepicker } from "../components/flatpickr";
 import { offerFilter } from "./offer_filter";
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 
@@ -22,7 +23,7 @@ import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
+initDatepicker();
 initSelect2();
 offerFilter();
 styleCheckBoxes();

@@ -11,7 +11,7 @@ const disableForm = (currentForm, toggler) => {
 const setToggler = (toggler, currentForm) => {
     toggler.classList.add("toggled")
     toggler.addEventListener("click", () => {
-        Rails.fire(currentForm, "submit");
+        Railps.fire(currentForm, "submit");
         disableForm(currentForm, toggler)
     })
 }

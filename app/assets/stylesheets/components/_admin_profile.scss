@@ -1,7 +1,7 @@
 .admin-profile {
   height: 100%;
   width: 100%;
-  padding: 12% 10%;
+  padding: 12% 5%;
   .forms-container {
     display: flex;
     justify-content: space-between;
@@ -55,8 +55,17 @@
 .admin-profile {
   .form-box {
     .edit_user {
+      padding: 1rem 1.2rem;
       .user-names {
         display: flex;
+        justify-content: space-between;
+        .name-field {
+          width: 47%;
+          .first_name, 
+          .last_name {
+            width: 100%;
+          }
+        }
       }
     }
   }
