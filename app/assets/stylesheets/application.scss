@@ -1,7 +1,6 @@
-
-
 //  import css libraries
-@import 'select2/dist/css/select2';
+@import "select2/dist/css/select2";
+@import 'slick-carousel/slick/slick.scss';
 @import "font-awesome";
 
 
@@ -16,47 +15,63 @@
 // default configs
 
 * {
-    margin: 0;
-    padding: 0;
-    a {
-        text-decoration: none;
-    }
+  margin: 0;
+  padding: 0;
+  a {
+    text-decoration: none;
+  }
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html {
-    box-sizing: border-box;
-    font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
 
-    @media only screen and (max-width: $bp-large) {
-        font-size: 50%;
-    }
+  @media only screen and (max-width: $bp-largest) {
+    font-size: 58%;
+  }
 
-    @media only screen and (max-width: $bp-small) {
-        font-size: 40%;
-    }
+  @media only screen and (max-width: $bp-large) {
+    font-size: 54%;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    font-size: 52%;
+  }
 }
 
 body {
-    font-family: $font-primary;
-    font-weight: 400;
-    line-height: 1.6;
-    color: $color-grey-dark-2;
-    min-height: 100vh;
+  font-family: $font-primary;
+  font-weight: 400;
+  line-height: 1.6;
+  color: $color-grey-dark-2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-grey-light-1;
+}
+
+.html-content {
     display: flex;
     flex-direction: column;
-    background-color: $color-grey-light-1;
+    justify-content: space-between;
+    height: 100vh;
+    .main-body {
+        height: 89%;
+        margin-top: auto;
+    }
 }
 
 main {
-    display: flex;
+  display: flex;
 }
 
-header, footer {
-    background-color: $color-primary;
+header,
+footer {
+  background-color: $color-primary;
 }

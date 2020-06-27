@@ -1,6 +1,7 @@
 class Offer < ApplicationRecord
   belongs_to :store
 
+  has_many :cart_offers, dependent: :destroy
   has_many :offer_products, dependent: :destroy
   has_many :products, through: :offer_products
 
