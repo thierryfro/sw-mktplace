@@ -49,7 +49,7 @@ gem "valid_email2" # validate email from users and sotres
 gem 'acts-as-taggable-on', '~> 6.0' # gema para pesquisa customizazda
 gem 'mercadopago-sdk' # pagamento
 gem "font-awesome-rails"
-
+gem 'cloudinary', '~> 1.12.0'
 
 
 group :development, :test do

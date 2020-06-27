@@ -43,7 +43,7 @@ class AdminController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :last_name, :birthdate)
+    params.require(:user).permit(:name, :last_name, :birthdate, :photo)
   end
 
   def set_store

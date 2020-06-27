@@ -12,5 +12,7 @@ class User < ApplicationRecord
   has_many :user_stores, dependent: :destroy
   has_many :user_ratings, dependent: :destroy
   belongs_to :cart, optional: true
+
+  has_one_attached :photo
   # has_many :stores, as: :owner, dependent: :destroy
 end
