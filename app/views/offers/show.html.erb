@@ -1,6 +1,6 @@
 <div class="offer_show">
   <div class="offer_title">
-    <h4><%= @product.name %></h4><span>(<%= @product.weight.first(5) %>)</span>
+    <h4><%= @product.name.upcase %></h4><span>(<%= @product.weight.first(5) %>)</span>
   </div>
   <div class="offer">
 
@@ -70,25 +70,72 @@
 
     <div class="score">
       <h4>Avaliação Média do Produto</h4>
-      <div>
+      <div class="average-score">
         <h6>4.3</h6>
         <p>35 avaliações</p>
       </div>
     </div>
 
     <div class="stars_section">
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar5"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar4"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar3"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar2"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar1"></div>
+      </div>
     </div>
 
   </div>
 
   <div class="testimonys">
     <div class="testimonys_cards">
-      foto
-      <div>
-        <h6>Hugo LitleWhite Da Silva</h6>
-        <span>⭐️⭐️⭐️⭐️</span>
+      <div class="avatar">
+        <%= image_tag 'avatar.png', class: 'avatar_img' %>
       </div>
-      <p>'Este produto é uma merda, eu nem malho, não sei pq comprei saporra!'</p>
+      <div>
+        <h6>Hugo Littlwehite</h6>
+        <span class="star_rating">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </span>
+      </div>
+      <div>
+        <p>'Este produto é uma merda, eu nem malho, não sei <br> pq comprei saporra!'</p>
+      </div>
     </div>
   </div>
 
