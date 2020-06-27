@@ -2,7 +2,7 @@
 
 class AdminController < ApplicationController
   # before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  before_action :set_store, only: [:offers, :profile]
+  before_action :set_store, only: %i[offers profile]
 
   layout 'admin_layout'
 
@@ -17,7 +17,15 @@ class AdminController < ApplicationController
     @offers = @offers.page params[:page]
   end
 
-  def profile
+  def profile; end
+
+  def edit_profile
+    if current_user.update(user_params)
+      flash[:notice] = 'Perfil atualizado com sucesso!'
+    else
+      flash[:notice] = 'Algo errado não está certo!'
+    end
+    redirect_to admin_profile_path
   end
 
   def new_offer
@@ -34,10 +42,14 @@ class AdminController < ApplicationController
 
   private
 
+  def user_params
+    params.require(:user).permit(:name, :last_name, :birthdate)
+  end
+
   def set_store
     @store = Store.find_by(owner_id: current_user.id)
   end
-  
+
   def offer_params
     params.require(:offer).permit(:store_id, :stock, :price, :active, offer_products_attributes: %i[product_id _destroy])
   end

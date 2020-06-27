@@ -1,14 +1,6 @@
 <div class="admin-profile">
     <div class="forms-container">
-        <div class="form-box">
-            <span class="form-info-toggler" data-offer="">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                <i class="fa fa-check" aria-hidden="true"></i>
-            </span>
-            <h3 class="form-title">
-            Dados Atuais
-            </h3>
-        </div>
+        <%= render 'shared/forms/user_data', user: current_user %>
         <div class="form-box">
             <span class="form-info-toggler" data-offer="">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

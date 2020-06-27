@@ -8,7 +8,7 @@
     align-items: center;
     width: 100%;
     .form-box {
-      flex: 0 0 23%;
+      width: 23%;
       height: 20rem;
       display: flex;
       flex-direction: column;
@@ -45,6 +45,18 @@
         font-style: italic;
         font-weight: bolder;
         text-align: center;
+      }
+    }
+  }
+}
+
+// FORMS LAYOUT 
+
+.admin-profile {
+  .form-box {
+    .edit_user {
+      .user-names {
+        display: flex;
       }
     }
   }
