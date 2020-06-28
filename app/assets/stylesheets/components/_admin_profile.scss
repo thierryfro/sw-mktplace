@@ -7,9 +7,13 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    input {
+      background-color: white;
+      border: none;
+    }
     .form-box {
       width: 23%;
-      height: 20rem;
+      height: 21rem;
       display: flex;
       flex-direction: column;
       border: solid 1px $color-grey-light-2;
@@ -21,6 +25,7 @@
         right: 1rem;
         top: 0.7rem;
         transition: 0.3s linear;
+        cursor: pointer;
         .fa-check {
           display: none;
           color: $color-sucess;
