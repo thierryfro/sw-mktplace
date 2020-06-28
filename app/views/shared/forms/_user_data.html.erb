@@ -8,11 +8,11 @@
     </h3>
     <%= simple_form_for user, url: edit_profile_path, method: :patch do |f| %>
         <div class="user-names">
-            <div class="name-field">
+            <div class="first-name-field">
                 <span class="form-label">Nome</span>
                 <%= f.input :name, label: false, input_html: { class: "first_name" } %>
             </div>
-            <div class="name-field">
+            <div class="last-name-field">
                 <span class="form-label">Sobrenome</span>
                 <%= f.input :last_name, label: false, input_html: { class: "last_name" } %>
             </div>

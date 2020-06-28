@@ -8,13 +8,18 @@
     .user-names {
       display: flex;
       justify-content: space-between;
-      .name-field {
-        width: 47%;
-        .first_name,
-        .last_name {
+      .first-name-field {
+        width: 30%;
+        .first_name {
           width: 100%;
         }
       }
+      .last-name-field {
+        width: 64%;
+        .last_name {
+          width: 100%;
+        }
+      }      
     }
     #user_birthdate {
       width: 8rem;
