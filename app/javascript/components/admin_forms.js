@@ -1,6 +1,6 @@
 const disableForm = (currentForm, toggler) => {
     currentForm
-        .querySelectorAll(".form_input , .form_input-larger")
+        .querySelectorAll(".form_input")
         .forEach((form) => {
             form.disabled = true
             toggler.classList.remove("toggled")
@@ -17,10 +17,10 @@ const setToggler = (toggler, currentForm) => {
 }
 
 const enableForm = (toggler) => {
-    const currentForm = document.getElementById(toggler.dataset.offer)
+    const currentForm = document.getElementById(toggler.dataset.form)
     toggler.addEventListener('click', () => {
         currentForm
-            .querySelectorAll(".form_input , .form_input-larger")
+            .querySelectorAll(".form_input")
             .forEach((form) => {
                 form.disabled = false
             })
@@ -28,8 +28,8 @@ const enableForm = (toggler) => {
     })
 }
 
-const initForms = () => {
-    const togglers = document.querySelectorAll('.form-toggler')
+const initAdminForms = () => {
+    const togglers = document.querySelectorAll('.form-info-toggler')
     if (togglers) {
         togglers.forEach((toggler) => {
             enableForm(toggler);
@@ -37,4 +37,13 @@ const initForms = () => {
     }
 }
 
-export { initForms }
+const initImageSetter = () => {
+    const imgSetter = document.querySelector('#image-setter')
+    if (imgSetter) {
+        imgSetter.addEventListener("click", () => {
+            document.querySelector('#user_photo').click()
+        })
+    }
+}
+
+export { initAdminForms, initImageSetter }

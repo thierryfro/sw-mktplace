@@ -12,22 +12,19 @@
         width: 30%;
         .first_name {
           width: 100%;
-          font-family: inherit;
         }
       }
       .last-name-field {
         width: 64%;
         .last_name {
           width: 100%;
-          font-family: inherit;
         }
-      }      
+      }
     }
     #user_birthdate {
       width: 8rem;
     }
     .datepicker {
-      font-family: inherit;
       cursor: default;
     }
     .photo_field {
@@ -45,9 +42,8 @@
         text-align: center;
         flex-grow: 1;
         font-size: 1.2rem;
+        cursor: pointer;
       }
     }
-
   }
 }
-
