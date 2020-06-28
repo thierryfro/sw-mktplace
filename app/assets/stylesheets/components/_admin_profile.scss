@@ -50,23 +50,3 @@
   }
 }
 
-// FORMS LAYOUT 
-
-.admin-profile {
-  .form-box {
-    .edit_user {
-      padding: 1rem 1.2rem;
-      .user-names {
-        display: flex;
-        justify-content: space-between;
-        .name-field {
-          width: 47%;
-          .first_name, 
-          .last_name {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-}

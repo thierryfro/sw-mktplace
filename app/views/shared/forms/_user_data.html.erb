@@ -17,19 +17,25 @@
                 <%= f.input :last_name, label: false, input_html: { class: "last_name" } %>
             </div>
         </div>
-        <span class="form-label" >Nascimento</span>
-        <%= f.input :birthdate, 
-            as: :string, 
-            label: false , 
-            input_html: { 
-                class: "datepicker",
-                data: { 
-                        birthdate: user.birthdate.strftime("%d/%m/%Y")
+        <div class="birthdate-field">
+            <span class="form-label" >Nascimento</span>
+            <%= f.input :birthdate, 
+                as: :string, 
+                label: false , 
+                input_html: { 
+                    class: "datepicker",
+                    data: { 
+                            birthdate: user.birthdate.strftime("%d/%m/%Y")
+                        }
                     }
-                }
-        %>
-        <%= f.input :photo, as: :file %>
-        <%= f.submit %>
+            %>
+        </div>
+        <div class="photo_field">
+            <% user_photo = current_user.photo.attached? ? current_user.photo.key : 'user.png' %>
+            <%= cl_image_tag user_photo, class: 'form-photo' %>
+            <span id="image-setter">Trocar imagem</span>
+            <%= f.input :photo, as: :file, label: false, input_html:{ class: "photo-input" } %>
+        </div>
     <% end %>
 </div>
 
