@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post '/cart_offer/:offer_id', to: 'carts_offers#create', as: 'create_cart_offer'
   get '/cart', to: 'carts#show'
   get '/checkout', to: 'carts#checkout'
+  get '/sucess', to: 'carts#sucess'
   post '/cart/:cart_offer_id/add', to: 'carts_offers#add', as: 'add_cart'
   post '/cart/:cart_offer_id/decrease', to: 'carts_offers#remove', as: 'decrease_cart'
   resources :carts_offers, only: %i[destroy]

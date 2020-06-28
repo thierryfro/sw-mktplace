@@ -1,17 +1,172 @@
-<%= link_to "Landing", root_path  %> <br>
-<%= simple_form_for :search, url: offers_path, method: "GET" do |f| %>
-  <%= f.input :query, label: "Pesquisa" %>
-  <%= f.submit "Search", class: "btn btn-primary" %>
-<% end %>
-<br>
+<div class="offer_show">
+  <div class="offer_title">
+    <h4><%= @product.name.upcase %></h4><span>(<%= @product.weight.first(5) %>)</span>
+  </div>
+  <div class="offer">
 
-<% @offer.products.each do |product| %>
-  <%= image_tag product.product_photos.where(name: "Principal").first.url %>
-  <p>- <%= product.name %></p>
-<% end %>
-<%= link_to 'Auditar oferta', edit_offer_path(@offer.id) if current_user && current_user.admin? %>
+    <div class="offer_photos">
+      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'main_photo', id: 'image' %>
 
-<%= link_to 'Voltar', root_path %> <br>
+      <div class="photos_preview">
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200").first.url, class: 'preview' %>
+      </div>
 
-<%= link_to 'Adicionar ao carrinho', create_cart_offer_path(@offer), method: :post %>
-<%# raise %>
+    </div>
+
+    <div class="offer_details">
+
+      <div class="store_link">
+        <h6>Produto vendido por: <span><%= @offer.store.name %></span></h6>
+        <h6>Antes de comprar, escolha ou confira o tamanho e o sabor do seu produto</h6>
+        <div class="selector_size">
+          <div>
+            <form action="">
+              <input type="dropdown">
+              <input type="dropdown">
+            </form>
+          </div>
+          <div>
+            <h4>R$ <%= @offer.price %>0</h4>
+
+            <%= link_to create_cart_offer_path(@offer), method: :post do %>
+              <div class="cart_btn">
+                <i class="fa fa-shopping-cart"></i>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="details">
+        <div>
+          <h5>Detalhes do produto</h5>
+        </div>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae eligendi dolorem non voluptas.
+          Magnam et eum debitis exercitationem unde hic quia, omnis, quo harum soluta consequatur iste voluptatum. Doloremque, neque!
+        </p>
+      </div>
+
+      <div class="price_details">
+
+        <div class="price">
+
+          <div class="brand_photo">
+            <%= image_tag @product.brand.logo if @product.brand.logo  %>
+          </div>
+        </div>
+
+      </div>
+
+    <%# raise %>
+    </div>
+  </div>
+</div>
+
+<div class="offer_show">
+  <div class="product_score">
+
+    <div class="score">
+      <h4>Avaliação Média do Produto</h4>
+      <div class="average-score">
+        <h6>4.3</h6>
+        <p>35 avaliações</p>
+      </div>
+    </div>
+
+    <div class="stars_section">
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar5"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar4"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar3"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar2"></div>
+      </div>
+      <div class="stars_count">
+        <div class="stars">
+          <i class="fa fa-star"></i>
+        </div>
+        <div class="star_bar1"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="testimonys">
+    <div class="testimonys_cards">
+      <div class="avatar">
+        <%= image_tag 'avatar.png', class: 'avatar_img' %>
+      </div>
+      <div>
+        <h6>Hugo Littlewhite</h6>
+        <span class="star_rating">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+        </span>
+      </div>
+      <div>
+        <p>'Este produto é uma merda, eu nem malho, não sei <br> pq comprei saporra!'</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%#= link_to "Landing", root_path  %> <br>
+<%#= simple_form_for :search, url: offers_path, method: "GET" do |f| %>
+  <%#= f.input :query, label: "Pesquisa" %>
+  <%#= f.submit "Search", class: "btn btn-primary" %>
+<%# end %>
+<%# <br> %>
+
+<%# @offer.products.each do |product| %>
+  <%#= image_tag product.product_photos.where(name: "Principal").first.url %>
+  <p>- <%#= product.name %></p>
+<%# end %>
+<%#= link_to 'Auditar oferta', edit_offer_path(@offer.id) if current_user && current_user.admin? %>
+
+<%#= link_to 'Voltar', root_path %> <br>
+
+<%#= link_to 'Adicionar ao carrinho', create_cart_offer_path(@offer), method: :post %>
