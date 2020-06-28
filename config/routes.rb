@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   # Stores
   resources :stores, except: %i[ destroy ] do
-    get 'credentials'
   end
+  get 'credentials', to: 'stores#credentials'
 
   # Devise
   devise_for :users

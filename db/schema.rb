@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_31_164509) do
-
+ActiveRecord::Schema.define(version: 2020_06_28_141638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +162,11 @@ ActiveRecord::Schema.define(version: 2020_05_31_164509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "owner_id"
+    t.bigint "address_id"
+    t.string "access_token"
+    t.string "public_key"
+    t.string "refresh_token"
+    t.index ["address_id"], name: "index_stores_on_address_id"
     t.index ["owner_id"], name: "index_stores_on_owner_id"
   end
 
@@ -267,6 +271,7 @@ ActiveRecord::Schema.define(version: 2020_05_31_164509) do
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "subcategories"
+  add_foreign_key "stores", "addresses"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_ratings", "stores"
