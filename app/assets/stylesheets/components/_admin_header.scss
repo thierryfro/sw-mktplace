@@ -1,0 +1,62 @@
+// MAIN HEADER STYLES
+
+header.admin-header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  height: 11%;
+  width: 100%;
+  z-index: 1;
+  .main-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  }
+  a {
+    font-size: 1.2rem;
+    color: white;
+    font-style: italic;
+    font-weight: bolder;
+  }
+  .left-nav {
+    flex: 0 1 17%;
+    .logo-box {
+      display: flex;
+      justify-content: flex-end;
+      .logo {
+        height: 4.5rem;
+        width: 17rem;
+      }
+    }
+  }
+  .right-nav {
+    display: flex;
+    justify-content: flex-start;
+    height: 5rem;
+    margin-right: 20%;
+    @media only screen and (max-width: $bp-largest) {
+      margin-right: 3%;
+    }
+  }
+}
+
+// Responsive navbar
+header.admin-header {
+  .navbar_toggler {
+    font-size: 3rem;
+    color: white;
+    width: 7rem;
+    text-align: center;
+    display: none;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 0 1rem;
+    .navbar_toggler {
+      display: inline-block;
+    }
+  }
+}
