@@ -183,7 +183,7 @@
       grid-column-gap: 2rem;
     }
   }
-  @media only screen and (max-width: $bp-medium) {
+  @media only screen and (max-width: $bp-large) {
     .offers {
       width: 100%;
       grid-template-columns: repeat(3, 30%);

@@ -14,11 +14,11 @@
         <div class="offers_body">
           <% @cart_offers.each do |cart_offer| %>
             <% product = cart_offer.products.first %>
-            <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
+            <% product_photo = product.index_photo %>
             <% offer =  cart_offer.offer %>
             <div class="offer">
               <div class="offer_product">
-                <%= image_tag product_photo.url %>
+                <%= image_tag product_photo %>
                 <div class="product_info">
                   <h3 class="product_title">
                     <%= "#{product.name.upcase}, #{product.weight}" %>
@@ -103,11 +103,11 @@
     <div id="cart-slider" class="cart_sugestions slider-wrapper">
         <% @sugested_offers.each do |offer| %>
           <% product = offer.products.first  %>
-          <% product_photo = product.product_photos.find_by(name: "Principal", size:"300x300") %>
+          <% product_photo = product.index_photo %>
 
           <div class="offer">
             <%= link_to offer do %>
-              <%= image_tag product_photo.url, class: "product_image" %>
+              <%= image_tag product_photo, class: "product_image" %>
               <div class="product_info">
                 <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 18)%></h3> 
               </div>

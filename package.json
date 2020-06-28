@@ -9,7 +9,8 @@
     "nouislider": "^14.5.0",
     "select2": "^4.0.13",
     "slick-carousel": "^1.8.1",
-    "wnumb": "^1.2.0"
+    "wnumb": "^1.2.0",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
