@@ -15,7 +15,8 @@ import { initSlider } from "../components/init_slider";
 import { initAdminSidebar } from "../components/admin_sidebar";
 import { offerFilter } from "./offer_filter";
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
-
+import { photoSelector } from "../components/photo_select"
+import { viewerJS } from '../components/viewer';
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -27,6 +28,8 @@ initSelect2();
 offerFilter();
 styleCheckBoxes();
 activateToggler();
+photoSelector();
+viewerJS();
 initFilter();
 initSlicker();
 initSlider();
