@@ -1,0 +1,46 @@
+.admin-sidebar {
+  .admin-links {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 47%;
+    align-self: center;
+    padding-top: 2rem;
+    img.img-seller {
+      width: 7rem;
+      height: 7rem;
+      align-self: center;
+    }
+    .link-sidebar,
+    .name-seller {
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: bolder;
+      color: $color-grey-dark-2;
+    }
+    .link-sidebar {
+      padding-left: 1.5rem;
+      margin-top: 3rem;
+      font-style: italic;
+    }
+    .name-seller {
+      margin-top: 0.5rem;
+      align-self: center;
+    }
+  }
+  @media only screen and (max-width: $bp-small) {
+    padding: 1rem 0;
+    .img-seller,
+    .name-seller {
+      display: none;
+    }
+    .admin-links {
+      padding: 0;
+      align-items: center;
+      .link-sidebar {
+        margin: 1rem 0;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

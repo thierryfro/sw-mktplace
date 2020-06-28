@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SwMktplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+</head>
+
+<body>
+    <div class="html-content">
+        <%= render 'shared/admin_header' %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <div class="main-body">
+            <div class="admin-content">
+                <span class="filter">
+                    <i class="fa fa-filter filter-icon"></i>
+                    <i class="fa fa-times close-icon"></i>
+                </span>
+                <nav class="admin-sidebar">
+                    <%= render "shared/admin_sidebar" %>
+                </nav>
+                <div class="main">
+                    <%= yield %>
+                </div>
+            </div>
+        </div>
+        <%= render 'shared/footer' %>
+    </div>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
+</body>
+
+</html>
