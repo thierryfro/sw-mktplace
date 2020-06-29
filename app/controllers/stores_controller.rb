@@ -82,7 +82,6 @@ class StoresController < ApplicationController
         redirect_to stores_path(@store)
       end
   rescue Exception => error
-      binding.pry
       flash[:notice] = error
       redirect_to store_path(@store) || root_path
       # Send the request
