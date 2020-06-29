@@ -327,6 +327,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.1)
+  rest-client
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_form

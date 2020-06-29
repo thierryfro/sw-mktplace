@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_220555) do
+
+ActiveRecord::Schema.define(version: 2020_06_28_141638) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,6 +37,19 @@ ActiveRecord::Schema.define(version: 2020_06_27_220555) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "street"
+    t.string "number"
+    t.string "neighborhood"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.string "complement"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -104,6 +120,34 @@ ActiveRecord::Schema.define(version: 2020_06_27_220555) do
     t.index ["store_id"], name: "index_offers_on_store_id"
   end
 
+  create_table "order_offers", force: :cascade do |t|
+    t.bigint "offer_id"
+    t.bigint "order_id"
+    t.float "recorded_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_order_offers_on_offer_id"
+    t.index ["order_id"], name: "index_order_offers_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "store_id"
+    t.bigint "user_id"
+    t.bigint "address_id"
+    t.string "preference_id"
+    t.string "payment_id"
+    t.string "payment_status"
+    t.string "payment_status_detail"
+    t.string "merchant_order_id"
+    t.string "processing_mode"
+    t.string "merchant_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["store_id"], name: "index_orders_on_store_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "product_photos", force: :cascade do |t|
     t.string "url"
     t.string "name"
@@ -141,6 +185,11 @@ ActiveRecord::Schema.define(version: 2020_06_27_220555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "owner_id"
+    t.bigint "address_id"
+    t.string "access_token"
+    t.string "public_key"
+    t.string "refresh_token"
+    t.index ["address_id"], name: "index_stores_on_address_id"
     t.index ["owner_id"], name: "index_stores_on_owner_id"
   end
 
@@ -237,10 +286,16 @@ ActiveRecord::Schema.define(version: 2020_06_27_220555) do
   add_foreign_key "offer_products", "offers"
   add_foreign_key "offer_products", "products"
   add_foreign_key "offers", "stores"
+  add_foreign_key "order_offers", "offers"
+  add_foreign_key "order_offers", "orders"
+  add_foreign_key "orders", "addresses"
+  add_foreign_key "orders", "stores"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_photos", "products"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "subcategories"
+  add_foreign_key "stores", "addresses"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_ratings", "stores"
