@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  offer: one
+  order: one
+  recorded_value: MyString
+
+two:
+  offer: two
+  order: two
+  recorded_value: MyString
