@@ -18,4 +18,8 @@ class User < ApplicationRecord
 
   has_one_attached :photo
   # has_many :stores, as: :owner, dependent: :destroy
+
+  def avatar_photo
+    photo.attached? ? photo.key : 'user.png'
+  end
 end
