@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
     @order.store = @cart.cart_offers.first.store
 
     if @order.save!
-      @cart.cart_offers.each {|cart_offer| OrderOffer.create(order: @order, offer: cart_offer.offer, recorded_value: cart_offer.offer.price)}
+      @cart.cart_offers.each { |cart_offer| OrderOffer.create(order: @order, offer: cart_offer.offer, recorded_value: cart_offer.offer.price)}
     end
     @cart.cart_offers.destroy_all
 
