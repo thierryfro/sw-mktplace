@@ -46,9 +46,14 @@ class StoresController < ApplicationController
 
   def update
     current_params = store_params
-    current_params[:address_attributes] = validate_address_infos
-    @store.update!(current_params)
-    redirect_to admin_profile_path
+    if validate_address_infos.empty?
+      current_params[:address_attributes] = validate_address_infos
+      @store.update!(current_params)
+      redirect_to admin_profile_path
+    else
+      flash[:notice] = "É preciso inserir um cep válido para continuar"
+      redirect_to admin_profile_path
+    end
   end
 
   # Ver com Bruno, acho que nao poderá deletar store
