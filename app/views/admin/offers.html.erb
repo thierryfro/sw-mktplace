@@ -21,10 +21,10 @@
             <i class="fa fa-check" aria-hidden="true"></i>
         </span>
         <div class="offer-head">
-            <%= image_tag product_photo, class: "product-image" %>
+            <%= image_tag product_photo, class: "product-image", alt: "#{product.name.upcase}, #{product.weight}"  %>
             <div class="product_info">
-                <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
-                <p class="product_brand"><%= product.brand.name.titleize %></p>
+                <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight}", length: 40)%></h3>
+                <p class="product_brand"><%= product.flavor %></p>
             </div>
         </div> 
         <%= simple_form_for offer, remote: true, html: { id: product.id } do |f| %>
