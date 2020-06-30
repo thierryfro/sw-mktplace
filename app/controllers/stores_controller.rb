@@ -44,15 +44,15 @@ class StoresController < ApplicationController
   end
 
   def update
-    @store.update(store_params)
-    redirect_to store_path(@store)
+    @store.update!(store_params)
+    redirect_to admin_profile_path
   end
 
   # Ver com Bruno, acho que nao poderá deletar store
-  def destroy
-    @store.destroy
-    redirect_to root_path
-  end
+  # def destroy
+  #   @store.destroy
+  #   redirect_to root_path
+  # end
 
   def credentials
     @store = Store.find_by(id: session[:store_id])

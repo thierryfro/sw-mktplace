@@ -1,0 +1,29 @@
+<div class="form-box">
+    <span class="form-info-toggler" data-form="store-data">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <i class="fa fa-check" aria-hidden="true"></i>
+    </span>
+    <h3 class="form-title">
+    Dados Atuais
+    </h3>
+    <%= simple_form_for store, remote: true,  method: :patch, html: { id: "store-data" } do |f| %>
+        <div class="comercial-name-field">
+            <span class="form-label">Nome</span>
+            <%= f.input :comercial_name, 
+                label: false, 
+                input_html: { 
+                    class: "comercial_name form_input",
+                    disabled: true
+                        } %>
+        </div>
+        <div class="cnpj-field">
+            <span class="form-label">CNPJ</span>
+            <%= f.input :cnpj, 
+                label: false, 
+                input_html: { 
+                    class: "cnpj form_input", 
+                    disabled: true 
+                    } %>
+        </div>
+    <% end %>
+</div>
