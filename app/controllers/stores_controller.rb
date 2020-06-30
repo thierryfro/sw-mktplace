@@ -1,6 +1,7 @@
 require 'rest-client'
 
 class StoresController < ApplicationController
+  include StoresHelper
 
   before_action :set_store, only: %i[show edit update destroy]
   # before_action :set_store_with_id, only: %i[credentials]
@@ -44,7 +45,9 @@ class StoresController < ApplicationController
   end
 
   def update
-    @store.update!(store_params)
+    current_params = store_params
+    current_params[:address_attributes] = validate_address_infos
+    @store.update!(current_params)
     redirect_to admin_profile_path
   end
 
@@ -91,7 +94,10 @@ class StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:store).permit(:name, :email, :cnpj, :comercial_name, :owner_id)
+    params.require(:store).permit(
+      :name, :email, :cnpj, :comercial_name, :owner_id,
+      address_attributes: [:id, :zipcode, :number, :complement]
+    )
   end
 
   def set_store

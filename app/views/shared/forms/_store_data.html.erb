@@ -6,7 +6,7 @@
     <h3 class="form-title">
     Dados Atuais
     </h3>
-    <%= simple_form_for store,   remote: true,  method: :patch, html: { id: "store-data" } do |f| %>
+    <%= simple_form_for store, remote: true, method: :patch, html: { id: "store-data" } do |f| %>
         <div class="comercial-name-field">
             <span class="form-label">Nome</span>
             <%= f.input :comercial_name, 
@@ -25,5 +25,25 @@
                     disabled: true 
                     } %>
         </div>
+        <%= f.simple_fields_for :address  do |form_address| %>
+            <div class="cep-field">
+                <span class="form-label">CEP</span>
+                <%= form_address.input :zipcode, 
+                    required: true, 
+                    label: false,
+                    input_html: {
+                        class: "form_input",
+                        disabled: true
+                    }
+                %>
+            </div>
+            <div class="street-field">
+                <span class="form-label">Endereço</span>
+                <span class="address">
+                    <% current_address = @current_user.store.address %>
+                    <%= "#{current_address.street}, #{current_address.city}, #{current_address.state}"  %>
+                </span>
+            </div>
+        <% end %> 
     <% end %>
 </div>

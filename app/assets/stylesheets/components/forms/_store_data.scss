@@ -1,0 +1,39 @@
+.form-box {
+  .edit_store {
+    padding: 1rem 1.2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    .form-label {
+      font-size: 1rem;
+    }
+    .comercial-name-field {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .comercial-name-field,
+    .cnpj-field,
+    .cep-field {
+      width: 100%;
+      .form_input {
+        width: 100%;
+        font-family: inherit;
+        color: $color-grey-dark-2;
+        font-size: inherit;
+      }
+    }
+    .street-field {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        font-size: inherit;
+        .address {
+          font-size: inherit;
+        }
+    }
+  }
+}
