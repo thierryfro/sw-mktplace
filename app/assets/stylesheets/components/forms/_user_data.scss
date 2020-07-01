@@ -1,0 +1,49 @@
+.form-box {
+  .edit_user {
+    padding: 1rem 1.2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .user-names {
+      display: flex;
+      justify-content: space-between;
+      .first-name-field {
+        width: 30%;
+        .first_name {
+          width: 100%;
+        }
+      }
+      .last-name-field {
+        width: 64%;
+        .last_name {
+          width: 100%;
+        }
+      }
+    }
+    #user_birthdate {
+      width: 8rem;
+    }
+    .datepicker {
+      cursor: default;
+    }
+    .photo_field {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      img.form-photo {
+        width: 5rem;
+        border-radius: 50%;
+      }
+      .photo-input {
+        display: none;
+      }
+      #image-setter {
+        text-align: center;
+        flex-grow: 1;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
