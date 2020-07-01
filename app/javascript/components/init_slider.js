@@ -1,6 +1,5 @@
 import noUiSlider from "nouislider";
 import wNumb from "wnumb";
-import "nouislider/distribute/nouislider.css";
 
 const checkMarkers = (limit, status) => (status === 0 ? limit : status);
 

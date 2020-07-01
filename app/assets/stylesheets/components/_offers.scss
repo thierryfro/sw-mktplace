@@ -65,11 +65,13 @@
       width: 100%;
     }
     .sidebar {
+      z-index: -1;
       max-height: 0;
       opacity: 0;
       height: auto;
       transition: 0.2s ease;
       &.toggled {
+        z-index: 0;
         opacity: 1;
         height: auto;
         max-height: fit-content;

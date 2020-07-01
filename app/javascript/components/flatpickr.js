@@ -1,5 +1,5 @@
 import flatpickr from "flatpickr";
-
+import "flatpickr/dist/themes/material_red.css";
 
 const initDatepicker = () => {
     const datepicker = document.querySelector('.datepicker')
