@@ -13,13 +13,13 @@ class User < ApplicationRecord
   has_many :user_ratings, dependent: :destroy
 
   has_many :address, dependent: :destroy
+  accepts_nested_attributes_for :address, allow_destroy: true
+  
+  has_one :store, :class_name => "Store", :foreign_key => 'owner_id'
 
   belongs_to :cart, optional: true
 
   has_one_attached :photo
   # has_many :stores, as: :owner, dependent: :destroy
 
-  def avatar_photo
-    photo.attached? ? photo.key : 'user.png'
-  end
 end

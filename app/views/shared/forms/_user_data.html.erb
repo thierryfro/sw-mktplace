@@ -42,8 +42,11 @@
             %>
         </div>
         <div class="photo_field">
-            <% user_photo = current_user.avatar_photo %>
-            <%= cl_image_tag user_photo, class: 'form-photo' %>
+            <% if current_user.photo.attached?  %>
+                <%= cl_image_tag current_user.photo.key, class: 'form-photo' %>
+            <% else %>
+                <%= image_tag 'user.png', class: 'form-photo' %>
+            <% end %>
             <span id="image-setter">Trocar imagem</span>
             <%= f.input :photo,
                 as: :file, 

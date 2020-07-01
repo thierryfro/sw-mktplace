@@ -4,6 +4,8 @@ class Store < ApplicationRecord
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   belongs_to :address, dependent: :destroy
 
+  accepts_nested_attributes_for :address, update_only: true, reject_if: :all_blank, allow_destroy: true
+
   has_many :user_stores, dependent: :destroy
   has_many :user_ratings, dependent: :destroy
   has_many :offers, dependent: :destroy

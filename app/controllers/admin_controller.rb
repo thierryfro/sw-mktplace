@@ -11,7 +11,7 @@ class AdminController < ApplicationController
   def offers
     @store = Store.find_by(owner_id: current_user.id)
 
-    @offers = Offer.includes(:products).where(store: @store).order(:price)
+    @offers = Offer.joins(:products).where(store: @store).order('products.product_code', 'products.weight DESC')
     query = params[:admin_query]
     search_offers(query) if query.present?
     @offers = @offers.page params[:page]
@@ -20,7 +20,7 @@ class AdminController < ApplicationController
   def profile; end
 
   def edit_profile
-    if current_user.update(user_params)
+    if current_user.update!(user_params)
       flash[:notice] = 'Perfil atualizado com sucesso!'
     else
       flash[:notice] = 'Algo errado não está certo!'

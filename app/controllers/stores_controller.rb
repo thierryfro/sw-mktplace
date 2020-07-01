@@ -1,6 +1,7 @@
 require 'rest-client'
 
 class StoresController < ApplicationController
+  include StoresHelper
 
   before_action :set_store, only: %i[show edit update destroy]
   # before_action :set_store_with_id, only: %i[credentials]
@@ -44,15 +45,22 @@ class StoresController < ApplicationController
   end
 
   def update
-    @store.update(store_params)
-    redirect_to store_path(@store)
+    current_params = store_params
+    if validate_address_infos.empty?
+      current_params[:address_attributes] = validate_address_infos
+      @store.update!(current_params)
+      redirect_to admin_profile_path
+    else
+      flash[:notice] = "É preciso inserir um cep válido para continuar"
+      redirect_to admin_profile_path
+    end
   end
 
   # Ver com Bruno, acho que nao poderá deletar store
-  def destroy
-    @store.destroy
-    redirect_to root_path
-  end
+  # def destroy
+  #   @store.destroy
+  #   redirect_to root_path
+  # end
 
   def credentials
     @store = Store.find_by(id: session[:store_id])
@@ -91,7 +99,10 @@ class StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:store).permit(:name, :email, :cnpj, :comercial_name, :owner_id)
+    params.require(:store).permit(
+      :name, :email, :cnpj, :comercial_name, :owner_id,
+      address_attributes: [:id, :zipcode, :number, :complement]
+    )
   end
 
   def set_store

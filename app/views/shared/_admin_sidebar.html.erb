@@ -1,5 +1,9 @@
 <div class="admin-links">
-    <%= cl_image_tag current_user.avatar_photo, class: "img-seller" %>
+    <% if current_user.photo.attached?  %>
+        <%= cl_image_tag current_user.photo.key, class: 'img-seller' %>
+    <% else %>
+        <%= image_tag 'user.png', class: 'img-seller' %>
+    <% end %>
     <div class="name-seller"><%= current_user.name.upcase %></div>
     <%= link_to 'Dados Pessoais', admin_profile_path, class: "link-sidebar" %>
     <%= link_to 'Suas Vendas', "#", class: "link-sidebar" %>

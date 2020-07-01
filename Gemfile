@@ -51,6 +51,7 @@ gem 'acts-as-taggable-on', '~> 6.0' # gema para pesquisa customizazda
 gem 'mercadopago-sdk' # pagamento
 gem "font-awesome-rails"
 gem 'cloudinary', '~> 1.12.0'
+gem 'correios-cep'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -8,23 +8,113 @@ puts "Environment #{Rails.env}"
 puts 'Iniciando o seed'
 puts ''
 
+# create adresses method
+CEPS = %w[
+    05027020 08226021 08226021 04236094
+    03047000 08240001 08240001 01517100
+    01034030 01253100 01253100 04005002
+  ].freeze
+
+def create_sample_address
+  cep = CEPS.sample
+  address = Correios::CEP::AddressFinder.get(cep)
+  Address.create!({
+                    street: address[:address],
+                    city: address[:city],
+                    state: address[:state],
+                    zipcode: address[:zipcode],
+                    neighborhood: address[:neighborhood]
+                  })
+end
+
 # create users
 puts 'Criando o usuário'
 User.destroy_all
-hugo = User.create!(email: 'hugo@sw.com', name: 'Hugo', last_name: 'Branquinho', password: 'swpass', birthdate: DateTime.now - 33.years, admin: true)
-thierry = User.create!(email: 'thierry@sw.com', name: 'Thierry', last_name: 'Fernando', password: 'swpass', birthdate: DateTime.now - 34.years, admin: true)
-bruno = User.create!(email: 'bruno@sw.com', name: 'Bruno', last_name: 'Tostes', password: 'swpass', birthdate: DateTime.now - 50.years, admin: true)
-manoel = User.create!(email: 'manoel@sw.com', name: 'Manoel', last_name: 'Tabet', password: 'swpass', birthdate: DateTime.now - 40.years)
+hugo = User.create!(
+  email: 'hugo@sw.com', 
+  name: 'Hugo', 
+  last_name: 'Branquinho', 
+  password: 'swpass', 
+  birthdate: DateTime.now - 33.years, 
+  admin: true
+)
+
+thierry = User.create!(
+  email: 'thierry@sw.com', 
+  name: 'Thierry', 
+  last_name: 'Fernando', 
+  password: 'swpass', 
+  birthdate: DateTime.now - 34.years, 
+  admin: true
+)
+
+bruno = User.create!(
+  email: 'bruno@sw.com', 
+  name: 'Bruno', 
+  last_name: 'Tostes', 
+  password: 'swpass', 
+  birthdate: DateTime.now - 50.years, 
+  admin: true
+)
+
+manoel = User.create!(
+  email: 'manoel@sw.com', 
+  name: 'Manoel', 
+  last_name: 'Tabet', 
+  password: 'swpass', 
+  birthdate: DateTime.now - 40.years
+)
+
+# add adresses to users
+User.all.each do |user|
+  address = create_sample_address
+  address.user = user
+  puts "#{address.street} create to #{user.name}" if address.save!
+end
+
 puts "Usuários: #{User.count}"
 puts ''
 
 # create stores
 puts 'Criando stores'
 Store.destroy_all
-vendinha = Store.create!(name: 'Vendinha', email: 'vendinha@bomba.com', cnpj: '16.453.309/0001-77', comercial_name: 'Vendinha Ltda', owner: hugo)
-budega = Store.create!(name: 'Budega', email: 'budega@bomba.com', cnpj: '24.655.223/0001-55', comercial_name: 'Budega Ltda', owner: thierry)
-marombas = Store.create!(name: 'Marombas', email: 'marombas@bomba.com', cnpj: '00.660.772/0001-50', comercial_name: 'Marombas Ltda', owner: bruno)
-savewhey = Store.create!(name: 'Savewhey', email: 'savewhey@bomba.com', cnpj: '97.491.634/0001-26', comercial_name: 'Marombas Ltda', owner: manoel)
+
+Store.create!(
+  name: 'Vendinha',
+  email: 'vendinha@bomba.com',
+  cnpj: '16.453.309/0001-77',
+  comercial_name: 'Vendinha Ltda',
+  owner: hugo,
+  address: create_sample_address
+)
+
+Store.create!(
+  name: 'Budega',
+  email: 'budega@bomba.com',
+  cnpj: '24.655.223/0001-55',
+  comercial_name: 'Budega Ltda',
+  owner: thierry,
+  address: create_sample_address
+)
+
+Store.create!(
+  name: 'Marombas',
+  email: 'marombas@bomba.com',
+  cnpj: '00.660.772/0001-50',
+  comercial_name: 'Marombas Ltda',
+  owner: bruno,
+  address: create_sample_address
+)
+
+Store.create!(
+  name: 'Savewhey',
+  email: 'savewhey@bomba.com',
+  cnpj: '97.491.634/0001-26',
+  comercial_name: 'Marombas Ltda',
+  owner: manoel,
+  address: create_sample_address
+)
+
 puts "Stores: #{Store.count}"
 puts ''
 
@@ -118,15 +208,14 @@ Offer.destroy_all
 puts 'Criando ofertas'
 Offer.destroy_all
 
-
 def offer_product_exists?(store, product)
   OfferProduct
-  .joins(:offer)
-  .where(
-    product: product,
-    offers: { store: store }
-  )
-  .present?
+    .joins(:offer)
+    .where(
+      product: product,
+      offers: { store: store }
+    )
+    .present?
 end
 
 def get_product(store)
