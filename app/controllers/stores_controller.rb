@@ -46,8 +46,9 @@ class StoresController < ApplicationController
 
   def update
     current_params = store_params
-    if validate_address_infos.empty?
-      current_params[:address_attributes] = validate_address_infos
+    address_infos = helpers.validate_address_infos(current_params[:address_attributes])
+    if address_infos.present?
+      current_params[:address_attributes] = address_infos
       @store.update!(current_params)
       redirect_to admin_profile_path
     else

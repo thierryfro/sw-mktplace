@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module StoresHelper
-  def validate_address_infos
-    request_info = store_params[:address_attributes]
+  def validate_address_infos(request_info)
+    return {} if request_info[:zipcode].blank?
+
     cep = request_info[:zipcode].gsub('-', '')
     api_info = Correios::CEP::AddressFinder.get(cep)
     {
