@@ -161,5 +161,9 @@
         color: white;
       }
     }
+    @media only screen and (max-width: $bp-small) {
+      width: 70%;
+      margin-right: 0;
+    }
   }
 }
