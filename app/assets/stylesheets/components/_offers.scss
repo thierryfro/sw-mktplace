@@ -40,11 +40,11 @@
   }
   .sidebar,
   .main {
-    padding-top: 2rem;
     display: flex;
     flex-direction: column;
   }
   .main {
+    padding-top: 2rem;
     width: 78%;
     margin-left: auto;
     background-color: $color-grey-light-1;
