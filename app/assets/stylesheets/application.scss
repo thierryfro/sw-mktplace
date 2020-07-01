@@ -2,7 +2,6 @@
 @import "select2/dist/css/select2";
 @import 'slick-carousel/slick/slick.scss';
 @import "font-awesome";
-@import "nouislider/distribute/nouislider.css";
 
 // import default config
 @import "config/colors";
@@ -23,7 +22,7 @@
 }
 
 *,
-*::before,
+*::before,  
 *::after {
   box-sizing: inherit;
 }
