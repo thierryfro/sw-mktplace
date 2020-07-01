@@ -67,18 +67,17 @@ class StoresController < ApplicationController
     }
     body = {
       # 'client_secret': ENV["PROD_ACCESS_TOKEN"],
-      'client_secret': "APP_USR-8887914689962136-050916-c100b4eb805f096e0843889052c4db69-558584930",
+      'client_secret': ENV["MP_ATOKEN"],
       'grant_type': "authorization_code",
       # 'code': "#{code}",
       'code': "#{params[:code]}",
-      'redirect_uri': "https://80765965a838.ngrok.io/credentials"
+      'redirect_uri': "https://e57193d67bac.ngrok.io/credentials"
     }
-
     # Create the HTTP objects
     begin
         response = RestClient.post(url, body, headers)
-
-      if @store&.update(access_token: response[:access_token], public_key: response[:public_key], refresh_token: response[:refresh_token] )
+        response = JSON.parse(response)
+      if @store&.update!(access_token: response[:access_token], public_key: response[:public_key], refresh_token: response[:refresh_token] )
         flash[:notice] = "Conta vinculada com sucesso"
         redirect_to stores_path(@store)
       end
