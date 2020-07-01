@@ -7,6 +7,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
     input {
       background-color: white;
       border: none;
@@ -20,6 +21,7 @@
       flex-direction: column;
       border: solid 1px $color-grey-light-2;
       position: relative;
+      margin-bottom: 2rem;
       .form-info-toggler {
         position: absolute;
         font-size: 2rem;
@@ -52,6 +54,22 @@
         font-style: italic;
         font-weight: bolder;
         text-align: center;
+      }
+    }
+    @media only screen and (max-width: $bp-largest) {
+      .form-box {
+        width: 32%;
+      }
+    }
+    @media only screen and (max-width: $bp-medium) {
+      .form-box {
+        width: 48%;
+      }
+    }
+    @media only screen and (max-width: $bp-smallest) {
+      justify-content: center;
+      .form-box {
+        width: 90%;
       }
     }
   }
