@@ -4,14 +4,19 @@ import wNumb from "wnumb";
 
 const checkMarkers = (limit, status) => (status === 0 ? limit : status);
 
+const cleandSliders = () => {
+  const remainingSlider = document.querySelector('.noUi-base')
+  remainingSlider && remainingSlider.remove()
+}
+
 const initSlider = () => {
   const formSlider = document.getElementById("form-slider");
   if (formSlider) {
-
+    // if some slider remains in page
+    cleandSliders()
     const [{ start, end, current_start, current_end }] = JSON.parse(
       formSlider.dataset.values
     );
-
     const currentStart = checkMarkers(start, current_start);
     const currentEnd = checkMarkers(end, current_end);
     if (formSlider) {
