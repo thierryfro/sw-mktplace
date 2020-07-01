@@ -5,11 +5,10 @@
     "@rails/webpacker": "5.0.1",
     "flatpickr": "^4.6.3",
     "jquery": "^3.5.0",
-    "select2": "^4.0.13",
-    "viewerjs": "^1.6.1",
-    "nouislider": "^14.5.0",
+    "nouislider": "^14.6.0",
     "select2": "^4.0.13",
     "slick-carousel": "^1.8.1",
+    "viewerjs": "^1.6.1",
     "wnumb": "^1.2.0",
     "yarn": "^1.22.4"
   },
