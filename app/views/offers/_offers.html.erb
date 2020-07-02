@@ -7,22 +7,26 @@
 
     <div class="offer">
       <%= link_to offer do %>
-        <%= image_tag product_photo, class: "product_image" %>
+        <%= image_tag product_photo, class: "product_image", data: { target: "offers.photo" } %>
         <div class="product_info">
-          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
-          <p class="product_brand"><%= product.brand.name.titleize %></p> 
+          <h3 class="product_title" data-target="offers.name"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
+          <p class="product_brand" data-target="offers.brand"><%= product.brand.name.titleize %></p> 
         </div>
       <% end %>
       <div class="offer_info">
         <div class="offer_price">
           <span>A partir de</span>
-          <span class="price_number">R$<%= sprintf('%.2f', offer.price) %></span>
+          <span class="price_number" data-target="offers.price">R$<%= sprintf('%.2f', offer.price) %></span>
         </div>
         <div class="buy_box">
           <span class="like_cart_button">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
           </span>
-          <%= link_to create_cart_offer_path(offer), method: :post, class: "offer_cart_button" do %>
+          <%= link_to create_cart_offer_path(offer),
+              remote: true, method: :post, 
+              class: "offer_cart_button", 
+              data: { action: "click->offers#hello" } do 
+          %>
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           <% end %> 
         </div>

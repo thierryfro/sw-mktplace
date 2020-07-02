@@ -7,9 +7,10 @@
     <%= render "sidebar_form" %>
   </nav>
   <div class="main">
-    <div class="offers">
+    <div class="offers" data-controller="offers">
       <%= render 'offers', offers: @offers %>
     </div>
+    <%= render "offer_modal" %>
   </div>
 </div>
 

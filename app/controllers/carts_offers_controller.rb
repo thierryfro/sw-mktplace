@@ -20,10 +20,8 @@ class CartsOffersController < ApplicationController
       # Analisar aqui -> Pode ter mais de uma cartoffer?
       session[:cart_offer_id] = @cart_offer.id
       flash[:notice] = "Oferta adicionada!"
-      redirect_to '/cart'
     else
       flash[:notice] = "Erro, nao foi possivel adicionar a oferta"
-      redirect_to offers_path
     end
   end
 

@@ -1,0 +1,55 @@
+
+// MODAL BEHAVIOR
+
+.offer-modal {
+    display: none;
+    animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    animation: mmslideOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    &.open {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+        animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+    }
+}
+
+@keyframes mmfadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes mmfadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+
+@keyframes mmslideIn {
+  from { transform: translateY(15%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes mmslideOut {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10%); }
+}
+
+// MODAL CONTENT
+
+.offer-modal {
+    .modal-content {
+        width: 40%;
+        height: 70%;
+        background-color: white;
+        border: $pattern-border;
+        border-radius: 15px;
+    }
+}
