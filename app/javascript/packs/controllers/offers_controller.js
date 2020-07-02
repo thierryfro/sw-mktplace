@@ -1,14 +1,20 @@
 import { Controller } from 'stimulus'
 
 export default class extends Controller {
-    static targets = ["name", "brand", "price", "photo"]
+    static targets = ["name", "brand", "price", "photo", "modal"]
 
-    hello() {
-        console.log({
+
+    initModal() {
+        const data = {
             name: this.nameTarget.innerText,
             price: this.priceTarget.innerText,
             brand: this.brandTarget.innerText,
-            photo: this.photoTarget.innerText,
-        })
+            photo: this.photoTarget.src,
+        }
+        const modalController = this.application.getControllerForElementAndIdentifier(
+            this.modalTarget,
+            "modal"
+        );
+        modalController.open(data)
     }
 }

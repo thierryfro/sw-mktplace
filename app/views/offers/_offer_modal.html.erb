@@ -1,7 +1,16 @@
-<div class="offer-modal" data-controller="modal">
+<div class="offer-modal" data-controller="modal" data-target="offers.modal">
     <div class="modal-content">
-        <h3 class="message">PRODUTO ADICIONADO AO CARRINHO</h3>
-        <h4 class="product-name" data-targe="modal.name"></h4>
-        <%= image_tag '', class: "product-image", data: { target: "modal.image" } %>
+        <div class="offer-info">
+            <h3 class="message">PRODUTO ADICIONADO AO CARRINHO</h3>
+            <h4 class="product-name" data-target="modal.name"></h4>
+            <%= image_tag '', class: "product-image", data: { target: "modal.photo" } %>
+            <div class="modal-cart">
+                <span class="items-cart"></span>
+                <div class="subtotal">
+                    Subtotal
+                    <span class="price" data-target="modal.price"></span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

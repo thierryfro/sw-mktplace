@@ -9,7 +9,8 @@
       <%= link_to offer do %>
         <%= image_tag product_photo, class: "product_image", data: { target: "offers.photo" } %>
         <div class="product_info">
-          <h3 class="product_title" data-target="offers.name"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
+          <span hidden data-target="offers.name"><%= "#{product.name.upcase}, #{product.weight} "%></span>
+          <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
           <p class="product_brand" data-target="offers.brand"><%= product.brand.name.titleize %></p> 
         </div>
       <% end %>
@@ -25,7 +26,7 @@
           <%= link_to create_cart_offer_path(offer),
               remote: true, method: :post, 
               class: "offer_cart_button", 
-              data: { action: "click->offers#hello" } do 
+              data: { action: "click->offers#initModal" } do 
           %>
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           <% end %> 
