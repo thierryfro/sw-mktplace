@@ -1,0 +1,39 @@
+
+var setToggler = (toggler, currentForm) => {
+    toggler.classList.add("toggled")
+    toggler.addEventListener("click", () => {
+        Rails.fire(currentForm, "submit");
+    })
+}
+
+var initAdminForm = () => {
+    const toggler = document.getElementById('store-form-info')
+                    .querySelector('.form-info-toggler')
+    const currentForm = document.getElementById(toggler.dataset.form)
+    toggler.addEventListener('click', () => {
+        currentForm
+            .querySelectorAll(".form_input")
+            .forEach((form) => {
+                form.disabled = false
+            })
+        setToggler(toggler, currentForm)
+    })
+}
+
+var replaceForm = () => {
+    const formBox = document.getElementById('user-form-info')
+    formBox.innerHTML = "<%= j render 'shared/forms/user_data',  user: current_user %>"
+    initAdminForm(formBox)
+}
+
+var initImageSetter = () => {
+    const imgSetter = document.querySelector('#image-setter')
+    if (imgSetter) {
+        imgSetter.addEventListener("click", () => {
+            document.querySelector('#user_photo').click()
+        })
+    }
+}
+
+initImageSetter()
+replaceForm()
