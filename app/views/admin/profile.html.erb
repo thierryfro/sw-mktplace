@@ -1,7 +1,11 @@
 <div class="admin-profile">
     <div class="forms-container">
-        <%= render 'shared/forms/user_data', user: current_user %>
-        <%= render 'shared/forms/store_data', store: current_user.store %>
+        <div class="form-box">
+            <%= render 'shared/forms/user_data', user: current_user %>
+        </div>
+        <div class="form-box" id="store-form-info">
+            <%= render 'shared/forms/store_data', store: current_user.store %>
+        </div>
         <div class="form-box">
             <span class="form-info-toggler" data-form="">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
