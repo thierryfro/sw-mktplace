@@ -50,10 +50,8 @@ class StoresController < ApplicationController
     if address_infos.present?
       current_params[:address_attributes] = address_infos
       @store.update!(current_params)
-      redirect_to admin_profile_path
     else
       flash[:notice] = "É preciso inserir um cep válido para continuar"
-      redirect_to admin_profile_path
     end
   end
 
