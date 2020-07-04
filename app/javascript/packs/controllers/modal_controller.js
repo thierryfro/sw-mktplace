@@ -2,7 +2,9 @@ import { Controller } from 'stimulus'
 
 export default class extends Controller {
 
-    static targets = ['name', 'photo', 'price', 'store', 'items'];
+    static targets = [
+        'name', 'photo', 'price',
+        'store', 'items' ];
 
     calcPrice(data) {
         const totalCart = parseInt(this.priceTarget.dataset.subtotal) + parseInt(data.price)
@@ -19,7 +21,7 @@ export default class extends Controller {
         this.priceTarget.innerText = this.calcPrice(data);
         this.itemsTarget.innerText = this.countItems();
         this.photoTarget.src = data.photo;
-        // this.storeTarget.href = data.store;
+        this.storeTarget.href = data.store;
     }
 
     launchModal(data) {

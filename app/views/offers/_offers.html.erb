@@ -9,7 +9,7 @@
       <%= link_to offer do %>
         <%= image_tag product_photo, class: "product_image", data: { target: "offer.photo" } %>
         <div class="product_info">
-          <span hidden data-target="offer.store" data-link=<%= "#{store_path(offer.store)}"%> data-name=<%= offer.store.comercial_name %>></span>
+          <span hidden data-target="offer.store" data-link=<%= "#{store_path(offer.store)}" %> data-name=<%= offer.store.comercial_name %>></span>
           <span hidden data-target="offer.name" style="display:none"><%= "#{product.name.upcase}, #{product.weight} "%></span>
           <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
           <p class="product_brand" data-target="offer.brand"><%= product.brand.name.titleize %></p> 
