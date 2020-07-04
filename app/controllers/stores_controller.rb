@@ -1,6 +1,7 @@
 require 'rest-client'
 
 class StoresController < ApplicationController
+  include StoresHelper
 
   before_action :set_store, only: %i[show edit update destroy]
   # before_action :set_store_with_id, only: %i[credentials]
@@ -44,15 +45,23 @@ class StoresController < ApplicationController
   end
 
   def update
-    @store.update(store_params)
-    redirect_to store_path(@store)
+    current_params = store_params
+    address_infos = helpers.validate_address_infos(current_params[:address_attributes])
+    if address_infos.present?
+      current_params[:address_attributes] = address_infos
+      @store.update!(current_params)
+      redirect_to admin_profile_path
+    else
+      flash[:notice] = "É preciso inserir um cep válido para continuar"
+      redirect_to admin_profile_path
+    end
   end
 
   # Ver com Bruno, acho que nao poderá deletar store
-  def destroy
-    @store.destroy
-    redirect_to root_path
-  end
+  # def destroy
+  #   @store.destroy
+  #   redirect_to root_path
+  # end
 
   def credentials
     @store = Store.find_by(id: session[:store_id])
@@ -64,17 +73,17 @@ class StoresController < ApplicationController
       'accept': 'application/json'
     }
     body = {
-      'client_secret': ENV["PROD_ACCESS_TOKEN"],
+      # 'client_secret': ENV["PROD_ACCESS_TOKEN"],
+      'client_secret': ENV["MP_ATOKEN"],
       'grant_type': "authorization_code",
       'code': "#{params[:code]}",
-      'redirect_uri': "https://80765965a838.ngrok.io/credentials"
+      'redirect_uri': "https://e57193d67bac.ngrok.io/credentials"
     }
-
     # Create the HTTP objects
     begin
         response = RestClient.post(url, body, headers)
-      byebug
-      if @store&.update(access_token: response[:access_token], public_key: response[:public_key], refresh_token: response[:refresh_token] )
+        response = JSON.parse(response)
+      if @store&.update!(access_token: response[:access_token], public_key: response[:public_key], refresh_token: response[:refresh_token] )
         flash[:notice] = "Conta vinculada com sucesso"
         redirect_to store_path(@store)
       end
@@ -88,7 +97,10 @@ class StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:store).permit(:name, :email, :cnpj, :comercial_name, :owner_id)
+    params.require(:store).permit(
+      :name, :email, :cnpj, :comercial_name, :owner_id,
+      address_attributes: [:id, :zipcode, :number, :complement]
+    )
   end
 
   def set_store

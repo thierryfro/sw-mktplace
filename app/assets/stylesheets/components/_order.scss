@@ -1,0 +1,134 @@
+.offer_show {
+
+  .sucess_warn {
+    background-color: #2BC470;
+    height: 100px;
+    padding: 27px 91px;
+    margin-bottom: 28px;
+
+    h4 {
+      font-size: 28px;
+      font-style: italic;
+      font-weight: bold;
+      color: #ffff;
+    }
+  }
+
+  .order {
+    height: 158px;
+    background-color: $color-grey-light-1;
+    padding: 27px 108px;
+    margin-bottom: 3.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .order_number {
+      text-align: center;
+
+      p {
+        font-size: 14px;
+        color: $color-grey-dark-2;
+        font-style: normal;
+      }
+
+      h4 {
+        font-size: 3rem;
+        color: $color-grey-dark-2;
+        font-style: italic;
+      }
+    }
+
+    .order_msg {
+
+      h6 {
+        font-size: 14px;
+        color: $color-grey-dark-2;
+        margin-bottom: 8px;
+        font-style: normal;
+      }
+
+      p {
+        font-size: 12px;
+        color: $color-grey-light-3;
+      }
+    }
+  }
+
+  .order_info {
+    display: flex;
+    justify-content: space-between;
+
+    .personal_info {
+      width: 311px;
+      height: 260px;
+      border: 1px solid $color-grey-light-2;
+      position: relative;
+
+      .content {
+        flex-direction: column;
+        padding: 15px 25px;
+
+        h6 {
+          font-weight: lighter;
+          font-size: 12px;
+          font-style: normal;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: bold;
+          font-style: normal;
+        }
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $color-grey-light-2;
+      height: 45px;
+
+      h4 {
+        font-size: 14px;
+        font-style: italic;
+        font-weight: bold;
+        color: $color-grey-dark-2;
+      }
+    }
+
+    .order_details {
+      display: flex;
+      justify-content: space-between;
+      padding: 9px 20px;
+
+      h6 {
+        font-size: 12px;
+        font-weight: lighter;
+        font-style: normal;
+      }
+
+      p {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: bold;
+      }
+    }
+
+    .resume_footer {
+      background-color: $color-grey-light-2;
+      height: 45px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      bottom: 0;
+
+      p {
+        font-style: normal;
+      }
+    }
+  }
+}

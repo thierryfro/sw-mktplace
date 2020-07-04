@@ -4,4 +4,15 @@
 <p>Email: <%= @store.email  %></p>
 <p>CPNJ: <%= @store.cnpj %></p>
 
-<%= link_to "Link com MercadoPago", "https://auth.mercadopago.com.br/authorization?client_id=4213177672217670&response_type=code&platform_id=mp&redirect_uri=https://80765965a838.ngrok.io/credentials" %>
+<% 
+    base_url =  "https://auth.mercadopago.com.br/authorization"
+    client_id = "client_id=2929864182574664"
+    response_type = "response_type=code"
+    platform_id = "platform_id=mp"
+    redirect_uri = "https://e57193d67bac.ngrok.io/credentials"
+ %>
+
+<%= 
+    link_to "Link com MercadoPago", 
+    "#{base_url}?#{client_id}&#{response_type}&#{platform_id}&#{redirect_uri}"   
+%>

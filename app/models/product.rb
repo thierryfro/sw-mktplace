@@ -31,9 +31,6 @@ class Product < ApplicationRecord
                     tsearch: { prefix: true }
                   }
 
-  acts_as_taggable
-  acts_as_taggable_on :tags
-
   # get information to use on filter form
   products_ids = OfferProduct.all&.pluck(:product_id)&.uniq # takes the product identifier that contains offers
   products = Product.where(id: products_ids)&.uniq # get products

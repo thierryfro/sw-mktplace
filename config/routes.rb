@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   # Admin
   scope 'admin' do
+    patch '/admin', to: 'admin#edit_profile', as: 'edit_profile'
+    get '/profile', to:'admin#profile', as: 'admin_profile'
     get '/dashboard', to: 'admin#dashboard'
     get '/offers', to: 'admin#offers', as: 'all_offers'
     get 'new_offer', to: 'admin#new_offer', as: 'new_offers'
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
   post '/cart_offer/:offer_id', to: 'carts_offers#create', as: 'create_cart_offer'
   get '/cart', to: 'carts#show'
   get '/checkout', to: 'carts#checkout'
+  get '/sucess', to: 'carts#sucess'
   post '/cart/:cart_offer_id/add', to: 'carts_offers#add', as: 'add_cart'
   post '/cart/:cart_offer_id/decrease', to: 'carts_offers#remove', as: 'decrease_cart'
   resources :carts_offers, only: %i[destroy]

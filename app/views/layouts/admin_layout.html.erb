@@ -5,6 +5,7 @@
     <title>SwMktplace</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 </head>
@@ -16,10 +17,6 @@
         <p class="alert"><%= alert %></p>
         <div class="main-body">
             <div class="admin-content">
-                <span class="filter">
-                    <i class="fa fa-filter filter-icon"></i>
-                    <i class="fa fa-times close-icon"></i>
-                </span>
                 <nav class="admin-sidebar">
                     <%= render "shared/admin_sidebar" %>
                 </nav>
@@ -30,7 +27,7 @@
         </div>
         <%= render 'shared/footer' %>
     </div>
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
     <%= javascript_pack_tag 'application' %>
 </body>
 
