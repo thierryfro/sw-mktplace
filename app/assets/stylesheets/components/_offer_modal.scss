@@ -148,7 +148,7 @@
       .offer-info {
         padding: 7% 12%;
         .product-image {
-          width: 65%;
+          width: 50%;
         }
         .modal-cart {
           .items-cart {
@@ -163,12 +163,22 @@
             }
           }
         }
+        .modal-buttons {
+          .order-btn,
+          .store-btn {
+            font-size: 1.7rem;
+            padding: 0.8rem;
+          }
+        }
       }
     }
     @media only screen and (max-width: $bp-medium) {
       width: 63%;
       .offer-info {
         padding: 4% 8%;
+        .product-image {
+          width: 55%;
+        }
         .modal-cart {
           .items-cart {
             font-size: 1.7rem;
@@ -193,7 +203,7 @@
           font-size: 1.8rem;
         }
         .product-image {
-          width: 70%;
+          width: 60%;
         }
         .modal-cart {
           display: flex;
@@ -202,7 +212,7 @@
           margin-bottom: 1rem;
           .items-cart {
             font-size: 1.6rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
           }
           .subtotal {
             align-items: center;
@@ -234,9 +244,7 @@
       width: 95%;
       .offer-info {
         .product-image {
-          width: 75%;
-          max-height: 23rem;
-          max-width: 20rem;
+          width: 68%;
         }
       }
     }
