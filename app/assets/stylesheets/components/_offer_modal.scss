@@ -105,7 +105,7 @@
           font-size: 1.4rem;
           color: inherit;
           .item {
-            font-style: italic; 
+            font-style: italic;
             font-weight: bolder;
           }
         }
@@ -138,8 +138,81 @@
           color: $color-grey-dark-2;
         }
         .order-btn {
-          background-color: $color-primary;
+          background-color: $color-primary-light;
           color: white;
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-largest) {
+      width: 50%;
+      .offer-info {
+        padding: 7% 12%;
+        .product-image {
+          width: 70%;
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-medium) {
+      width: 63%;
+      .offer-info {
+        padding: 7% 10%;
+        .product-image {
+          width: 75%;
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-small) {
+      width: 80%;
+      .offer-info {
+        .message {
+          font-size: 2rem;
+        }
+        .product-name {
+          font-size: 1.8rem;
+        }
+        .product-image {
+          width: 70%;
+        }
+        .modal-cart {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 1rem;
+          .items-cart {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+          }
+          .subtotal {
+            align-items: center;
+            span {
+              font-size: 2.2rem;
+            }
+            span.price {
+              font-size: 3.5rem;
+            }
+          }
+        }
+        .modal-buttons {
+          flex-direction: column-reverse;
+          justify-content: space-around;
+          align-items: center;
+          flex: 1;
+          width: 100%;
+          .order-btn,
+          .store-btn {
+            font-size: 2rem;
+            width: 70%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-smallest) {
+      width: 95%;
+      .offer-info {
+        .product-image {
+          width: 75%;
         }
       }
     }
