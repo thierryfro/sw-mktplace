@@ -56,8 +56,6 @@ class StoresController < ApplicationController
 
   def credentials
     @store = Store.find_by(id: session[:store_id])
-    # raise
-    # code = 'TG-5ef766e061480e00074feedd-558584930'
 
     url = "https://api.mercadopago.com/oauth/token"
 
@@ -66,10 +64,8 @@ class StoresController < ApplicationController
       'accept': 'application/json'
     }
     body = {
-      # 'client_secret': ENV["PROD_ACCESS_TOKEN"],
-      'client_secret': "APP_USR-8887914689962136-050916-c100b4eb805f096e0843889052c4db69-558584930",
+      'client_secret': ENV["PROD_ACCESS_TOKEN"],
       'grant_type': "authorization_code",
-      # 'code': "#{code}",
       'code': "#{params[:code]}",
       'redirect_uri': "https://80765965a838.ngrok.io/credentials"
     }
@@ -77,10 +73,10 @@ class StoresController < ApplicationController
     # Create the HTTP objects
     begin
         response = RestClient.post(url, body, headers)
-
+      byebug
       if @store&.update(access_token: response[:access_token], public_key: response[:public_key], refresh_token: response[:refresh_token] )
         flash[:notice] = "Conta vinculada com sucesso"
-        redirect_to stores_path(@store)
+        redirect_to store_path(@store)
       end
   rescue Exception => error
       flash[:notice] = error
