@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :stores, except: %i[ destroy ]
 
   get 'credentials', to: 'stores#credentials'
+  post 'credential_new', to: "stores#credential_new"
 
   # Devise
   devise_for :users

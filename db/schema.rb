@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_141638) do
+ActiveRecord::Schema.define(version: 2020_07_04_175056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,8 @@ ActiveRecord::Schema.define(version: 2020_06_28_141638) do
     t.string "access_token"
     t.string "public_key"
     t.string "refresh_token"
+    t.string "expires_in"
+    t.integer "user_id"
     t.index ["address_id"], name: "index_stores_on_address_id"
     t.index ["owner_id"], name: "index_stores_on_owner_id"
   end
