@@ -18,7 +18,8 @@
       <div class="offer_info">
         <div class="offer_price"> 
           <span>A partir de</span>
-          <span class="price_number" data-target="offer.price">R$<%= sprintf('%.2f', offer.price) %></span>
+          <% current_price = sprintf('%.2f', offer.price) %>
+          <span class="price_number" data-target="offer.price" data-price="<%= current_price %>">R$<%= current_price %></span>
         </div>
         <div class="buy_box">
           <span class="like_cart_button">
