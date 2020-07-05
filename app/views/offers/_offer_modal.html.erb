@@ -1,0 +1,20 @@
+<div class="offer-modal" id="offer-modal" data-controller="modal" data-target="offer.modal">
+    <div class="modal-content">
+        <div class="offer-info">
+            <h3 class="message">PRODUTO ADICIONADO AO CARRINHO</h3>
+            <h4 class="product-name" data-target="modal.name"></h4>
+            <%= image_tag '', class: "product-image", data: { target: "modal.photo" } %>
+            <div class="modal-cart">
+                <span class="items-cart">Tem <span class="item" data-target="modal.items" data-items="<%= @cart.count_items %>">1 item</span> em seu carrinho</span>
+                <div class="subtotal">
+                    <span>Subtotal</span>       
+                    <span class="price" data-target="modal.price" data-subtotal="<%= @cart.calc_subtotal %>">R$ <%= @cart.calc_subtotal %></span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <%= link_to "Continuar Compra", "", class: "store-btn", data: { target: "modal.store" } %>
+                <%= link_to "Finalizar Pedido", cart_path, class: "order-btn" %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -53,6 +53,10 @@ class Cart < ApplicationRecord
     end
   end
 
+  def count_items
+    cart_offers.sum(&:quantity)
+  end
+
   def cart_store
     cart_offers.first.store if cart_offers.present?
   end

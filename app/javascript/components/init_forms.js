@@ -1,10 +1,15 @@
-const disableForm = (currentForm, toggler) => {
+const restartToggler = (toggler) => {
+    toggler.classList.remove("toggled")
+    const new_toggler = toggler.cloneNode(true);
+    toggler.parentNode.replaceChild(new_toggler, toggler);
+    enableForm(new_toggler)
+}
+
+const disableForm = (currentForm) => {
     currentForm
         .querySelectorAll(".form_input , .form_input-larger")
         .forEach((form) => {
             form.disabled = true
-            toggler.classList.remove("toggled")
-            enableForm(toggler)
         })
 }
 
@@ -12,7 +17,8 @@ const setToggler = (toggler, currentForm) => {
     toggler.classList.add("toggled")
     toggler.addEventListener("click", () => {
         Rails.fire(currentForm, "submit");
-        disableForm(currentForm, toggler)
+        disableForm(currentForm);
+        restartToggler(toggler);
     })
 }
 

@@ -5,24 +5,31 @@
     <% product = offer.products.first  %>
     <% product_photo = product.index_photo %>
 
-    <div class="offer">
+    <div class="offer" data-controller="offer">
       <%= link_to offer do %>
-        <%= image_tag product_photo, class: "product_image" %>
+        <%= image_tag product_photo, class: "product_image", data: { target: "offer.photo" } %>
         <div class="product_info">
+          <span hidden data-target="offer.store" data-link=<%= "#{store_path(offer.store)}" %> data-name=<%= offer.store.comercial_name %>></span>
+          <span hidden data-target="offer.name" style="display:none"><%= "#{product.name.upcase}, #{product.weight} "%></span>
           <h3 class="product_title"><%=truncate("#{product.name.upcase}, #{product.weight} ", length: 20)%></h3>
-          <p class="product_brand"><%= product.brand.name.titleize %></p> 
+          <p class="product_brand" data-target="offer.brand"><%= product.brand.name.titleize %></p> 
         </div>
       <% end %>
       <div class="offer_info">
-        <div class="offer_price">
+        <div class="offer_price"> 
           <span>A partir de</span>
-          <span class="price_number">R$<%= sprintf('%.2f', offer.price) %></span>
+          <% current_price = sprintf('%.2f', offer.price) %>
+          <span class="price_number" data-target="offer.price" data-price="<%= current_price %>">R$<%= current_price %></span>
         </div>
         <div class="buy_box">
           <span class="like_cart_button">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
           </span>
-          <%= link_to create_cart_offer_path(offer), method: :post, class: "offer_cart_button" do %>
+          <%= link_to create_cart_offer_path(offer),
+              remote: true, method: :post, 
+              class: "offer_cart_button", 
+              data: { action: "click->offer#initModal" } do 
+          %>
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           <% end %> 
         </div>
