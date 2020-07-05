@@ -1,0 +1,143 @@
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1088px;
+  height: 752px;
+  border: 1px solid #DBDBDB;
+  background-color: #ffffff;
+  margin: 50px auto;
+  padding: 61px;
+
+  .login_card {
+    width: 311px;
+    height: 387px;
+    border: 1px solid $color-grey-light-2;
+    position: relative;
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $color-grey-light-2;
+      height: 45px;
+
+      h4 {
+        font-size: 14px;
+        font-style: italic;
+        font-weight: bold;
+        color: $color-grey-dark-2;
+      }
+    }
+
+    .content {
+      flex-direction: column;
+      padding: 15px 25px;
+
+      h6 {
+        font-weight: lighter;
+        font-size: 12px;
+        font-style: normal;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+      }
+    }
+  }
+
+  .payment_options_card {
+    width: 311px;
+    height: 387px;
+    border: 1px solid $color-grey-light-2;
+    position: relative;
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $color-grey-light-2;
+      height: 45px;
+
+      h4 {
+        font-size: 14px;
+        font-style: italic;
+        font-weight: bold;
+        color: $color-grey-dark-2;
+      }
+    }
+
+    .content {
+      flex-direction: column;
+      padding: 15px 25px;
+
+      h6 {
+        font-weight: lighter;
+        font-size: 12px;
+        font-style: normal;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+      }
+    }
+  }
+
+  .cart_resume_card {
+    width: 311px;
+    height: 387px;
+    border: 1px solid $color-grey-light-2;
+    position: relative;
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $color-grey-light-2;
+      height: 45px;
+
+      h4 {
+        font-size: 14px;
+        font-style: italic;
+        font-weight: bold;
+        color: $color-grey-dark-2;
+      }
+    }
+
+    .content {
+      flex-direction: column;
+      padding: 15px 25px;
+
+      h6 {
+        font-weight: lighter;
+        font-size: 12px;
+        font-style: normal;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+      }
+    }
+
+    .resume_footer {
+      background-color: $color-grey-light-2;
+      height: 45px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      bottom: 0;
+
+      p {
+        font-style: normal;
+      }
+    }
+  }
+}
