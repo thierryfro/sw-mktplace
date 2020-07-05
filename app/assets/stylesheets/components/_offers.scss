@@ -203,7 +203,7 @@
 
 
 .offer_show {
-  width: 1088px;
+  width: 57%;
   height: 752px;
   border: 1px solid #DBDBDB;
   background-color: #ffffff;
@@ -217,7 +217,7 @@
   }
 
   .offer_title {
-    width: 500px;
+    // width: 500px;
     height: 46px;
     display: flex;
     position: relative;
@@ -239,7 +239,7 @@
   }
 
   .offer_photos {
-    width: 358px;
+    // width: 358px;
     height: 440px;
 
     img {
@@ -250,7 +250,7 @@
     }
 
     .photos_preview {
-      width: 400px;
+      width: 85%;
       display: flex;
       justify-content: space-evenly;
       margin-top: 40px;
@@ -283,7 +283,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 46rem;
+    width: 100%;
     height: auto;
 
     .store_link {
@@ -340,7 +340,7 @@
   }
 
   .details {
-    width: 46rem;
+    // width: 46rem;
     height: 17.8rem;
     margin-bottom: 5.6rem;
     font-style: italic;
@@ -397,6 +397,18 @@
 
     }
   }
+
+
+}
+
+.testimony_container {
+  width: 57%;
+  height: 752px;
+  border: 1px solid #DBDBDB;
+  background-color: #ffffff;
+  margin: 50px auto;
+  padding: 61px;
+  position: relative;
 
   .product_score {
     display: flex;
@@ -524,6 +536,172 @@
     color: #F2AF29;
     font-size: 1.8rem;
   }
+}
+
+@media only screen and (max-width: $bp-small) {
+
+  .offer_show {
+    width: 100%;
+    height: auto;
+    padding: 5px 25px;
+
+    .offer_title {
+
+      h4 {
+        font-size: 2rem;
+      }
+      span {
+        font-size: 2rem;
+      }
+    }
+
+    .offer_photos {
+      height: auto;
+      margin-top: 2rem;
+
+      .photos_preview {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+    .main_photo {
+
+    }
+
+    .brand_photo {
+      top: 28px;
+      left: 13px;
+      width: 125px;
+    }
+
+    .offer_details {
+      flex-direction: column-reverse;
+
+      .details_open {
+        margin-top: 8px;
+        height: auto;
+        transition: ease 1s;
+
+        h5 {
+          font-size: 2.4rem;
+          font-weight: bold;
+          font-style: italic;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 5rem;
+          border-top: 1px solid $color-grey-light-2;
+          border-bottom: 1px solid $color-grey-light-2;
+
+          .arrow_down {
+            font-size: 5rem;
+          }
+        }
+
+        p {
+          font-size: 1.6rem;
+          color: $color-grey-light-3;
+          letter-spacing: 0px;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .details {
+
+        margin-top: 8px;
+        height: 0;
+        transition: ease-out 0.5s;
+
+        h5 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 5rem;
+          border-top: 1px solid $color-grey-light-2;
+          border-bottom: 1px solid $color-grey-light-2;
+
+          .arrow_down {
+            font-size: 5rem;
+          }
+        }
+
+        p {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  .offer {
+    flex-direction: column;
+
+    .selector_size {
+      flex-direction: column;
+
+      form {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      input {
+        width: 40% !important;
+        height: 35px;
+        border: 1px solid black;
+        margin: 0 !important;
+        padding: 6px 10px;
+        font-family: "Titillium Web", sans-serif;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 2rem;
+      }
+
+      .price_container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h4 {
+          margin: 0;
+        }
+
+        .cart_btn {
+          width: 12rem !important;
+        }
+      }
+    }
+  }
+  #store_mobile {
+    display: none;
+  }
+
+  .testimony_container {
+    width: 85%;
+    height: auto;
+    padding: 20px 10px;
+
+    .testimonys {
+      height: 28.5rem;
+      padding: 14px 21px;
+    }
+
+    .testimonys_cards {
+      flex-wrap: wrap;
+
+      .author {
+        text-align: end;
+      }
+    }
+
+    .stars_section {
+      display: none;
+    }
+  }
+
 }
 
 // colors {
