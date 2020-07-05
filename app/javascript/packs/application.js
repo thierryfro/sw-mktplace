@@ -16,7 +16,7 @@ import { initAdminSidebar } from "../components/admin_sidebar";
 import { initDatepicker } from "../components/flatpickr";
 import { offerFilter } from "./offer_filter";
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
-import { photoSelector } from "../components/photo_select"
+import { photoSelector, dropDown } from "../components/photo_select"
 import { viewerJS } from '../components/viewer';
 import { initSlider } from "../components/init_slider";
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -39,6 +39,7 @@ initImageSetter();
 initForms();
 initAdminForms();
 initAdminSidebar();
+dropDown();
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */
