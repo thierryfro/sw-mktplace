@@ -2,8 +2,8 @@
 
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[show edit update destroy]
-  before_action :sidebar_params, only: %i[index]
-  before_action :set_offers, only: %i[index]
+  before_action :sidebar_params, only: %i[index, store]
+  before_action :set_offers, only: %i[index, store]
 
   skip_before_action :require_admin
 
@@ -73,6 +73,14 @@ class OffersController < ApplicationController
     # redirect_to offers_path
   end
 
+  def store
+    @offers = @offers.sample(25)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
 
   def handle_prices(prices)
@@ -83,7 +91,7 @@ class OffersController < ApplicationController
   end
 
   def set_offers
-    products = Product.all
+    products = params[:store_id].present? ? Product.from_store(params[:store_id]) : Product.all
     filters = params['search']
     if filters.present?
       filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
