@@ -2,9 +2,9 @@
 
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[show edit update destroy]
-  before_action :sidebar_params, only: %i[index]
-  before_action :set_offers, only: %i[index]
-
+  before_action :sidebar_params, only: %i[index store]
+  before_action :set_offers, only: %i[index store]
+  before_action :set_store, only: %i[store]
   skip_before_action :require_admin
 
   def index
@@ -73,6 +73,14 @@ class OffersController < ApplicationController
     # redirect_to offers_path
   end
 
+  def store
+    @offers = @offers.sample(25)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
 
   def handle_prices(prices)
@@ -94,7 +102,11 @@ class OffersController < ApplicationController
       prices = filters['prices'] if filters['prices'].present?
     end
     products = products.search_products(params['query']) if params['query'].present?
-    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
+    @offers = Offer.includes(products: :product_photos)
+      .where(
+        products: { id: products.pluck(:id) },
+        store_id: params[:store_id].present? ? params[:store_id] : Store.all.pluck(:id)
+        )
     @offers = handle_prices(prices) if prices
   end
 
@@ -123,5 +135,9 @@ class OffersController < ApplicationController
       current_start: start_price.to_i,
       current_end: end_price.to_i
     }].to_json
+  end
+
+  def set_store
+    @store = Store.find(params[:store_id])
   end
 end

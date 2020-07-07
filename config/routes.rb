@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   # Stores
   resources :stores, except: %i[ destroy ]
 
+  get 'stores/:store_id/offers', to: 'offers#store', as: 'store_offers'
+
   get 'credentials', to: 'stores#credentials'
 
   # Devise

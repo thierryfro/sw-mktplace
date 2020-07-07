@@ -29,10 +29,10 @@ import { initSlider } from "../components/init_slider";
 // Stimulus auto-load
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
- 
 const application = Application.start()
 const context = require.context("./controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
+
 
 
 initDatepicker();
@@ -50,6 +50,8 @@ initForms();
 initAdminForms();
 initAdminSidebar();
 dropDown();
+
+
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */
