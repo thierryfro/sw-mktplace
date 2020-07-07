@@ -1,0 +1,15 @@
+<div class="content">
+  <span class="filter">
+    <i class="fa fa-filter filter-icon"></i>
+    <i class="fa fa-times close-icon"></i>
+  </span>
+  <nav class="sidebar">
+    <%= render "sidebar_form" %>
+  </nav>
+  <div class="main">
+    <div class="offers">
+      <%= render 'offers', offers: @offers %>
+    </div>
+    <%= render "offer_modal" %>
+  </div>
+</div>
