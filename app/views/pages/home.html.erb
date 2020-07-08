@@ -1,13 +1,17 @@
 <div class="main-banner" style="background-image: url(/assets/banner.png);">
   <div class="layer">
     <%= image_tag 'Logo@2x.png', alt:"suplemento rápido logo", class:"logo" %>
-    <p class="slogan">Seu delivery de suplementos <br>rápido e barato</p>
-    <%= form_tag offers_path, method: :get, class: "banner_search" do %>
+    <p class="slogan">Seu delivery de suplementos <br>rápido e barato!</p>
+    <%= form_tag offers_path, method: :get, class: "banner-search" do %>
         <%= text_field_tag :address_info,
                     params[:address_info],
-                    class: "nav_search_input",
-                    placeholder: "O que deseja buscar?"
+                    class: "search_input",
+                    placeholder: "Inserir endereço para pedir"
                 %>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
     <% end %>
   </div>
+</div>
+<div class="about-banner">
+  <h4 class="how-it-works">Como funciona o Suplemento Rápido?</h4>
 </div>
