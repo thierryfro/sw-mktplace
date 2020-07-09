@@ -3,7 +3,7 @@
     <div class="content">
       <%= image_tag 'Logo.svg', alt:"suplemento rápido logo", class:"logo" %>
       <p class="slogan">Seu delivery de suplementos <br>rápido e barato!</p>
-      <%= form_tag offers_path, method: :get, class: "banner-search" do %>
+      <%= form_tag start_address_path, class: "banner-search" do %>
           <%= text_field_tag :address_info,
                       params[:address_info],
                       class: "search_input",

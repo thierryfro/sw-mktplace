@@ -52,6 +52,7 @@ gem 'mercadopago-sdk' # pagamento
 gem "font-awesome-rails"
 gem 'cloudinary', '~> 1.12.0'
 gem 'correios-cep'
+gem 'via_cep'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

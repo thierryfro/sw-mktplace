@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'procesar-pago', to: 'orders#create' # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
   # root to index
   root to: 'pages#home'
+  post 'start_address', to: 'pages#new_address', as: 'start_address'
 
   # Offers
   resources :offers, except: %i[destroy]
