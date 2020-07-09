@@ -7,7 +7,7 @@
     width: 100%;
     height: 70rem;
     display: flex;
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     .layer {
       display: flex;
@@ -59,7 +59,7 @@
     justify-content: space-around;
     background-color: $color-grey-dark-2;
     width: 100%;
-    height: 60rem;
+    height: 45rem;
     text-align: center;
     .how-it-works {
       color: white;
@@ -78,7 +78,8 @@
         flex-direction: column;
         align-items: center;
         .icon-draft {
-          width: 100%;
+          height: 16rem;
+          margin-bottom: 1rem;
         }
         .icon-text {
           font-size: 2rem;

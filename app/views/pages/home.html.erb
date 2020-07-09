@@ -1,7 +1,7 @@
 <div class="home-layout">
   <div class="main-banner" style="background-image: url(/assets/banner.png);">
     <div class="layer">
-      <%= image_tag 'Logo@2x.png', alt:"suplemento rápido logo", class:"logo" %>
+      <%= image_tag 'Logo.svg', alt:"suplemento rápido logo", class:"logo" %>
       <p class="slogan">Seu delivery de suplementos <br>rápido e barato!</p>
       <%= form_tag offers_path, method: :get, class: "banner-search" do %>
           <%= text_field_tag :address_info,
@@ -26,7 +26,7 @@
       </div>
       <div class="icon">
         <%= image_tag 'strong-man.svg', class: 'icon-draft' %>
-        <p class="icon-text">Fornecedores verificados e os melhores lojistas do país</p>
+        <p class="icon-text">Lojistas com fornecedores verificados</p>
       </div>
     </div>
   </div>
