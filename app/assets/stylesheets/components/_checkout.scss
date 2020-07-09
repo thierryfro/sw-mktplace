@@ -14,6 +14,7 @@
     height: 387px;
     border: 1px solid $color-grey-light-2;
     position: relative;
+    text-align: center;
 
     .header {
       display: flex;
@@ -34,6 +35,10 @@
       flex-direction: column;
       padding: 15px 25px;
 
+      .subheader {
+        margin-bottom: 1rem;
+      }
+
       h6 {
         font-weight: lighter;
         font-size: 12px;
@@ -44,6 +49,50 @@
         font-size: 14px;
         font-weight: bold;
         font-style: normal;
+      }
+
+      .input_login {
+        height: 30px;
+        width: 75%;
+        border: 1px solid $color-grey-light-3;
+        border-radius: 7px;
+        padding: 0 8px;
+        margin-bottom: 2rem;
+        font-style: italic;
+      }
+
+      input[type="submit"] {
+        border: none;
+        background-color: $color-sucess;
+        font-size: 16px;
+        font-style: italic;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 41px;
+        padding: 8px;
+        margin-left: 61px;
+      }
+    }
+
+    .btn_div {
+      margin-left: 85px;
+      width: 87%;
+
+      .new_acc_btn {
+        a {
+          background-color: $color-primary-light;
+          font-size: 16px;
+          font-style: italic;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50%;
+          padding: 8px;
+        }
       }
     }
   }
@@ -84,6 +133,26 @@
         font-weight: bold;
         font-style: normal;
       }
+
+      .payment_options {
+        display: flex;
+        flex-direction: column;
+        margin-top: 3rem;
+        height: 90px;
+        justify-content: space-between;
+
+        i {
+          font-size: 3.5rem;
+          margin-right: 3rem;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
     }
   }
 
@@ -92,6 +161,48 @@
     height: 387px;
     border: 1px solid $color-grey-light-2;
     position: relative;
+
+    .products_resume {
+      height: 167px;
+      overflow-y: scroll;
+      border-bottom: 1px solid $color-grey-light-2;
+
+      .resume_card {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border: 1px solid $color-grey-light-2;
+
+        img {
+          width: 76px;
+          height: 76px;
+        }
+
+        .product_name {
+          display: flex;
+          flex-wrap: wrap;
+          font-size: 12px;
+          font-weight: bold;
+          font-style: italic;
+
+          span {
+            margin-left: 2px;
+          }
+
+          .flavor {
+            font-size: 8px;
+            color: $color-grey-light-2;
+          }
+        }
+
+        .total_price {
+          display: flex;
+          flex-direction: column;
+          width: 110px;
+          font-size: 14px;
+        }
+      }
+    }
 
     .header {
       display: flex;
@@ -137,6 +248,28 @@
 
       p {
         font-style: normal;
+      }
+    }
+
+    .footer_checkout {
+      background-color: $color-grey-light-2;
+      height: 45px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      bottom: 0;
+      padding: 0 16px;
+
+      h4 {
+        font-size: 1.6rem;
+        font-style: italic;
+      }
+
+      p {
+        font-style: italic;
+        font-size: 1.6rem;
       }
     }
   }
