@@ -13,6 +13,6 @@ class PagesController < ApplicationController
   private
 
   def address_params
-    params.require(:address_info)
+    params.require(:address).permit(:info, :zipcode, :street)
   end
 end
