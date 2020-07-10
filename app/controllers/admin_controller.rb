@@ -2,7 +2,6 @@
 
 class AdminController < ApplicationController
   # before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  skip_before_action :set_address
   before_action :set_store, only: %i[offers profile]
 
   layout 'admin_layout'

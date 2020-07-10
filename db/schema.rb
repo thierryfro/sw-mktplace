@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_141638) do
+ActiveRecord::Schema.define(version: 2020_07_10_195804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2020_06_28_141638) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "freight_rule_id"
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_carts_on_address_id"
     t.index ["freight_rule_id"], name: "index_carts_on_freight_rule_id"
   end
 
@@ -252,6 +254,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_141638) do
   add_foreign_key "addresses", "users"
   add_foreign_key "cart_offers", "carts"
   add_foreign_key "cart_offers", "offers"
+  add_foreign_key "carts", "addresses"
   add_foreign_key "carts", "freight_rules"
   add_foreign_key "freight_rules", "stores"
   add_foreign_key "freight_weights", "freight_rules"
