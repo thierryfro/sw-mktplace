@@ -11,13 +11,17 @@
 
   <body>
     <div class="html-content">
-      <%= render 'shared/header' %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <div class="main-body">
+      <% if current_page?(root_url) %>
         <%= yield %>
-      </div>
-      <%= render 'shared/footer' %>
+      <% else %>
+        <%= render 'shared/header' %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <div class="main-body">
+          <%= yield %>
+        </div>
+        <%= render 'shared/footer' %>
+      <% end %>
     </div>
     <%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
     <%= javascript_pack_tag 'application' %>

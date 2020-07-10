@@ -5,6 +5,7 @@ class Cart < ApplicationRecord
   has_many :offers, through: :cart_offers
   has_many :cart_offers, dependent: :destroy
   belongs_to :freight_rule, optional: true
+  belongs_to :address, optional: true
 
   def total_weight
     return 0 if cart_offers.empty?
@@ -22,9 +23,10 @@ class Cart < ApplicationRecord
       return 'Seu carrinho está vazio'
     end
 
+
     store = cart_offers.first.store
     # given a zip code find store rules
-    zone_rules = store.find_zone_rules('02399999')
+    zone_rules = store.find_zone_rules(address.zipcode)
     if zone_rules.blank?
       update!(freight_rule_id: nil)
       return 'Essa loja não entrega na sua região'
@@ -43,7 +45,9 @@ class Cart < ApplicationRecord
   def fill_cart(session)
     session_cart = Cart.find(session[:cart_id])
     update!(
-      cart_offers: session_cart.cart_offers
+      cart_offers: session_cart.cart_offers,
+      address_id: session_cart.address_id,
+      freight_rule_id: session_cart.freight_rule_id
     )
   end
 
@@ -60,4 +64,5 @@ class Cart < ApplicationRecord
   def cart_store
     cart_offers.first.store if cart_offers.present?
   end
+
 end
