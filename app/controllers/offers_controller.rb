@@ -91,28 +91,23 @@ class OffersController < ApplicationController
   end
 
   def set_offers
-    if @cart.address.nil?
-      flash[:notice] = "Insira um endereço válido"
-      redirect_to root_path
-    else
-      products = Product.all
-      filters = params['search']
-      if filters.present?
-        filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
-        products = products.where(brand_id: filters['brands']) if filters['brands'].present?
-        products = products.where(category_id: filters['categories']) if filters['categories'].present?
-        products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
-        products = products.where(weight: filters['weights']) if filters['weights'].present?
-        prices = filters['prices'] if filters['prices'].present?
-      end
-      products = products.search_products(params['query']) if params['query'].present?
-      @offers = Offer.includes(products: :product_photos)
-                    .where(
-                      products: { id: products.pluck(:id) },
-                      store_id: params[:store_id].present? ? params[:store_id] : Store.delivers_in(@cart.address.zipcode)
-                    )
-      @offers = handle_prices(prices) if prices
+    products = Product.all
+    filters = params['search']
+    if filters.present?
+      filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
+      products = products.where(brand_id: filters['brands']) if filters['brands'].present?
+      products = products.where(category_id: filters['categories']) if filters['categories'].present?
+      products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
+      products = products.where(weight: filters['weights']) if filters['weights'].present?
+      prices = filters['prices'] if filters['prices'].present?
     end
+    products = products.search_products(params['query']) if params['query'].present?
+    @offers = Offer.includes(products: :product_photos)
+      .where(
+        products: { id: products.pluck(:id) },
+        store_id: params[:store_id].present? ? params[:store_id] : Store.all.pluck(:id)
+        )
+    @offers = handle_prices(prices) if prices
   end
 
   def offer_params

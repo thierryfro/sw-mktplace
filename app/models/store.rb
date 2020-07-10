@@ -38,13 +38,4 @@ class Store < ApplicationRecord
         zip_code, zip_code
       )
   end
-
-  def self.delivers_in(zip_code)
-    Store
-      .joins(:zip_code_zones)
-      .where(
-      'zip_code_zones.start_zip_code <= ? AND zip_code_zones.end_zip_code >= ?',
-      zip_code, zip_code
-    )
-  end
 end

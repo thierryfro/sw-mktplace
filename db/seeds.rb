@@ -68,7 +68,7 @@ manoel = User.create!(
 # add adresses to users
 User.all.each do |user|
   address = create_sample_address
-  address.update(user: user)
+  address.user = user
   puts "#{address.street} create to #{user.name}" if address.save!
 end
 
