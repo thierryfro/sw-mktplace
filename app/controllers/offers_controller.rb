@@ -8,7 +8,7 @@ class OffersController < ApplicationController
   skip_before_action :require_admin
 
   def index
-    @offers = @offers.sample(25)
+    @offers = @offers.page(params[:page]).per(25)
     respond_to do |format|
       format.html
       format.js
