@@ -140,4 +140,5 @@ class OffersController < ApplicationController
   def set_store
     @store = Store.find(params[:store_id])
   end
+
 end

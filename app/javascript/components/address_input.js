@@ -34,14 +34,11 @@ const initAddressInput = () => {
       const {
         postcode,
         name,
-        city,
-        hit: {
-          vilage, locale_names
-        }
+        city
       } = e.suggestion
       street_field.value = name
       zipcode_field.value = postcode
-      debugger
+      city_field.value = city
       submitForm()
     });
   }

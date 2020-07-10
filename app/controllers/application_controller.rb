@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :require_admin, unless: :devise_controller?
   before_action :custom_param_devise, if: :devise_controller?
   before_action :set_cart
+  before_action :set_address
   # current_use already have a cart but put something on session cart before login
   after_action :get_session_cart, if: :user_buying_unsigned?
 
@@ -34,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   def set_cart
     @cart = if current_user
-              # user already has a cart 
+              # user already has a cart
               Cart.find(current_user.cart_id)
             else
               # session already has a cart
@@ -56,11 +57,25 @@ class ApplicationController < ActionController::Base
     if session[:cart_id]
       cart = Cart.find(session[:cart_id])
       # if current and devise the user just logged
-      # and only gets session cart, if there is cart_offers in it  
+      # and only gets session cart, if there is cart_offers in it
       devise_controller? && current_user && cart&.cart_offers.present?
     else
       # if session has not cart_id, the user just logged out
       false
     end
+  end
+
+  def set_address
+    @address = if current_user
+              # user already has a address
+              raise
+            else
+              # session already has a address
+              Address.find(session[:address_id])
+      # current_user.address_id = @address.id if current_user
+    end
+  rescue ActiveRecord::RecordNotFound
+    # if there is no address, go to form
+    redirect_to root_path
   end
 end
