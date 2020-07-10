@@ -16,6 +16,7 @@ class PagesController < ApplicationController
     if address.save
       session[:address_id] = address.id
       @cart.update!(address: address)
+      @cart.update_freight
       redirect_to offers_path
     else
       flash[:notice] = "Endereço inválido"
