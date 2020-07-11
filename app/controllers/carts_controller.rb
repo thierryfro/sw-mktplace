@@ -36,6 +36,7 @@ class CartsController < ApplicationController
     session_offers = @session_cart.cart_offers
     # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
     @cart.fill_cart(session) unless session_offers.empty?
+    @subtotal = @cart.calc_subtotal
     # Começo da Order
     # Configura credenciais
     $mp = MercadoPago.new(ENV['PROD_ACCESS_TOKEN'])

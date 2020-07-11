@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1088px;
+  width: 57%;
   height: 752px;
   border: 1px solid #DBDBDB;
   background-color: #ffffff;
@@ -153,6 +153,18 @@
           font-weight: bold;
         }
       }
+
+      .mercadopago-button {
+
+        width: 120px;
+        font-style: italic;
+        font-size: 16px;
+        border-radius: 0;
+        display: flex;
+        justify-content: center;
+        margin-left: 70px;
+        margin-top: 50px;
+      }
     }
   }
 
@@ -164,6 +176,7 @@
 
     .products_resume {
       height: 167px;
+      overflow: hidden;
       overflow-y: scroll;
       border-bottom: 1px solid $color-grey-light-2;
 
@@ -200,6 +213,8 @@
           flex-direction: column;
           width: 110px;
           font-size: 14px;
+          text-align: end;
+          margin-right: 5px;
         }
       }
     }
@@ -271,6 +286,39 @@
         font-style: italic;
         font-size: 1.6rem;
       }
+    }
+
+    .freigth_details {
+      width: 100%;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+
+      span {
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $bp-small) {
+
+  .checkout {
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    padding: 0 25px;
+
+    .login_card {
+      margin-bottom: 2rem;
+    }
+    .payment_options_card {
+      margin-bottom: 2rem;
+    }
+    .cart_resume_card {
+      margin-bottom: 2rem;
     }
   }
 }

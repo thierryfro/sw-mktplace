@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def set_cart
     @cart = if current_user
-              # user already has a cart 
+              # user already has a cart
               Cart.find(current_user.cart_id)
             else
               # session already has a cart
@@ -51,12 +51,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name last_name birthdate])
   end
 
+  def after_sign_in_path_for(resource)
+    # path_to_redirect_to For eg. root_path
+  end
+
   # check if user has offers on session before authentication
   def user_buying_unsigned?
     if session[:cart_id]
       cart = Cart.find(session[:cart_id])
       # if current and devise the user just logged
-      # and only gets session cart, if there is cart_offers in it  
+      # and only gets session cart, if there is cart_offers in it
       devise_controller? && current_user && cart&.cart_offers.present?
     else
       # if session has not cart_id, the user just logged out
