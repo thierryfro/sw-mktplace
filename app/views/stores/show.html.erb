@@ -12,11 +12,11 @@
 
 <%
     base_url =  "https://auth.mercadopago.com.br/authorization"
-    client_id = "client_id=6327096864908872"
+    client_id = "client_id=#{ENV["APP_ID"]}"
     response_type = "response_type=code"
     platform_id = "platform_id=mp"
     state = @store.id
-    redirect_uri = "https://ef3ea30988ec.ngrok.io/credentials"
+    redirect_uri = "#{ENV["redirect_uri"]}/credentials"
  %>
 
 <%=

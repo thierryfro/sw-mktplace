@@ -77,7 +77,7 @@ class StoresController < ApplicationController
       # 'client_secret': ENV["MP_ATOKEN"],
       'grant_type': "authorization_code",
       'code': "#{params[:code]}",
-      'redirect_uri': "https://ef3ea30988ec.ngrok.io/credentials"
+      'redirect_uri': "#{ENV["redirect_uri"]}/credentials"
     }
     # Create the HTTP objects
     begin

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'mercadopago.rb'
-
 class CartsController < ApplicationController
   skip_before_action :require_admin
   before_action :authenticate_user!, only: :checkout
@@ -31,30 +29,92 @@ class CartsController < ApplicationController
 
   def checkout
     # Sem user chega o @cart == session[:cart_id]
-    @session_cart = Cart.find(session[:cart_id])
-    session_offers = @session_cart.cart_offers
+    @session_cart = Cart.find_by(id: session[:cart_id])
+    session_offers = @session_cart&.cart_offers
     # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
-    @cart.fill_cart(session) unless session_offers.empty?
-    # Começo da Order
-    # Configura credenciais
-    $mp = MercadoPago.new(ENV['PROD_ACCESS_TOKEN'])
+    @cart&.fill_cart(session) unless session_offers&.empty?
 
-    # Cria um objeto de preferência
-    items = []
-    @cart.cart_offers.each do |cart_offer|
-      items << {
-        title: cart_offer.offer.id,
-        unit_price: cart_offer.offer.price,
-        quantity: cart_offer.quantity
-      }
-    end
-    preference_data = {
-      "items": items
+    amount = @cart&.cart_offers&.joins(:offer)&.sum(:price)
+    store = @cart&.cart_offers&.first&.offer&.store
+    quantity = @cart&.cart_offers&.joins(:offer)&.count
+
+    # items = []
+    # @cart.cart_offers.each do |cart_offer|
+    #   items << {
+    #     title: cart_offer.offer.id,
+    #     unit_price: cart_offer.offer.price,
+    #     quantity: cart_offer.quantity,
+    #     currency_id: "BRL"
+    #   }
+    # end
+    # require 'mercadopago'
+
+    # MercadoPago::SDK.configure(ACCESS_TOKEN: ENV["PROD_ACCESS_TOKEN"])
+
+    # payment = MercadoPago::Payment.new()
+    # payment.transaction_amount = amount
+    # payment.token = store.access_token
+    # payment.description = 'Title of what you are paying for'
+    # payment.installments = 1
+    # payment.payment_method_id = "visa"
+    # payment.payer = {
+    #   email: "test_user_69207677@testuser.com"
+    # }
+
+    # payment.save()
+
+    curl -X POST \
+    -H 'Accept: application/json' \
+    -H 'Content-Type: application/json' \
+    'https://api.mercadopago.com/v1/advanced_payments?access_token=TEST-4621434340573915-071322-132cb43e76a224ae6b7b99a719e388f9-558584930' \
+    -d '{
+      "payer": {
+        "email": "test@user.com"
+      },
+      "payments": [
+        {
+          "payment_method_id": "visa",
+          "payment_type_id": "credit_card",
+          "token": "UHinzdTVOLjy9YGWVPpH7HMyh5krao7b",
+          "transaction_amount": 1000,
+          "installments": 1,
+          "processing_mode": "aggregator"
+        }
+      ],
+      "disbursements": [
+        {
+          "amount": 1000,
+          "external_reference": "ref-collector-1",
+          "collector_id": 558585522,
+          "application_fee": 100,
+          "money_release_days": 30
+        }
+      ],
+      "external_reference": "ref-transaction"
+    }'
+
+    url = "https://api.mercadopago.com/v1/payments?access_token=#{ENV["PROD_ACCESS_TOKEN"]}"
+
+    headers = {
+      'content-type': 'application/json',
+      'accept': 'application/json'
     }
-    preference = $mp.create_preference(preference_data)
+    body = {
+      "transaction_amount": amount,
+      "token": store.access_token,
+      "description": "Title of what you are paying for",
+      "installments": 1,
+      "payer": {
+        "id": "584422973"
+      },
+      "payment_method_id": "visa",
+      "application_fee": 2.56
+    }
+
+    response = RestClient.post(url, body, headers)
+    response = JSON.parse(response)
 
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
-    @preference_id = preference['response']['id']
   end
 
   def sucess
