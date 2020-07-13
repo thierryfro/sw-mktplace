@@ -21,19 +21,9 @@ var initAdminForm = () => {
 }
 
 var replaceForm = () => {
-    const formBox = document.getElementById('user-form-info')
-    formBox.innerHTML = "<%= j render 'shared/forms/user_data',  user: current_user %>"
+    const formBox = document.getElementById('store-form-info')
+    formBox.innerHTML = "<%= j render 'shared/forms/store_data',  store: @store %>"
     initAdminForm(formBox)
 }
 
-var initImageSetter = () => {
-    const imgSetter = document.querySelector('#image-setter')
-    if (imgSetter) {
-        imgSetter.addEventListener("click", () => {
-            document.querySelector('#user_photo').click()
-        })
-    }
-}
-
-initImageSetter()
 replaceForm()

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   # Cart methods
   def set_new_cart
     @cart = Cart.create
-    # get offers from session chart when authentication happens
+    # get offers from session cart when authentication happens
     # if current_user has no cart - his cart is created for the first time
     if current_user
       get_session_cart
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def set_cart
     @cart = if current_user
-              # user already has a cart 
+              # user already has a cart
               Cart.find(current_user.cart_id)
             else
               # session already has a cart
@@ -56,11 +56,12 @@ class ApplicationController < ActionController::Base
     if session[:cart_id]
       cart = Cart.find(session[:cart_id])
       # if current and devise the user just logged
-      # and only gets session cart, if there is cart_offers in it  
+      # and only gets session cart, if there is cart_offers in it
       devise_controller? && current_user && cart&.cart_offers.present?
     else
       # if session has not cart_id, the user just logged out
       false
     end
   end
+
 end

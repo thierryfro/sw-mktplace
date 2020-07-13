@@ -2,9 +2,9 @@
 
 class OffersController < ApplicationController
   before_action :set_offer, only: %i[show edit update destroy]
-  before_action :sidebar_params, only: %i[index]
-  before_action :set_offers, only: %i[index]
-
+  before_action :sidebar_params, only: %i[index store]
+  before_action :set_offers, only: %i[index store]
+  before_action :set_store, only: %i[store]
   skip_before_action :require_admin
 
   def index
@@ -73,6 +73,14 @@ class OffersController < ApplicationController
     # redirect_to offers_path
   end
 
+  def store
+    @offers = @offers.sample(25)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
 
   def handle_prices(prices)
@@ -83,19 +91,28 @@ class OffersController < ApplicationController
   end
 
   def set_offers
-    products = Product.all
-    filters = params['search']
-    if filters.present?
-      filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
-      products = products.where(brand_id: filters['brands']) if filters['brands'].present?
-      products = products.where(category_id: filters['categories']) if filters['categories'].present?
-      products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
-      products = products.where(weight: filters['weights']) if filters['weights'].present?
-      prices = filters['prices'] if filters['prices'].present?
+    if @cart.address.nil?
+      flash[:notice] = "Insira um endereço válido"
+      redirect_to root_path
+    else
+      products = Product.all
+      filters = params['search']
+      if filters.present?
+        filters.keys.each { |filter| filters[filter].reject!(&:blank?) if filters[filter].class == Array }
+        products = products.where(brand_id: filters['brands']) if filters['brands'].present?
+        products = products.where(category_id: filters['categories']) if filters['categories'].present?
+        products = products.where(subcategory_id: filters['subcategories']) if filters['subcategories'].present?
+        products = products.where(weight: filters['weights']) if filters['weights'].present?
+        prices = filters['prices'] if filters['prices'].present?
+      end
+      products = products.search_products(params['query']) if params['query'].present?
+      @offers = Offer.includes(products: :product_photos)
+                    .where(
+                      products: { id: products.pluck(:id) },
+                      store_id: params[:store_id].present? ? params[:store_id] : Store.delivers_in(@cart.address.zipcode)
+                    )
+      @offers = handle_prices(prices) if prices
     end
-    products = products.search_products(params['query']) if params['query'].present?
-    @offers = Offer.includes(products: :product_photos).where(products: { id: products.pluck(:id) })
-    @offers = handle_prices(prices) if prices
   end
 
   def offer_params
@@ -123,5 +140,9 @@ class OffersController < ApplicationController
       current_start: start_price.to_i,
       current_end: end_price.to_i
     }].to_json
+  end
+
+  def set_store
+    @store = Store.find(params[:store_id])
   end
 end

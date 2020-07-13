@@ -1,0 +1,38 @@
+<div class="home-layout">
+  <div class="main-banner" style="background-image: url(/assets/banner.png);">
+    <div class="content">
+      <%= image_tag 'Logo.svg', alt:"suplemento rápido logo", class:"logo" %>
+      <p class="slogan">Seu delivery de suplementos <br>rápido e barato!</p>
+      <%= form_for :address, url: start_address_path, html: { class: "banner-search", id: "banner-search" } do |form| %>
+          <%= form.text_field :info,
+                      class: "search_input",
+                      id: "new_address",
+                      placeholder: "Inserir endereço para pedir"
+                  %>
+          <%= form.hidden_field :street, id: 'street_field' %>
+          <%= form.hidden_field :zipcode, id: 'zipcode_field' %>
+          <%= form.hidden_field :city, id: 'city_field' %>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <div class="layer"></div>
+  </div>
+  <div class="about-banner">
+    <h4 class="how-it-works">Como funciona o Suplemento Rápido?</h4>
+    <div class="icons">
+      <div class="icon">
+        <%= image_tag 'sup.svg', class: 'icon-draft' %>
+        <p class="icon-text">Escolha dentre os melhores produtos do mercado</p>
+      </div>
+      <div class="icon">
+        <%= image_tag 'truck.svg', class: 'icon-draft' %>
+        <p class="icon-text">Entregamos seus suplementos em até 24 horas!</p>
+      </div>
+      <div class="icon">
+        <%= image_tag 'strong-man.svg', class: 'icon-draft' %>
+        <p class="icon-text">Lojistas com fornecedores verificados</p>
+      </div>
+    </div>
+  </div>
+</div>
+

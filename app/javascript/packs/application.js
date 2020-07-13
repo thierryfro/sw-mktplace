@@ -6,7 +6,7 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-
+import { initAddressInput } from '../components/address_input';
 import { initSelect2 } from "../components/init_select2";
 import { initFilter } from "../components/filter_toggler";
 import { initSlicker } from "../components/slick";
@@ -16,7 +16,7 @@ import { initAdminSidebar } from "../components/admin_sidebar";
 import { initDatepicker } from "../components/flatpickr";
 import { offerFilter } from "./offer_filter";
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
-import { photoSelector } from "../components/photo_select"
+import { photoSelector, dropDown } from "../components/photo_select"
 import { viewerJS } from '../components/viewer';
 import { initSlider } from "../components/init_slider";
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -25,6 +25,16 @@ import { initSlider } from "../components/init_slider";
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// Stimulus auto-load
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+const application = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
+
+
+initAddressInput();
 initDatepicker();
 initSelect2();
 offerFilter();
@@ -39,6 +49,9 @@ initImageSetter();
 initForms();
 initAdminForms();
 initAdminSidebar();
+dropDown();
+
+
 
 $("form").on("cocoon:after-insert", function () {
   /* apply select2 styling */

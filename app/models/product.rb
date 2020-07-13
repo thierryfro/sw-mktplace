@@ -40,6 +40,10 @@ class Product < ApplicationRecord
   $subcategories = Subcategory.where(id: products&.pluck(:subcategory_id))&.pluck(:name)&.reject(&:blank?)&.uniq
   $weight = products&.pluck(:weight)&.reject(&:blank?)&.uniq
 
+  def self.from_store(store_id)
+    joins(:offers).where(offers: { store_id: store_id })
+  end
+
   def capitalize_weight
     self.weight = weight&.capitalize
   end

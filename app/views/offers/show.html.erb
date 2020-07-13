@@ -19,16 +19,16 @@
     <div class="offer_details">
 
       <div class="store_link">
-        <h6>Produto vendido por: <span><%= @offer.store.name %></span></h6>
+        <h6 id="store_mobile">Produto vendido por: <span><%= @offer.store.name %></span></h6>
         <h6>Antes de comprar, escolha ou confira o tamanho e o sabor do seu produto</h6>
         <div class="selector_size">
-          <div>
+          <div class="size_form">
             <form action="">
-              <input type="dropdown">
-              <input type="dropdown">
+              <input type="dropdown" placeholder="TAMANHO">
+              <input type="dropdown" placeholder="SABOR">
             </form>
           </div>
-          <div>
+          <div class="price_container">
             <h4>R$ <%= @offer.price %>0</h4>
 
             <%= link_to create_cart_offer_path(@offer), method: :post do %>
@@ -42,7 +42,7 @@
 
       <div class="details">
         <div>
-          <h5>Detalhes do produto</h5>
+          <h5>Detalhes do produto <span class="arrow_down"><i class="fa fa-angle-down"></i></span></h5>
         </div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae eligendi dolorem non voluptas.
@@ -64,7 +64,7 @@
   </div>
 </div>
 
-<div class="offer_show">
+<div class="testimony_container">
   <div class="product_score">
 
     <div class="score">
@@ -125,7 +125,7 @@
       <div class="avatar">
         <%= image_tag 'avatar.png', class: 'avatar_img' %>
       </div>
-      <div>
+      <div class="author">
         <h6>Hugo Littlewhite</h6>
         <span class="star_rating">
           <i class="fa fa-star"></i>
@@ -133,7 +133,7 @@
         </span>
       </div>
       <div>
-        <p>'Este produto é uma merda, eu nem malho, não sei <br> pq comprei saporra!'</p>
+        <p>'Este produto é uma merda, eu nem malho, não sei pq comprei saporra!'</p>
       </div>
     </div>
   </div>

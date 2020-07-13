@@ -1,0 +1,102 @@
+.home-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .main-banner {
+    width: 100%;
+    height: 70rem;
+    display: flex;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    .layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(0 90%, 100% 97%, 100% 100%, 0% 100%);
+      background-color: $color-primary-light;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 43%;
+      height: 55%;
+      padding: 2% 7%;
+      .logo {
+        width: 65%;
+      }
+      .slogan {
+        font-size: 2.7rem;
+        font-weight: bolder;
+        font-style: italic;
+        text-align: start;
+        color: white;
+      }
+      .banner-search {
+        width: 100%;
+        position: relative;
+        .search_input {
+          padding: 0 1rem;
+          width: 100%;
+          height: 4.5rem;
+          background-color: white;
+          font-size: 1.5rem;
+          font-style: italic;
+          font-family: $font-primary;
+          font-weight: 400;
+          color: $color-grey-light-3;
+          border-radius: 7px;
+        }
+        .ap-suggestion {
+          font-size: 1.3rem;
+          font-family: inherit;
+          font-style: italic;
+        }
+        .ap-footer {
+          display: none;
+        }
+      }
+    }
+  }
+  .about-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $color-grey-dark-2;
+    width: 100%;
+    height: 45rem;
+    text-align: center;
+    .how-it-works {
+      color: white;
+      font-size: 2.7rem;
+      font-weight: bolder;
+      font-style: italic;
+    }
+    .icons {
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .icon {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .icon-draft {
+          height: 16rem;
+          margin-bottom: 1rem;
+        }
+        .icon-text {
+          font-size: 2rem;
+          font-weight: bolder;
+          font-style: italic;
+          text-align: center;
+          color: white;
+        }
+      }
+    }
+  }
+}
