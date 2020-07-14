@@ -74,7 +74,7 @@ class OffersController < ApplicationController
   end
 
   def store
-    @offers = @offers.sample(25)
+    @offers = @offers.page(params[:page]).per(25)
     respond_to do |format|
       format.html
       format.js
