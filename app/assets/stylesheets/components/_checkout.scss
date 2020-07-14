@@ -179,6 +179,9 @@
       overflow: hidden;
       overflow-y: scroll;
       border-bottom: 1px solid $color-grey-light-2;
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       .resume_card {
         display: flex;
@@ -312,12 +315,22 @@
     padding: 0 25px;
 
     .login_card {
+      width: 100%;
       margin-bottom: 2rem;
     }
     .payment_options_card {
+      width: 100%;
       margin-bottom: 2rem;
+
+      .content {
+
+        .mercadopago-button {
+          margin-left: 125px;
+        }
+      }
     }
     .cart_resume_card {
+      width: 100%;
       margin-bottom: 2rem;
     }
   }

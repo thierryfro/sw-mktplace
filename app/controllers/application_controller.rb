@@ -52,7 +52,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    # path_to_redirect_to For eg. root_path
+    # raise
+    if @_request.referer.match?(/checkout/)
+      checkout_path
+    else
+      root_path
+    end
   end
 
   # check if user has offers on session before authentication
