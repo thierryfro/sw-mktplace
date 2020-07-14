@@ -71,17 +71,19 @@ class StoresController < ApplicationController
       'accept': 'application/json'
     }
     body = {
-      'client_secret': ENV["PROD_ACCESS_TOKEN"],
+      'client_secret': ENV["MP_ATOKEN"],
       # 'client_secret': ENV["MP_ATOKEN"],
       'grant_type': "authorization_code",
       'code': "#{params[:code]}",
       'redirect_uri': "#{ENV["redirect_uri"]}/credentials"
     }
     # Create the HTTP objects
+    
     begin
 
         response = RestClient.post(url, body, headers)
         response = JSON.parse(response)
+        puts response
       if @store&.update!(access_token: response['access_token'],
                          public_key: response['public_key'],
                          refresh_token: response['refresh_token'],
@@ -91,7 +93,7 @@ class StoresController < ApplicationController
         flash[:notice] = "Conta vinculada com sucesso"
         redirect_to store_path(@store)
       end
-  rescue Exception => error
+  rescue Exception => exception_with_response
       flash[:notice] = error
       redirect_to store_path(@store) || root_path
   #     # Send the request

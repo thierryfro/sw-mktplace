@@ -28,16 +28,12 @@ class CartsController < ApplicationController
   # end
 
   def checkout
-    # Sem user chega o @cart == session[:cart_id]
-    @session_cart = Cart.find_by(id: session[:cart_id])
-    session_offers = @session_cart&.cart_offers
-    # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
-    @cart&.fill_cart(session) unless session_offers&.empty?
 
-    amount = @cart&.cart_offers&.joins(:offer)&.sum(:price)
-    store = @cart&.cart_offers&.first&.offer&.store
-    quantity = @cart&.cart_offers&.joins(:offer)&.count
+    amount = @cart.calc_subtotal 
+    store = @cart.store
+    quantity = @cart.count_items
 
+    raise
     # items = []
     # @cart.cart_offers.each do |cart_offer|
     #   items << {
@@ -62,36 +58,6 @@ class CartsController < ApplicationController
     # }
 
     # payment.save()
-
-    curl -X POST \
-    -H 'Accept: application/json' \
-    -H 'Content-Type: application/json' \
-    'https://api.mercadopago.com/v1/advanced_payments?access_token=TEST-4621434340573915-071322-132cb43e76a224ae6b7b99a719e388f9-558584930' \
-    -d '{
-      "payer": {
-        "email": "test@user.com"
-      },
-      "payments": [
-        {
-          "payment_method_id": "visa",
-          "payment_type_id": "credit_card",
-          "token": "UHinzdTVOLjy9YGWVPpH7HMyh5krao7b",
-          "transaction_amount": 1000,
-          "installments": 1,
-          "processing_mode": "aggregator"
-        }
-      ],
-      "disbursements": [
-        {
-          "amount": 1000,
-          "external_reference": "ref-collector-1",
-          "collector_id": 558585522,
-          "application_fee": 100,
-          "money_release_days": 30
-        }
-      ],
-      "external_reference": "ref-transaction"
-    }'
 
     url = "https://api.mercadopago.com/v1/payments?access_token=#{ENV["PROD_ACCESS_TOKEN"]}"
 
@@ -121,3 +87,33 @@ class CartsController < ApplicationController
   end
 
 end
+
+# \    curl -X POST \
+# -H 'Accept: application/json' \
+# -H 'Content-Type: application/json' \
+# 'https://api.mercadopago.com/v1/advanced_payments?access_token=TEST-4621434340573915-071322-132cb43e76a224ae6b7b99a719e388f9-558584930' \
+# -d '{
+#   "payer": {
+#     "email": "test@user.com"
+#   },
+#   "payments": [
+#     {
+#       "payment_method_id": "visa",
+#       "payment_type_id": "credit_card",
+#       "token": "UHinzdTVOLjy9YGWVPpH7HMyh5krao7b",
+#       "transaction_amount": 1000,
+#       "installments": 1,
+#       "processing_mode": "aggregator"
+#     }
+#   ],
+#   "disbursements": [
+#     {
+#       "amount": 1000,
+#       "external_reference": "ref-collector-1",
+#       "collector_id": 558585522,
+#       "application_fee": 100,
+#       "money_release_days": 30
+#     }
+#   ],
+#   "external_reference": "ref-transaction"
+# }'
