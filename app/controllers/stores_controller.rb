@@ -123,14 +123,3 @@ class StoresController < ApplicationController
   end
 
 end
-
-# {
-#   "access_token"=>"TEST-6327096864908872-070417-dc38939afe58586131ac882b5b2287a8-558585522",
-#   "token_type"=>"bearer",
-#   "expires_in"=>15552000,
-#   "scope"=>"offline_access read write",
-#   "user_id"=>558585522,
-#   "refresh_token"=>"TG-5f00c0cfa269a00007c39c19-558585522",
-#   "public_key"=>"TEST-98c81b15-22e7-4c25-8cc0-1d29edd7202f",
-#   "live_mode"=>false
-# }
