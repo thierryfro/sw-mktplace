@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   # Devise
   devise_for :users
 
+  scope 'profile' do
+    get '/info', to: 'profile#info', as: 'user_info'
+  end
+
   # Admin
   scope 'admin' do
     patch '/admin', to: 'admin#edit_profile', as: 'edit_profile'

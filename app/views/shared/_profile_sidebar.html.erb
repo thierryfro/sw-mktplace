@@ -1,0 +1,12 @@
+<div class="admin-links">
+    <% if current_user.photo.attached?  %>
+        <%= cl_image_tag current_user.photo.key, class: 'img-seller' %>
+    <% else %>
+        <%= image_tag 'user.png', class: 'img-seller' %>
+    <% end %>
+    <div class="name-seller"><%= current_user.name.upcase %></div>
+    <%= link_to 'Dados Pessoais', "#", class: "link-sidebar" %>
+    <%= link_to 'Seus pedidos', "#", class: "link-sidebar" %>
+    <%= link_to 'Favoritos', "#", class: "link-sidebar" %>
+    <%= link_to 'Endereço de entregas', "#", class: "link-sidebar" %>
+</div>
