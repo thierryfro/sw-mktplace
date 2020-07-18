@@ -30,6 +30,7 @@ class CartsController < ApplicationController
   def checkout
     $mp = MercadoPago.new(@cart.store.access_token)
     response = $mp.post('/v1/payments', payment_data)
+    raise
     manage_payment(response)
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
   end
@@ -39,7 +40,7 @@ class CartsController < ApplicationController
   private
 
   def manage_payment(response)
-
+    raise
 
   end
 
