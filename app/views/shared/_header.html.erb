@@ -8,15 +8,16 @@
             </div>
         </div>
         <div class="center-nav">
+            <% current_address = @cart.address %>
             <%= link_to '#', class:'address' do %>
-                <% current_address = @cart.address %>
                 <%= "#{ current_address ? current_address.street : '' }" %>
             <% end %>
             <%= form_tag offers_path, method: :get, class: "nav_search" do %>
                 <%= text_field_tag :query,
                             params[:query],
                             class: "nav_search_input",
-                            placeholder: "O que deseja buscar?"
+                            placeholder: "O que deseja buscar?",
+                            disabled: current_address.nil?
                         %>
                 <%= button_tag type: "submit", class: "nav_search_button" do %>
                     <i class="fa fa-search"></i>
