@@ -4,7 +4,7 @@ require 'mercadopago.rb'
 
 class CartsController < ApplicationController
   skip_before_action :require_admin
-  before_action :authenticate_user!, only: :checkout
+  # before_action :authenticate_user!, only: :checkout
 
   def show
     if current_user
@@ -30,11 +30,13 @@ class CartsController < ApplicationController
   # end
 
   def checkout
+    @user = User.new
     # Sem user chega o @cart == session[:cart_id]
     @session_cart = Cart.find(session[:cart_id])
     session_offers = @session_cart.cart_offers
     # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
     @cart.fill_cart(session) unless session_offers.empty?
+    @subtotal = @cart.calc_subtotal
     # Começo da Order
     # Configura credenciais
     $mp = MercadoPago.new(ENV['PROD_ACCESS_TOKEN'])

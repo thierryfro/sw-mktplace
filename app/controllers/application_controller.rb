@@ -51,6 +51,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name last_name birthdate])
   end
 
+  def after_sign_in_path_for(resource)
+    # raise
+    if @_request.referer.match?(/checkout/)
+      checkout_path
+    else
+      root_path
+    end
+  end
+
   # check if user has offers on session before authentication
   def user_buying_unsigned?
     if session[:cart_id]
