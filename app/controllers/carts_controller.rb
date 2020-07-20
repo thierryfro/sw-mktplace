@@ -4,6 +4,7 @@ require 'mercadopago.rb'
 class CartsController < ApplicationController
   skip_before_action :require_admin
   before_action :authenticate_user!, only: :payment
+  # before_action :authenticate_user!, only: :checkout
 
   def show
     if current_user
@@ -32,6 +33,7 @@ class CartsController < ApplicationController
     response = $mp.post('/v1/payments', payment_data)
     raise
     manage_payment(response)
+
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
   end
 
