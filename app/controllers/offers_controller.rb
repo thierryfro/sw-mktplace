@@ -106,11 +106,11 @@ class OffersController < ApplicationController
         prices = filters['prices'] if filters['prices'].present?
       end
       products = products.search_products(params['query']) if params['query'].present?
-      @offers = Offer.includes(products: :product_photos)
+      @offers = Offer.includes(products: [:product_photos, :brand])
                     .where(
                       products: { id: products.pluck(:id) },
                       store_id: params[:store_id].present? ? params[:store_id] : Store.delivers_in(@cart.address.zipcode)
-                    )
+                    ).includes(:offer_products, :store)
       @offers = handle_prices(prices) if prices
     end
   end
