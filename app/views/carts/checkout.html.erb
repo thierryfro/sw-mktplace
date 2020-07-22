@@ -2,17 +2,39 @@
 
   <div class="login_card">
 
-    <div class="header">
-      <h4>Identificação</h4>
-    </div>
-    <div class="content">
-      <h6>Nome:</h6>
-      <p>Rua das ameixas, 132 São Paulo - SP</p>
-    </div>
-    <div class="content">
-      <h6>Email:</h6>
-      <p>thierry@sw.com</p>
-    </div>
+    <% if !current_user %>
+      <div class="header">
+        <h4>Identificação</h4>
+      </div>
+      <div class="content">
+        <p class="subheader">Informe seu email para continuar</p>
+        <%= simple_form_for @user, url: new_user_session_path do |f| %>
+          <%= f.input :email, label: false, placeholder: 'Email', input_html: { class: 'input_login'} %>
+          <%= f.input :password, label: false, placeholder: 'Senha', input_html: { class: 'input_login'} %>
+          <%= f.submit 'Entrar' %>
+        <% end %>
+      </div>
+      <div class="content">
+        <p>Novo no site?</p>
+        <p>Cadastre agora, em poucos segundos</p>
+      </div>
+      <div class="btn_div">
+        <div class="new_acc_btn">
+          <%= link_to 'Criar conta', new_user_registration_path  %>
+        </div>
+      </div>
+    <% else %>
+      <div class="header">
+        <h4>Bem vindo <%= current_user.name.capitalize %></h4>
+      </div>
+      <div class="content">
+        <p>Obrigado pela preferência</p>
+      </div>
+      <div class="content">
+        <h6>Endereço de entrega:</h6>
+        <p>Rua das ameixas, 132 São Paulo - SP</p>
+      </div>
+    <% end %>
 
   </div>
 
@@ -22,69 +44,62 @@
       <h4>Pagamento</h4>
     </div>
     <div class="content">
-      <h6>Nome:</h6>
-      <p>Rua das ameixas, 132 São Paulo - SP</p>
+      <p>Aceitamos como formas de pagamento:</p>
+      <div class="payment_options">
+        <span> <i class="fa fa-credit-card"></i> Cartão de Crédito</span>
+        <span><i class="fa fa-barcode"></i> Boleto</span>
+      </div>
     </div>
     <div class="content">
-      <h6>Email:</h6>
-      <p>thierry@sw.com</p>
+      <% if @cart.cart_offers.count > 0 && current_user %>
+        <form action="/procesar-pago" method="POST">
+          <script
+            src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
+            data-preference-id="<%= @preference_id %>">
+          </script>
+        </form>
+      <% end %>
     </div>
 
   </div>
 
   <div class="cart_resume_card">
 
-    <div class="header">
-      <h4>Resumo do pedido</h4>
-    </div>
-    <div class="content">
-      <h6>Nome:</h6>
-      <p>Rua das ameixas, 132 São Paulo - SP</p>
-    </div>
-    <div class="content">
-      <h6>Email:</h6>
-      <p>thierry@sw.com</p>
-    </div>
+      <div class="header" style="margin-bottom: 10px;">
+        <h4>Resumo do pedido</h4>
+      </div>
+
+      <div class="products_resume">
+        <% @cart.cart_offers.each do |cart_offer| %>
+          <div class="resume_card">
+            <div class="photo">
+              <%= image_tag cart_offer.products.first.index_photo %>
+            </div>
+            <div class="product_name">
+              <%= cart_offer.products.first.name %><span> (<%= cart_offer.products.first.weight %>)</span>
+            </div>
+            <div class="total_price">
+              <div>
+                <%= cart_offer.quantity %>x R$ <%= cart_offer.offer.price %>0
+              </div>
+              <div>
+                R$ <%= cart_offer.offer.price * cart_offer.quantity %>0
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="footer_checkout">
+          <h4>Total do pedido</h4>
+          <p>R$ <%= @subtotal %>0</p>
+          <%# raise %>
+        </div>
+
+      </div>
+
+      <div class="freight_price">
+        <div class="freigth_details">Valor: <span>R$ <%= @subtotal %>0</span></div>
+        <div class="freigth_details">Frete: <span>R$ <%= @subtotal %>0</span></div>
+        <div class="freigth_details">Desconto: <span>R$ <%= @subtotal %>0</span></div>
+      </div>
 
   </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1>Checkout</h1> <br>
-
-<%= link_to 'Continuar comprando', offers_path %>
-
-
-<% if @cart.cart_offers.count > 0 %>
-  <form action="/procesar-pago" method="POST">
-    <script
-    src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
-    data-preference-id="<%= @preference_id %>">
-    </script>
-  </form>
-<% end %>
-

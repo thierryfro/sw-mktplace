@@ -35,10 +35,18 @@ class ApplicationController < ActionController::Base
   def set_cart
     @cart = if current_user
               # user already has a cart
-              Cart.find(current_user.cart_id)
+              unless (params[:controller] == 'offers' && params[:action] == "show") || (params[:controller] == 'pages' && params[:action] == "home")
+                Cart.includes(cart_offers: :offer).find(current_user.cart_id)
+              else
+                Cart.find(current_user.cart_id)
+              end
             else
               # session already has a cart
-              Cart.find(session[:cart_id])
+              unless (params[:controller] == 'offers' && params[:action] == "show") || (params[:controller] == 'pages' && params[:action] == "home")
+                Cart.includes(cart_offers: :offer).find(session[:cart_id])
+              else
+                Cart.find(session[:cart_id])
+              end
               # current_user.cart_id = @cart.id if current_user
             end
   rescue ActiveRecord::RecordNotFound
@@ -49,6 +57,15 @@ class ApplicationController < ActionController::Base
 
   def custom_param_devise
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name last_name birthdate])
+  end
+
+  def after_sign_in_path_for(resource)
+    # raise
+    if @_request.referer.match?(/checkout/)
+      checkout_path
+    else
+      root_path
+    end
   end
 
   # check if user has offers on session before authentication

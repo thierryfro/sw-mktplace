@@ -5,13 +5,13 @@
   <div class="offer">
 
     <div class="offer_photos">
-      <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'main_photo', id: 'image' %>
+      <%= image_tag( @product.product_photos.where(name: "Principal", size: "1200x1200")&.first&.url, class: 'main_photo', id: 'image') if @product.product_photos.where(name: "Principal", size: "1200x1200")&.first&.url %>
 
       <div class="photos_preview">
-        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>
-        <%= image_tag @product.product_photos.where(name: "Principal", size: "1200x1200").first.url, class: 'preview' %>
-        <%= image_tag @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200").first.url, class: 'preview' %>
-        <%= image_tag @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200").first.url, class: 'preview' %>
+        <%= image_tag( @product.product_photos.where(name: "Principal", size: "1200x1200")&.first&.url, class: 'preview' ) if @product.product_photos.where(name: "Principal", size: "1200x1200")&.first&.url %>
+        <%= image_tag( @product.product_photos.where(name: "Principal", size: "1200x1200")&.first&.url, class: 'preview' ) if @product.product_photos.where(name: "Principal", size: "1200x1200")&.first&.url %>
+        <%= image_tag( @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200")&.first&.url, class: 'preview' ) if @product.product_photos.where(name: "Ficha Técnica 1", size: "1200x1200")&.first&.url %>
+        <%= image_tag( @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200")&.first&.url, class: 'preview' ) if @product.product_photos.where(name: "Tabela Nutricional", size: "1200x1200")&.first&.url %>
       </div>
 
     </div>
@@ -60,8 +60,6 @@
         </div>
 
       </div>
-
-    <%# raise %>
     </div>
   </div>
 </div>
