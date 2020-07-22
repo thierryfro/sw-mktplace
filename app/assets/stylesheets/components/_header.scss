@@ -5,7 +5,7 @@ header.header {
   align-items: center;
   position: fixed;
   height: 11%;
-  min-height: 90px;
+  min-height: 8 0px;
   width: 100%;
   z-index: 1;
   .main-navbar {
@@ -38,6 +38,13 @@ header.header {
     justify-content: space-between;
     .address {
       margin-left: 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .deliver-in {
+        font-style: normal;
+        font-weight: 300;
+      }
     }
   }
   .right-nav {
