@@ -8,11 +8,7 @@ class PagesController < ApplicationController
 
   def new_address
     clean_session_address if session[:address_id].present?
-    address = Address.new(
-      street: @address_params[:street],
-      zipcode: @address_params[:zipcode].gsub('-', ''),
-      city: @address_params[:city]
-    )
+    address = Address.new(@address_params)
     if address.save
       session[:address_id] = address.id
       @cart.update!(address: address)
@@ -27,13 +23,22 @@ class PagesController < ApplicationController
   private
   
   def clean_session_address
-    address = Address.find(session[:address_id])
+    address = Address.find_by(id: session[:address_id])
     session[:address] = nil
     @cart.update(address: nil)
-    address.destroy if address.user_id.nil?
+    address.destroy if address && address.user_id.nil?
   end
 
   def address_params
     @address_params = params.require(:address).permit(:info, :zipcode, :city, :street)
+    @address_params = parse_params
+  end
+
+  def parse_params
+    {
+      street: @address_params[:street],
+      zipcode: @address_params[:zipcode].gsub('-', ''),
+      city: @address_params[:city]
+    }
   end
 end
