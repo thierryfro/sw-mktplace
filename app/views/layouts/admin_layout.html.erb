@@ -18,7 +18,11 @@
         <div class="main-body">
             <div class="admin-content">
                 <nav class="admin-sidebar">
-                    <%= render "shared/admin_sidebar" %>
+                    <% if controller == "admin" %>
+                        <%= render "shared/admin_sidebar" %>
+                    <% else %>
+                        <%= render "shared/profile_sidebar" %>
+                    <% end %>
                 </nav>
                 <div class="main">
                     <%= yield %>

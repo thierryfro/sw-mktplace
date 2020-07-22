@@ -1,18 +1,28 @@
 
 <h4>Loja <%= @store.comercial_name %></h4>
-<p>Proprietário: <%= @store.owner.name  %></p>
+<p>Proprietário: <%= @store.owner&.name  %></p>
 <p>Email: <%= @store.email  %></p>
 <p>CPNJ: <%= @store.cnpj %></p>
+<p>Vencimento da permissão: <%= @store.expires_in %></p>
+<p>Access: <%= @store.access_token %></p>
+<p>Public: <%= @store.public_key %></p>
+<p>User_id: <%= @store.user_id %></p>
+<p>Refresh: <%= @store.refresh_token %></p>
 
-<% 
+
+<%
     base_url =  "https://auth.mercadopago.com.br/authorization"
-    client_id = "client_id=2929864182574664"
+    client_id = "client_id=#{ENV["APP_ID"]}"
     response_type = "response_type=code"
     platform_id = "platform_id=mp"
-    redirect_uri = "https://e57193d67bac.ngrok.io/credentials"
+    state = @store.id
+    redirect_uri = "#{ENV["redirect_uri"]}/credentials"
  %>
 
-<%= 
-    link_to "Link com MercadoPago", 
-    "#{base_url}?#{client_id}&#{response_type}&#{platform_id}&#{redirect_uri}"   
+<%=
+    link_to "Link com MercadoPago",
+    "#{base_url}?#{client_id}&#{response_type}&#{platform_id}&state=#{state}&#{redirect_uri}"
 %>
+
+
+                

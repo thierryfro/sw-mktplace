@@ -65,4 +65,8 @@ class Cart < ApplicationRecord
     cart_offers.first.store if cart_offers.present?
   end
 
+  def store
+    cart_offers.present? ? cart_offers.first.store : nil
+  end
+
 end
