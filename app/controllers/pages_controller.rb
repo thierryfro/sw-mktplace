@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   def home; end
 
   def new_address
-    # clean_session_address if session[:address_id].present?
+    clean_session_address if session[:address_id].present?
     address = Address.new(
       street: @address_params[:street],
       zipcode: @address_params[:zipcode].gsub('-', ''),
@@ -29,6 +29,7 @@ class PagesController < ApplicationController
   def clean_session_address
     address = Address.find(session[:address_id])
     session[:address] = nil
+    @cart.update(address: nil)
     address.destroy if address.user_id.nil?
   end
 
