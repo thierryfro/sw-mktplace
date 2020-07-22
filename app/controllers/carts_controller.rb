@@ -1,9 +1,9 @@
-# frozen_string_literal: true
 
 require 'mercadopago.rb'
 
 class CartsController < ApplicationController
   skip_before_action :require_admin
+  before_action :authenticate_user!, only: :payment
   # before_action :authenticate_user!, only: :checkout
 
   def show
@@ -20,46 +20,50 @@ class CartsController < ApplicationController
       @sugested_offers = Offer.where(store: @cart.cart_store).sample(4)
     end
   end
-
-  # def session_offers(cart_offers)
-  #   offers = []
-  #   cart_offers.each do |offer|
-  #     session_offers << offer
-  #   end
-  #   offers
-  # end
+  
+  def payment
+    @store = @cart.store
+    @amount = @cart.calc_subtotal
+    @store = @cart.store
+    @quantity = @cart.count_items
+  end
 
   def checkout
-    @user = User.new
-    # Sem user chega o @cart == session[:cart_id]
-    @session_cart = Cart.find(session[:cart_id])
-    session_offers = @session_cart.cart_offers
-    # Depois que authenticate, user tera outro cart, passar os produtos do cart_session pro cart_user
-    @cart.fill_cart(session) unless session_offers.empty?
-    @subtotal = @cart.calc_subtotal
-    # Começo da Order
-    # Configura credenciais
-    $mp = MercadoPago.new(ENV['PROD_ACCESS_TOKEN'])
-
-    # Cria um objeto de preferência
-    items = []
-    @cart.cart_offers.each do |cart_offer|
-      items << {
-        title: cart_offer.offer.id,
-        unit_price: cart_offer.offer.price,
-        quantity: cart_offer.quantity
-      }
-    end
-    preference_data = {
-      "items": items
-    }
-    preference = $mp.create_preference(preference_data)
+    $mp = MercadoPago.new(@cart.store.access_token)
+    response = $mp.post('/v1/payments', payment_data)
+    raise
+    manage_payment(response)
 
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
-    @preference_id = preference['response']['id']
   end
 
-  def sucess
+  def sucess; end
+
+  private
+
+  def manage_payment(response)
+    raise
+
   end
 
+  def payment_data
+    payment_data = payment_params
+    {
+      "transaction_amount": payment_data['transaction_amount'].to_i,
+      "token": payment_data['token'],
+      "description": payment_data['description'],
+      "installments": payment_data['installments'].to_i,
+      "payment_method_id": payment_data['payment_method_id'],
+      "payer": {
+        "email": payment_data['email']
+      }
+    }
+  end
+
+  def payment_params
+    params.permit(
+      :transaction_amount, :token, :description,
+      :installments, :payment_method_id, :email
+    )
+  end
 end

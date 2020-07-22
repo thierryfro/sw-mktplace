@@ -62,9 +62,7 @@ class StoresController < ApplicationController
   # end
 
   def credentials
-    @store = Store.find_by(id: session[:store_id])
-    # raise
-    # code = 'TG-5ef766e061480e00074feedd-558584930'
+    @store = Store.find_by(id: params[:state])
 
     url = "https://api.mercadopago.com/oauth/token"
 
@@ -73,26 +71,38 @@ class StoresController < ApplicationController
       'accept': 'application/json'
     }
     body = {
-      # 'client_secret': ENV["PROD_ACCESS_TOKEN"],
       'client_secret': ENV["MP_ATOKEN"],
+      # 'client_secret': ENV["MP_ATOKEN"],
       'grant_type': "authorization_code",
-      # 'code': "#{code}",
       'code': "#{params[:code]}",
-      'redirect_uri': "https://e57193d67bac.ngrok.io/credentials"
+      'redirect_uri': "#{ENV["redirect_uri"]}/credentials"
     }
     # Create the HTTP objects
+    
     begin
+
         response = RestClient.post(url, body, headers)
         response = JSON.parse(response)
-      if @store&.update!(access_token: response[:access_token], public_key: response[:public_key], refresh_token: response[:refresh_token] )
+        puts response
+      if @store&.update!(access_token: response['access_token'],
+                         public_key: response['public_key'],
+                         refresh_token: response['refresh_token'],
+                         expires_in: response['expires_in'],
+                         user_id: response['user_id'] )
+
         flash[:notice] = "Conta vinculada com sucesso"
-        redirect_to stores_path(@store)
+        redirect_to store_path(@store)
       end
-  rescue Exception => error
+  rescue Exception => exception_with_response
       flash[:notice] = error
       redirect_to store_path(@store) || root_path
-      # Send the request
+  #     # Send the request
     end
+  end
+
+  def credential_new
+    byebug
+
   end
 
   private
