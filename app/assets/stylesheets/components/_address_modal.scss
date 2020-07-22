@@ -44,7 +44,7 @@
 
 @keyframes mmslideIn {
   from {
-    transform: translateY(15%);
+    transform: translateY(-15%);
   }
   to {
     transform: translateY(0);
@@ -56,7 +56,7 @@
     transform: translateY(0);
   }
   to {
-    transform: translateY(-10%);
+    transform: translateY(10%);
   }
 }
 
@@ -70,6 +70,22 @@
     background-color: white;
     border: $pattern-border-semi;
     border-radius: 15px;
+    position: relative;
+    .close-address {
+      background-color: #e62d21;
+      color: white;
+      position: absolute;
+      font-size: 1.7rem;
+      right: 1.5rem;
+      top: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
+    }
     @media only screen and (max-width: $bp-largest) {
       width: 50%;
     }
