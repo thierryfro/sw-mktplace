@@ -7,6 +7,7 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 import { initAddressInput } from '../components/address_input';
+import { bannerInput } from "../components/banner_input";
 import { initSelect2 } from "../components/init_select2";
 import { initFilter } from "../components/filter_toggler";
 import { initSlicker } from "../components/slick";
@@ -33,7 +34,7 @@ const application = Application.start()
 const context = require.context("./controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
 
-
+bannerInput();
 initAddressInput();
 initDatepicker();
 initSelect2();
