@@ -65,14 +65,19 @@
 .address-modal {
   .modal-content {
     width: 40%;
-    height: 70%;
+    height: 80%;
+    padding: 6rem 3rem;
     min-height: 60rem;
     background-color: white;
     border: $pattern-border-semi;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     border-radius: 15px;
     position: relative;
     .close-address {
-      background-color: #e62d21;
+      background-color: $color-primary;
       color: white;
       position: absolute;
       font-size: 1.7rem;
@@ -86,11 +91,100 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .actions {
+      width: 65%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .address-info {
+        width: 100%;
+        .address-header {
+          color: $color-grey-dark-2;
+          font-size: 2.1rem;
+          text-align: center;
+          font-style: italic;
+          margin-bottom: 2rem;
+        }
+        .address-search {
+          width: 100%;
+          position: relative;
+          .search_input {
+            padding: 0 1rem;
+            width: 100%;
+            height: 4.5rem;
+            background-color: $color-grey-light-1;
+            border: 1px solid $color-grey-light-3;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-family: $font-primary;
+            font-weight: 400;
+            border-radius: 7px;
+          }
+          .ap-input-icon svg {
+            fill: $color-grey-dark-2;
+          }
+          .ap-suggestion {
+            font-size: 1.3rem;
+            font-family: inherit;
+            color: $color-grey-dark-2;
+            font-style: italic;
+          }
+          .ap-footer {
+            display: none;
+          }
+        }
+        .location-button {
+          width: 50%;
+          margin: 2rem auto;
+          display: flex;
+          justify-content: space-between;
+          color: $color-grey-light-3;
+          .fa {
+            font-size: 3rem;
+          }
+          .location-text {
+            font-style: italic;
+          }
+        }
+      }
+      .user-address {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .disclaimer {
+          color: $color-grey-dark-2;
+          font-size: 1.4rem;
+          font-style: normal;
+          font-weight: 400;
+        }
+        .link-text-1, .link-text-2 {
+          text-align: center;
+        }
+        .link-text-1 {
+          color: $color-grey-light-3;
+          font-size: 1.4rem;
+          font-style: normal;
+          font-weight: 300;
+          margin: 1rem 0;
+        }
+        .link-text-2 {
+          color: $color-primary;
+          font-style: italic;
+          font-size: 1.6rem;
+          font-weight: 700;
+        }
+      }
+    }
     @media only screen and (max-width: $bp-largest) {
-      width: 50%;
+      width: 60%;
+      .location-button {
+        width: 40%;
+      }
     }
     @media only screen and (max-width: $bp-medium) {
-      width: 63%;
+      width: 70%;
     }
     @media only screen and (max-width: $bp-small) {
       width: 80%;

@@ -1,7 +1,7 @@
 import places from 'places.js';
 
 const submitForm = () => {
-  const searchForm = document.getElementById('banner-search')
+  const searchForm = document.getElementById('adress-search')
   searchForm.submit()
 }
 
