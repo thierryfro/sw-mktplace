@@ -1,0 +1,30 @@
+
+<div class="address" data-controller="address">
+  <span class="deliver-in">Entregar em:</span>
+  <%= "#{ current_address ? current_address.street : '' }" %>
+  <div class="address-modal <%= 'open' if address.zipcode.blank?  %>" >
+    <div class="modal-content">
+      <span class="close-address" data-action="click->address#closeModal">
+        <i class="fa fa-times"></i>
+      </span>
+      <div class="actions">
+        <h3 class="address-header">
+          Onde você quer receber o seu pedido?
+        </h3>
+        <%= form_for :address, url: start_address_path, html: { class: "banner-search", id: "banner-search" } do |form| %>
+          <%= form.text_field :info,
+                      class: "search_input",
+                      id: "new_address",
+                      placeholder: "Inserir endereço para pedir"
+                  %>
+          <%= form.hidden_field :street, id: 'street_field' %>
+          <%= form.hidden_field :zipcode, id: 'zipcode_field' %>
+          <%= form.hidden_field :city, id: 'city_field' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

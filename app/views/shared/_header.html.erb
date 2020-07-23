@@ -9,10 +9,7 @@
         </div>
         <div class="center-nav">
             <% current_address = @cart.address %>
-            <%= link_to '#', class:'address' do %>
-                <span class="deliver-in">Entregar em:</span>
-                <%= "#{ current_address ? current_address.street : '' }" %>
-            <% end %>
+            <%= render 'shared/address_modal', address: current_address %>
             <%= form_tag offers_path, method: :get, class: "nav_search" do %>
                 <%= text_field_tag :query,
                             params[:query],

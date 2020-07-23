@@ -42,6 +42,10 @@ header.header {
       flex-direction: column;
       align-items: flex-start;
       font-size: 1.3rem;
+      color: white;
+      font-weight: 600;
+      font-style: italic;
+      cursor: pointer;
       .deliver-in {
         font-size: 1.2rem;
         font-style: normal;
