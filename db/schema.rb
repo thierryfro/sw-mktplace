@@ -189,6 +189,8 @@ ActiveRecord::Schema.define(version: 2020_07_10_195804) do
     t.string "access_token"
     t.string "public_key"
     t.string "refresh_token"
+    t.string "expires_in"
+    t.integer "user_id"
     t.index ["address_id"], name: "index_stores_on_address_id"
     t.index ["owner_id"], name: "index_stores_on_owner_id"
   end
@@ -278,7 +280,6 @@ ActiveRecord::Schema.define(version: 2020_07_10_195804) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "addresses", "users"
   add_foreign_key "cart_offers", "carts"
   add_foreign_key "cart_offers", "offers"
   add_foreign_key "carts", "addresses"
