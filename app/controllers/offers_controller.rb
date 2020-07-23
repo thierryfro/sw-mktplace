@@ -8,7 +8,7 @@ class OffersController < ApplicationController
   skip_before_action :require_admin
 
   def index
-    @offers = @offers.page(params[:page]).per(25)
+    @offers = @offers ? @offers.page(params[:page]).per(25) : []
     respond_to do |format|
       format.html
       format.js
@@ -93,7 +93,6 @@ class OffersController < ApplicationController
   def set_offers
     if @cart.address.nil?
       flash[:notice] = "Insira um endereço válido"
-      redirect_to root_path
     else
       products = Product.all
       filters = params['search']

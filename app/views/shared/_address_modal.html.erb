@@ -4,7 +4,7 @@
     <span class="deliver-in">Entregar em: <br></span>
     <%= "#{ address ? address.street : '' }" %>
   </nav>
-  <div class="address-modal <%= 'open' if address.zipcode.blank?  %>" data-target="address.modal">
+  <div class="address-modal <%= 'open' if address&.zipcode.blank?  %>" data-target="address.modal">
     <div class="modal-content">
       <span class="close-address" data-action="click->address#closeModal">
         <i class="fa fa-times"></i>
