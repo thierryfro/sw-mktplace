@@ -73,12 +73,180 @@
         font-style: italic;
         font-weight: bold;
         color: $color-primary-light;
+        margin-top: 3rem;
       }
     }
   }
 
   .login_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 48%;
     border: 2px solid #DBDBDB;
+
+    .header {
+      width: 70%;
+      margin-top: 31px;
+      text-align: center;
+    }
+    h4 {
+      font-size: 2.8rem;
+      color: $color-grey-dark-2;
+      font-style: italic;
+    }
+
+    h6 {
+      font-size: 1.8rem;
+      color:  $color-grey-dark-2;
+      font-weight: lighter;
+      opacity: 0.7;
+      margin-top: 31px;
+    }
+
+    .signup_form {
+      margin-top: 1rem;
+
+    }
+
+    .field {
+      font-style: italic;
+      font-weight: bold;
+      color: $color-grey-dark-2;
+      margin-top: 14px;
+      font-size: 12px;
+    }
+
+    .login_form {
+      margin-top: 4rem;
+    }
+
+    .field_custom {
+      display: flex;
+      align-items: center;
+      margin: 1.4rem 0;
+      font-size: 13px;
+    }
+
+    input[type="text"], input[type="email"],
+    input[type="date"], input[type="password"] {
+      width: 267px;
+      height: 42px;
+      border: 1px solid $color-grey-light-3;
+      border-radius: 7px;
+      padding: 11px 16px;
+      font-style: italic;
+    }
+
+    input[type="checkbox"] {
+      width: 28px;
+      height: 26px;
+      border: 1px solid $color-grey-light-3;
+      border-radius: 6px;
+      margin-right: 6px;
+
+    }
+
+    input[type="submit"] {
+      width: 266px;
+      height: 37px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $color-primary-light;
+      border-radius: 8px;
+      font-style: italic;
+      font-weight: bold;
+      color: $color-grey-light-1;
+      background-color: $color-primary-light;
+      margin-top: 1rem;
+    }
+
+  }
+}
+
+@media only screen and (max-width: 1800px) {
+
+  .registration_div {
+    height: auto;
+
+    input[type="submit"] {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .login_div {
+    height: auto;
+
+    input[type="submit"] {
+      margin-bottom: 2rem;
+    }
+
+  }
+}
+
+
+@media only screen and (max-width: $bp-largest) {
+  .registration_div {
+    flex-direction: column;
+
+    .signup_div {
+      width: 80%;
+      margin: 0px auto 25px auto;
+    }
+
+    .login_div {
+      width: 80%;
+      margin: 0px auto 25px auto;
+    }
+  }
+
+}
+@media only screen and (max-width: $bp-large) {
+  .registration_div {
+    width: 80%;
+    .signup_div {
+      width: 90%;
+      // margin: 0px auto 25px auto;
+    }
+
+    .login_div {
+      width: 90%;
+      // margin: 0px auto 25px auto;
+    }
+  }
+
+}
+@media only screen and (max-width: $bp-small) {
+  .registration_div {
+    width: 95%;
+
+    .signup_div {
+      width: 100%;
+      // margin: 0px auto 25px auto;
+    }
+
+    .login_div {
+      width: 100%;
+      // margin: 0px auto 25px auto;
+    }
+  }
+
+}
+@media only screen and (max-width: $bp-smallest) {
+  .registration_div {
+    width: 100%;
+    padding: 18px;
+    margin: 0;
+
+    .signup_div {
+      width: 100%;
+      // margin: 0px auto 25px auto;
+    }
+
+    .login_div {
+      width: 100%;
+      // margin: 0px auto 25px auto;
+    }
   }
 }
