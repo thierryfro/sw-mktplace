@@ -1,41 +1,87 @@
-<h2>Sign up</h2>
+<div class="registration_div">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="signup_div">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  <div class="field">
-    <%= f.label :Nome %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
-  <div class="field">
-    <%= f.label :Sobrenome %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
-  </div>
-  <div class="field">
-    <%= f.label :Data_de_nascimento %><br />
-    <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate" %>
+    <div class="header">
+      <h4>Cadastre-se e explore as melhores ofertas na internet!</h4>
+      <h6>Cadastre-se e explore as melhores ofertas de suplementos na internet!</h6>
+    </div>
+
+    <div class="signup_form">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.label :Nome %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+        </div>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="field">
+          <%= f.label :Sobrenome %><br />
+          <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+        </div>
+        <div class="field">
+          <%= f.label :Data_de_nascimento %><br />
+          <%= f.date_field :birthdate, autofocus: true, autocomplete: "birthdate" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> tamanho minimo)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :confirme_sua_senha %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "REGISTRAR" %>
+        </div>
+      <% end %>
+
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="login_div">
+
+    <div class="header">
+      <h4>Já possui uma conta?</h4>
+      <h6>Faça o login e aproveite os melhores preços!</h6>
+    </div>
+
+    <div class="login_form">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field_custom">
+            <%= f.check_box :remember_me %>
+            <%= f.label :Manter_conectado %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "LOGIN" %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
