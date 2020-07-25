@@ -239,8 +239,9 @@
   }
 
   .offer_photos {
-    // width: 358px;
+    width: 100%;
     height: 440px;
+    margin-top: 2rem;
 
     img {
       width: 100%;
@@ -265,8 +266,8 @@
   }
 
   .brand_photo {
-    width: 26rem;
-    height: 7.2rem;
+    width: 30rem;
+    height: 10.2rem;
     position: absolute;
     right: 136px;
     // margin-bottom: 2rem;
@@ -283,7 +284,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 70%;
     height: auto;
 
     .store_link {
@@ -294,9 +295,26 @@
         align-items: center;
         margin-bottom: 6.8rem;
 
-        input {
+        .size_form {
+          width: 50%;
+        }
+
+        .size, .flavour {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid black;
+          padding: 0 11px;
+          font-size: 1.5rem;
+          font-weight: bold;
+          font-style: italic;
           width: 70%;
           margin: 25px 0;
+
+          .arrow_selector{
+            font-weight: bolder;
+            font-size: 2rem;
+          }
         }
       }
 
@@ -402,6 +420,8 @@
 }
 
 .testimony_container {
+
+  display: none;
   width: 57%;
   height: 752px;
   border: 1px solid #DBDBDB;
@@ -538,6 +558,97 @@
   }
 }
 
+// $bp-largest: 80em;     // 1200px
+// $bp-large: 68.75em;    // 1100px
+// $bp-medium: 56.25em;   // 900px
+// $bp-small: 37.5em;     // 600px
+// $bp-smallest: 31.25em; // 450px
+
+@media only screen and (max-width: 1650px) {
+  .offer_show {
+    width: 63%;
+
+    .offer_details {
+      width: 80%;
+    }
+
+    .brand_photo {
+      right: 90px;
+      bottom: 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .offer_show {
+    width: 73%;
+
+    .offer_details {
+
+      .selector_size {
+
+        h4 {
+          margin: 0;
+        }
+      }
+    }
+
+    .brand_photo {
+      right: 132px;
+      // bottom: 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: $bp-large) {
+  .offer_show {
+    width: 83%;
+
+    .brand_photo {
+      right: 111px;
+    }
+  }
+}
+
+@media only screen and (max-width: $bp-medium) {
+  .offer_show {
+    width: 90%;
+
+    .brand_photo {
+      right: 70px;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .offer_show {
+    width: 90%;
+    height: 80rem;
+    padding: 31px;
+
+    .offer_photos {
+      height: 440px;
+
+      img {
+        width: 80%;
+      }
+    }
+
+    .photos_preview {
+      margin-bottom: 70px;
+    }
+
+    .offer_details {
+      width: 120%;
+    }
+
+    .brand_photo {
+      right: 30px;
+      bottom: 53px;
+    }
+  }
+}
+
 @media only screen and (max-width: $bp-small) {
 
   .offer_show {
@@ -548,35 +659,49 @@
     .offer_title {
 
       h4 {
-        font-size: 2rem;
+        font-size: 4rem;
       }
       span {
-        font-size: 2rem;
+        font-size: 4rem;
       }
     }
 
     .offer_photos {
       height: auto;
-      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10rem;
+
+      img {
+        width: 50%;
+      }
 
       .photos_preview {
         width: 100%;
-        margin-top: 0;
       }
     }
 
-    .main_photo {
-
-    }
-
     .brand_photo {
-      top: 28px;
+      top: 46px;
       left: 13px;
       width: 125px;
     }
 
     .offer_details {
+      width: 100%;
       flex-direction: column-reverse;
+
+      .store_link {
+
+        h6 {
+          font-size: 1.8rem;
+        }
+      }
+
+      .brand_photo {
+        width: 226px;
+      }
 
       .details_open {
         margin-top: 8px;
@@ -584,7 +709,7 @@
         transition: ease 1s;
 
         h5 {
-          font-size: 2.4rem;
+          font-size: 3.4rem;
           font-weight: bold;
           font-style: italic;
           display: flex;
@@ -600,7 +725,7 @@
         }
 
         p {
-          font-size: 1.6rem;
+          font-size: 2.2rem;
           color: $color-grey-light-3;
           letter-spacing: 0px;
           margin-bottom: 1rem;
@@ -614,6 +739,7 @@
         transition: ease-out 0.5s;
 
         h5 {
+          font-size: 3.4rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -630,6 +756,21 @@
           display: none;
         }
       }
+      .selector_size {
+        flex-direction: column;
+
+        .size_form {
+
+          display: flex;
+          width: 70% !important;
+
+          .size, .flavour {
+            border: 2px solid black;
+            margin: 25px 10px;
+            font-weight: bold;
+            font-size: 2rem;
+          }
+        }
     }
 
   }
@@ -637,8 +778,6 @@
   .offer {
     flex-direction: column;
 
-    .selector_size {
-      flex-direction: column;
 
       form {
         display: flex;
@@ -663,14 +802,16 @@
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
+
 
         h4 {
           margin: 0;
+          font-size: 5.5rem;
         }
 
         .cart_btn {
-          width: 12rem !important;
+          width: 18rem !important;
         }
       }
     }

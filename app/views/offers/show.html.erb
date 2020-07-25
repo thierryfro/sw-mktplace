@@ -23,10 +23,17 @@
         <h6>Antes de comprar, escolha ou confira o tamanho e o sabor do seu produto</h6>
         <div class="selector_size">
           <div class="size_form">
-            <form action="">
-              <input type="dropdown" placeholder="TAMANHO">
-              <input type="dropdown" placeholder="SABOR">
-            </form>
+
+            <div class="size">
+              TAMANHO
+              <span class="arrow_selector"><i class="fa fa-angle-down"></i></span>
+            </div>
+
+            <div class="flavour">
+              SABOR
+              <span class="arrow_selector"><i class="fa fa-angle-down"></i></span>
+            </div>
+
           </div>
           <div class="price_container">
             <h4>R$ <%= @offer.price %>0</h4>
