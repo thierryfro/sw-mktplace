@@ -16,9 +16,10 @@ import { initAdminSidebar } from "../components/admin_sidebar";
 import { initDatepicker } from "../components/flatpickr";
 import { offerFilter } from "./offer_filter";
 import { styleCheckBoxes, activateToggler } from "../components/check_boxes";
-import { photoSelector, dropDown } from "../components/photo_select"
+import { photoSelector } from "../components/photo_select"
 import { viewerJS } from '../components/viewer';
 import { initSlider } from "../components/init_slider";
+import { dropDownDetails, dropDownOptions } from "../components/dropdown";
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -49,7 +50,8 @@ initImageSetter();
 initForms();
 initAdminForms();
 initAdminSidebar();
-dropDown();
+dropDownDetails();
+dropDownOptions();
 
 
 

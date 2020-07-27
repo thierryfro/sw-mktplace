@@ -299,10 +299,30 @@
           width: 50%;
         }
 
+        .size_div {
+
+        }
+
+        .hide_size_div {
+          display: none;
+        }
+
+        .hide_flavour_div {
+          display: none;
+        }
+
+        .size_title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+
         .size, .flavour {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          flex-direction: column;
           border: 1px solid black;
           padding: 0 11px;
           font-size: 1.5rem;
@@ -311,7 +331,7 @@
           width: 70%;
           margin: 25px 0;
 
-          .arrow_selector{
+          .arrow_selector {
             font-weight: bolder;
             font-size: 2rem;
           }
@@ -769,6 +789,7 @@
             margin: 25px 10px;
             font-weight: bold;
             font-size: 2rem;
+
           }
         }
     }
