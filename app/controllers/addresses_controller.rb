@@ -23,7 +23,7 @@ class AddressesController < ApplicationController
     address = Address.find_by(id: session[:address_id])
     session[:address] = nil
     @cart.update(address: nil)
-    address.destroy if address && address.user_id.nil?
+    # address.destroy if address && address.user_id.nil?
   end
 
   def address_params
