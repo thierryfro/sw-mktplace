@@ -51,7 +51,7 @@ const initLocateButton = () => {
     e.preventDefault();
     let buttonText = document.querySelector('.location-text');
 
-    buttonText.innerText = 'Localizando...';
+    buttonText.innerText = 'Localizando, aguarde um momento...';
 
     navigator.geolocation.getCurrentPosition((response) => {
       var coords = response.coords;

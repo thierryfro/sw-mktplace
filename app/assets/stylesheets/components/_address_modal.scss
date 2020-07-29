@@ -135,16 +135,18 @@
           }
         }
         .location-button {
-          width: 50%;
+          width: 70%;
           margin: 2rem auto;
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           color: $color-grey-light-3;
           .fa {
             font-size: 3rem;
+            margin-right: 1rem;
           }
           .location-text {
             font-style: italic;
+            text-align: start;
           }
         }
       }
