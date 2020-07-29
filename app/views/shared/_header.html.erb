@@ -7,11 +7,11 @@
             <% end %>
             </div>
         </div>
+        <% current_address = @cart.address %>
+        <% if params[:controller] == "offers" %>
+            <%= render 'shared/address_modal', address: current_address, current_user: current_user %>
+        <% end %>
         <div class="center-nav">
-            <% current_address = @cart.address %>
-            <% if params[:controller] == "offers" %>
-                <%= render 'shared/address_modal', address: current_address, current_user: current_user %>
-            <% end %>
             <%= form_tag offers_path, method: :get, class: "nav_search" do %>
                 <%= text_field_tag :query,
                             params[:query],

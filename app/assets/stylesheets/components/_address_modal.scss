@@ -1,6 +1,7 @@
 // MODAL BEHAVIOR
 
 .address-modal {
+  z-index: 10;
   display: none;
   animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
   animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
@@ -141,12 +142,13 @@
           justify-content: center;
           color: $color-grey-light-3;
           .fa {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-right: 1rem;
           }
           .location-text {
             font-style: italic;
             text-align: start;
+            font-size: 1.6rem;
           }
         }
       }
@@ -157,7 +159,7 @@
         width: 100%;
         .disclaimer {
           color: $color-grey-dark-2;
-          font-size: 1.4rem;
+          font-size: 1.6rem;
           font-style: normal;
           font-weight: 400;
         }
@@ -166,15 +168,15 @@
         }
         .link-text-1 {
           color: $color-grey-light-3;
-          font-size: 1.4rem;
+          font-size: 1.6rem;
           font-style: normal;
           font-weight: 300;
-          margin: 1rem 0;
+          margin: 1.5rem 0;
         }
         .link-text-2 {
           color: $color-primary;
           font-style: italic;
-          font-size: 1.6rem;
+          font-size: 1.8rem;
           font-weight: 700;
         }
       }
@@ -187,9 +189,19 @@
     }
     @media only screen and (max-width: $bp-medium) {
       width: 70%;
+      .actions {
+        width: 70%;
+        .search_input, .location-button, 
+        .disclaimer, .link-text-1, .link-text-2 {
+          font-size: 1.8rem !important;
+        }
+      }
     }
     @media only screen and (max-width: $bp-small) {
       width: 80%;
+      .actions {
+        width: 90%;
+      }
     }
     @media only screen and (max-width: $bp-smallest) {
       width: 95%;

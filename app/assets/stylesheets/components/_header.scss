@@ -31,26 +31,39 @@ header.header {
       }
     }
   }
+  .address {
+    margin-left: 6rem;
+    min-width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 600;
+    font-style: italic;
+    cursor: pointer;
+    .deliver-in {
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 300;
+    }
+    @media only screen and (max-width: $bp-medium) {
+      margin-left: 4rem;
+    }
+    @media only screen and (max-width: $bp-small) {
+      margin-left: 3rem;
+    }
+    @media only screen and (max-width: $bp-smallest) {
+      margin-left: 2rem;
+    }
+  }
   .center-nav {
-    flex: 0 0 56%;
+    flex: 0 0 50%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    .address {
-      margin-left: 6rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      font-size: 1.3rem;
-      color: white;
-      font-weight: 600;
-      font-style: italic;
-      cursor: pointer;
-      .deliver-in {
-        font-size: 1.2rem;
-        font-style: normal;
-        font-weight: 300;
-      }
+    justify-content: center;
+    @media only screen and (max-width: $bp-medium) {
+      flex: 0 0 45%;
     }
   }
   .right-nav {
@@ -64,6 +77,9 @@ header.header {
     }
   }
 }
+
+
+
 
 // FORM STYLES
 
@@ -93,6 +109,9 @@ header.header {
       font-size: 2.4rem;
       color: white;
     }
+  }
+  @media only screen and (max-width: $bp-medium) {
+    width: 85%;
   }
 }
 
