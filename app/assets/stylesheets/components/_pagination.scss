@@ -24,6 +24,12 @@
       border-bottom: 3px solid $color-primary;
     }
   }
+  @media only screen and (max-width: $bp-medium) {
+    padding: 0 30%;
+    .page {
+      font-size: 3rem;
+    }
+  }
   @media only screen and (max-width: $bp-small) {
     padding: 0 20%;
     .page {
