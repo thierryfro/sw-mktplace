@@ -1,0 +1,210 @@
+// MODAL BEHAVIOR
+
+.address-modal {
+  z-index: 10;
+  display: none;
+  animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+  animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+  width: 100%;
+  height: 100%;
+  &.open {
+    box-shadow: $pattern-shadow-dark;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+    animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mmfadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mmslideIn {
+  from {
+    transform: translateY(-15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes mmslideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(10%);
+  }
+}
+
+// MODAL CONTENT
+
+.address-modal {
+  .modal-content {
+    width: 40%;
+    height: 80%;
+    padding: 6rem 3rem;
+    min-height: 60rem;
+    background-color: white;
+    border: $pattern-border-semi;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 15px;
+    position: relative;
+    .close-address {
+      background-color: $color-primary;
+      color: white;
+      position: absolute;
+      font-size: 1.7rem;
+      right: 1.5rem;
+      top: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .actions {
+      width: 65%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .address-info {
+        width: 100%;
+        .address-header {
+          color: $color-grey-dark-2;
+          font-size: 2.1rem;
+          text-align: center;
+          font-style: italic;
+          margin-bottom: 2rem;
+        }
+        .address-search {
+          width: 100%;
+          position: relative;
+          .search_input {
+            padding: 0 1rem;
+            width: 100%;
+            height: 4.5rem;
+            background-color: $color-grey-light-1;
+            border: 1px solid $color-grey-light-3;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-family: $font-primary;
+            font-weight: 400;
+            border-radius: 7px;
+          }
+          .ap-input-icon svg {
+            fill: $color-grey-dark-2;
+          }
+          .ap-suggestion {
+            font-size: 1.3rem;
+            font-family: inherit;
+            color: $color-grey-dark-2;
+            font-style: italic;
+          }
+          .ap-footer {
+            display: none;
+          }
+        }
+        .location-button {
+          width: 70%;
+          margin: 2rem auto;
+          display: flex;
+          justify-content: center;
+          color: $color-grey-light-3;
+          .fa {
+            font-size: 3.5rem;
+            margin-right: 1rem;
+          }
+          .location-text {
+            font-style: italic;
+            text-align: start;
+            font-size: 1.6rem;
+          }
+        }
+      }
+      .user-address {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .disclaimer {
+          color: $color-grey-dark-2;
+          font-size: 1.6rem;
+          font-style: normal;
+          font-weight: 400;
+        }
+        .link-text-1, .link-text-2 {
+          text-align: center;
+        }
+        .link-text-1 {
+          color: $color-grey-light-3;
+          font-size: 1.6rem;
+          font-style: normal;
+          font-weight: 300;
+          margin: 1.5rem 0;
+        }
+        .link-text-2 {
+          color: $color-primary;
+          font-style: italic;
+          font-size: 1.8rem;
+          font-weight: 700;
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-largest) {
+      width: 60%;
+      .location-button {
+        width: 40%;
+      }
+    }
+    @media only screen and (max-width: $bp-medium) {
+      width: 70%;
+      .actions {
+        width: 70%;
+        .search_input, .location-button, 
+        .disclaimer, .link-text-1, .link-text-2 {
+          font-size: 1.8rem !important;
+        }
+      }
+    }
+    @media only screen and (max-width: $bp-small) {
+      width: 80%;
+      .actions {
+        width: 90%;
+      }
+    }
+    @media only screen and (max-width: $bp-smallest) {
+      width: 95%;
+    }
+  }
+}

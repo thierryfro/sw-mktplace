@@ -1,5 +1,5 @@
 <div class="home-layout">
-  <div class="main-banner" style="background-image: url(<%= asset_path 'banner.png' %>);">
+  <div class="main-banner">
     <div class="content">
       <%= image_tag 'Logo.svg', alt:"suplemento rápido logo", class:"logo" %>
       <p class="slogan">Seu delivery de suplementos <br>rápido e barato!</p>
@@ -7,12 +7,12 @@
           <%= form.text_field :info,
                       class: "search_input",
                       id: "new_address",
-                      placeholder: "Inserir endereço para pedir"
+                      placeholder: "Inserir endereço para pedir",
+                      disabled: true
                   %>
           <%= form.hidden_field :street, id: 'street_field' %>
           <%= form.hidden_field :zipcode, id: 'zipcode_field' %>
           <%= form.hidden_field :city, id: 'city_field' %>
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
       <% end %>
     </div>
     <div class="layer"></div>
