@@ -9,6 +9,12 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
+    background-image: asset-url('banner.png');
+    @media only screen and (max-width: $bp-small) {
+      background-image: asset-url('banner-mobile.jpg');
+      background-size: cover;
+      background-position: top;
+    }
     .layer {
       position: absolute;
       width: 100%;
@@ -48,6 +54,10 @@
           font-weight: 400;
           color: $color-grey-light-3;
           border-radius: 7px;
+          @media only screen and (max-width: $bp-medium) {
+            font-size: 2rem;
+            height: 6rem;
+          }
         }
         .ap-suggestion {
           font-size: 1.3rem;
@@ -56,6 +66,15 @@
         }
         .ap-footer {
           display: none;
+        }
+      }
+      @media only screen and (max-width: $bp-medium) {
+        width: 60%;
+      }
+      @media only screen and (max-width: $bp-small) {
+        width: 100%;
+        .logo {
+          width: 50%;
         }
       }
     }
@@ -74,6 +93,9 @@
       font-size: 2.7rem;
       font-weight: bolder;
       font-style: italic;
+      @media only screen and (max-width: $bp-small) {
+        font-size: 2.4rem;
+      }
     }
     .icons {
       width: 60%;
@@ -95,6 +117,25 @@
           font-style: italic;
           text-align: center;
           color: white;
+        }
+      }
+      @media only screen and (max-width: $bp-medium) {
+        width: 80%;
+      }
+      @media only screen and (max-width: $bp-small) {
+        width: 100%;
+        flex-direction: column;
+        .icon {
+          width: 80%;
+          flex-direction: row;
+          justify-content: space-between;
+          .icon-draft {
+            height: 11rem;
+          }
+          .icon-text {
+            text-align: end;
+            flex: 0 0 55%;
+          }
         }
       }
     }
