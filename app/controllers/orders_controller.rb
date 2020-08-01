@@ -1,65 +1,77 @@
 class OrdersController < ApplicationController
   skip_before_action :require_admin
-  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, only: :payment
+
+  def new
+    @store = @cart.store
+    @amount = @cart.calc_subtotal
+    @store = @cart.store
+    @quantity = @cart.count_items
+  end
 
   def create
-    @order = Order.new(order_params)
-    # @order = {
-    #   preference_id: params[:preference_id],
-    #   external_reference: params[:external_reference],
-    #   back_url: params[:back_url],
-    #   payment_id: params[:payment_id],
-    #   payment_status: params[:payment_status],
-    #   payment_status_detail: params[:payment_status_detail],
-    #   merchant_order_id: params[:merchant_order_id],
-    #   processing_mode: params[:processing_mode],
-    #   merchant_account_id: params[:merchant_account_id]
-    # }
-    @order.user = current_user
-    @order.address = current_user.address.first
-    @order.store = @cart.cart_offers.first.store
-
-    if @order.save!
-      @cart.cart_offers.each { |cart_offer| OrderOffer.create(order: @order, offer: cart_offer.offer, recorded_value: cart_offer.offer.price)}
+    response = call_mp_api
+    parsed_response = manage_payment(response)
+    @order = Order.new(parsed_response)
+    if @order.save
+      raise
+    else
+      flash.now[:alert] = 'Something went wrong'
+      render 'new'
     end
-    @cart.cart_offers.destroy_all
-
-
-    puts "ORDER + #{@order}"
-    redirect_to offers_path
-
-
+  end
+  
+  
+  def sucess; end
+  
+  private
+  
+  def call_mp_api
+    $mp = MercadoPago.new(@cart.store.access_token)
+    response = $mp.post('/v1/payments', payment_data)
+    if response['status'] != '201'
+      flash.now[:alert] = 'Something went wrong'
+      render 'new'
+    end
+    response['response']
   end
 
-  def order_params
-    params.permit(:preference_id, :payment_id, :payment_status, :payment_status_detail, :merchant_order_id, :processing_mode, :merchant_account_id)
+  def manage_payment(response)
+    {
+      user: current_user,
+      store: @cart.store,
+      address: @cart.address,
+      freight_rule: @cart.freight_rule,
+      payment_id: response['id'],
+      payment_status: response['status'],
+      payment_status_detail: response['status_detail'],
+      payment_type: response['payment_type_id'],
+      installments: response['installments'],
+      taxes_amount: response['taxes_amount'],
+      mercadopago_fee: response['fee_details'].first['amount'],
+      collector_id: response['collector_id']
+    }
   end
 
-  # APROVADA1
-  {
-    :preference_id=>"558584930-adcfd115-d450-4bd4-8965-d9405f3d90a3",
-    :external_reference=>"",
-    :back_url=>"",
-    :payment_id=>"25717816",
-    :payment_status=>"approved",
-    :payment_status_detail=>"accredited",
-    :merchant_order_id=>"1329216722",
-    :processing_mode=>"aggregator",
-    :merchant_account_id=>""
-  }
+  def payment_data
+    {
+      "transaction_amount": payment_params['transaction_amount'].to_i,
+      "token": payment_params['token'],
+      "description": payment_params['description'],
+      "installments": payment_params['installments'].to_i,
+      "payment_method_id": payment_params['payment_method_id'],
+      "payer": {
+        "email": payment_params['email']
+      }
+    }
+  end
 
-  # PAGAMENTO PENDENTE
-  {
-    :preference_id=>"558584930-89b428b8-ad31-49d9-98ca-9116ea0311f6",
-    :external_reference=>"",
-    :back_url=>"",
-    :payment_id=>"25719320",
-    :payment_status=>"in_process",
-    :payment_status_detail=>"pending_contingency",
-    :merchant_order_id=>"1329370816",
-    :processing_mode=>"aggregator",
-    :merchant_account_id=>""
-  }
-
+  def payment_params
+    params.permit(
+      :transaction_amount, :token, :description,
+      :installments, :payment_method_id, :email,
+      :authenticity_token
+    )
+  end
 
 end

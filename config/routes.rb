@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'products/index'
   get 'payments/mercado'
-  post 'procesar-pago', to: 'orders#create' # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
   # root to index
   root to: 'pages#home'
   post 'start_address', to: 'addresses#new_address', as: 'start_address'
@@ -14,7 +13,10 @@ Rails.application.routes.draw do
   resources :products, only: %i[index]
 
   # Stores
-  resources :stores, except: %i[ destroy ]
+  resources :stores, except: %i[destroy]
+
+  # Orders
+  resources :orders, only: %i[new create show] # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
 
   get 'stores/:store_id/offers', to: 'offers#store', as: 'store_offers'
 
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
   # Admin
   scope 'admin' do
     patch '/admin', to: 'admin#edit_profile', as: 'edit_profile'
-    get '/profile', to:'admin#profile', as: 'admin_profile'
+    get '/profile', to: 'admin#profile', as: 'admin_profile'
     get '/dashboard', to: 'admin#dashboard'
     get '/offers', to: 'admin#offers', as: 'all_offers'
     get 'new_offer', to: 'admin#new_offer', as: 'new_offers'
@@ -49,7 +51,4 @@ Rails.application.routes.draw do
   post '/cart/:cart_offer_id/decrease', to: 'carts_offers#remove', as: 'decrease_cart'
   resources :carts_offers, only: %i[destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  # Payments 
-  get '/payment', to: 'carts#payment', as: 'payment'
 end

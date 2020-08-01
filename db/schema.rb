@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_152718) do
     t.decimal "taxes_amount"
     t.decimal "transaction_amount"
     t.integer "shipping_amount"
-    t.integer "marcadopago_fee"
+    t.integer "mercadopago_fee"
     t.integer "collector_id"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["freight_rule_id"], name: "index_orders_on_freight_rule_id"

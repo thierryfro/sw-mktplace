@@ -6,7 +6,7 @@ class AddCollumnsToOrders < ActiveRecord::Migration[5.2]
     add_column :orders, :taxes_amount, :decimal
     add_column :orders, :transaction_amount, :decimal
     add_column :orders, :shipping_amount, :integer
-    add_column :orders, :marcadopago_fee, :integer
+    add_column :orders, :mercadopago_fee, :integer
     add_column :orders, :collector_id, :integer
   end
 end
