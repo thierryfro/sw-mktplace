@@ -5,8 +5,8 @@
         <%= image_tag 'user.png', class: 'img-seller' %>
     <% end %>
     <div class="name-seller"><%= current_user.name.upcase %></div>
-    <%= link_to 'Dados Pessoais', "#", class: "link-sidebar" %>
+    <%= link_to 'Dados Pessoais', user_info_path, class: "link-sidebar" %>
     <%= link_to 'Seus pedidos', "#", class: "link-sidebar" %>
     <%= link_to 'Favoritos', "#", class: "link-sidebar" %>
-    <%= link_to 'Endereço de entregas', "#", class: "link-sidebar" %>
+    <%= link_to 'Endereço de entregas', user_addresses_path, class: "link-sidebar" %>
 </div>

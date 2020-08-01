@@ -4,35 +4,35 @@
     <i class="fa fa-check" aria-hidden="true"></i>
 </span>
 <h3 class="form-title">Dados Atuais</h3>
-<%= simple_form_for user, url: edit_profile_path, remote: true,  method: :patch, html: { id: "user-data" } do |f| %>
+<%= simple_form_for user, url: defined?(user_profile) ? user_path(current_user) : edit_profile_path, remote: true,  method: :patch, html: { id: "user-data" } do |f| %>
     <div class="user-names">
         <div class="first-name-field">
             <span class="form-label">Nome</span>
-            <%= f.input :name, 
-                label: false, 
-                input_html: { 
+            <%= f.input :name,
+                label: false,
+                input_html: {
                     class: "first_name form_input",
                     disabled: true
                         } %>
         </div>
         <div class="last-name-field">
             <span class="form-label">Sobrenome</span>
-            <%= f.input :last_name, 
-                label: false, 
-                input_html: { 
-                    class: "last_name form_input", 
-                    disabled: true 
+            <%= f.input :last_name,
+                label: false,
+                input_html: {
+                    class: "last_name form_input",
+                    disabled: true
                     } %>
         </div>
     </div>
     <div class="birthdate-field">
         <span class="form-label" >Nascimento</span>
-        <%= f.input :birthdate, 
-            as: :string, 
-            label: false , 
-            input_html: { 
+        <%= f.input :birthdate,
+            as: :string,
+            label: false ,
+            input_html: {
                 class: "datepicker form_input",
-                data: { 
+                data: {
                         birthdate: user.birthdate.strftime("%d/%m/%Y")
                     },
                 disabled: true
@@ -47,9 +47,9 @@
         <% end %>
         <span id="image-setter">Trocar imagem</span>
         <%= f.input :photo,
-            as: :file, 
-            label: false, 
-            input_html:{ 
+            as: :file,
+            label: false,
+            input_html:{
                 class: "photo-input form_input",
                 disabled: true
                 } %>

@@ -1,0 +1,81 @@
+
+<span class="form-info-toggler" data-form="address-data">
+    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    <i class="fa fa-check" aria-hidden="true"></i>
+</span>
+<h3 class="form-title">Endereço de cobrança</h3>
+<%= simple_form_for address, remote: true, method: :patch, html: { id: "address-data" , class: "edit_user"} do |f| %>
+    <div class="comercial-name-field">
+        <span class="form-label">Lagradouro</span>
+        <%= f.input :street,
+            label: false,
+            input_html: {
+                class: "comercial_name form_input",
+                disabled: true
+                    } %>
+    </div>
+    <div class="user-names">
+      <div class="cnpj-field">
+          <span class="form-label">Número</span>
+          <%= f.input :number,
+              label: false,
+              input_html: {
+                  class: "form_input",
+                  disabled: true
+                  } %>
+      </div>
+      <div class="cnpj-field">
+          <span class="form-label">Bairro</span>
+          <%= f.input :neighborhood,
+              label: false,
+              input_html: {
+                  class: "form_input",
+                  disabled: true
+                  } %>
+      </div>
+    </div>
+    <div class="user-names">
+      <div class="cnpj-field">
+          <span class="form-label">Cidade</span>
+          <%= f.input :city,
+              label: false,
+              input_html: {
+                  class: "cnpj form_input",
+                  disabled: true
+                  } %>
+      </div>
+      <div class="cnpj-field">
+          <span class="form-label">Estado</span>
+          <%= f.input :state,
+              label: false,
+              input_html: {
+                  class: "cnpj form_input",
+                  disabled: true
+                  } %>
+      </div>
+    </div>
+    <div class="user-names">
+      <div class="cep-field">
+          <span class="form-label">Complemento</span>
+          <%= f.input :complement,
+              required: true,
+              label: false,
+              input_html: {
+                  class: "cnpj form_input",
+                  disabled: true
+              }
+          %>
+      </div>
+      <div class="cep-field">
+          <span class="form-label">CEP</span>
+          <%= f.input :zipcode,
+              required: true,
+              label: false,
+              input_html: {
+                  class: "form_input",
+                  disabled: true
+              }
+          %>
+      </div>
+    </div>
+<% end %>
