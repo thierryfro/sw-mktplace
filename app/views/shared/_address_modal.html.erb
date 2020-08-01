@@ -1,0 +1,44 @@
+
+<div class="address" data-controller="address">
+  <nav data-action="click->address#launchModal">
+    <span class="deliver-in">Entregar em: <br></span>
+    <%= "#{ address ? address.street : '' }" %>
+  </nav>
+  <div class="address-modal <%= 'open' if address&.zipcode.blank?  %>" data-target="address.modal">
+    <div class="modal-content">
+      <span class="close-address" data-action="click->address#closeModal">
+        <i class="fa fa-times"></i>
+      </span>
+      <div class="actions">
+        <div class="address-info">
+          <h3 class="address-header">
+            Onde você quer receber o seu pedido?
+          </h3>
+          <%= form_for :address, url: start_address_path, html: { class: "address-search", id: "address-search" } do |form| %>
+            <%= form.text_field :info,
+                        class: "search_input",
+                        id: "new_address",
+                        placeholder: "Inserir endereço para pedir"
+                    %>
+            <%= form.hidden_field :street, id: 'street_field' %>
+            <%= form.hidden_field :zipcode, id: 'zipcode_field' %>
+            <%= form.hidden_field :city, id: 'city_field' %>
+          <% end %>
+          <div class="location-button" id="locate-me">
+            <i class="fa fa-street-view"></i><span class="location-text">Usar minha localização</span>   
+          </div>
+        </div>
+        <div class="user-address">
+          <p class="disclaimer">Já tem um endereço salvo?</p>
+          <%= link_to new_user_session_path do %>
+            <p class="link-text-1">Entre na conta para selecionar seu endereço</p>
+            <p class="link-text-2">Entrar ou cadastrar</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
