@@ -1,4 +1,3 @@
-
 require 'mercadopago.rb'
 
 class CartsController < ApplicationController
@@ -20,7 +19,7 @@ class CartsController < ApplicationController
       @sugested_offers = Offer.where(store: @cart.cart_store).sample(4)
     end
   end
-  
+
   def payment
     @store = @cart.store
     @amount = @cart.calc_subtotal
@@ -32,7 +31,7 @@ class CartsController < ApplicationController
     $mp = MercadoPago.new(@cart.store.access_token)
     response = $mp.post('/v1/payments', payment_data)
     raise
-    manage_payment(response)
+    manage_payment(response['response'])
 
     # Este valor substituirá a string "<%= @preference_id %>" no seu HTML
   end
@@ -43,7 +42,14 @@ class CartsController < ApplicationController
 
   def manage_payment(response)
     raise
-
+    {
+      user_id: current_user.id,
+      store_id: @cart.store.id,
+      address_id: @cart.address.id,
+      payment_id: response['id'],
+      payment_status: response['status'],
+      payment_status_detail: response['status_detail']
+    }
   end
 
   def payment_data
