@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     parsed_response = manage_payment(response)
     @order = Order.new(parsed_response)
     if @order.save
-      raise
+      redirect_to order_path
     else
       flash.now[:alert] = 'Something went wrong'
       render 'new'

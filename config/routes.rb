@@ -18,6 +18,12 @@ Rails.application.routes.draw do
   # Orders
   resources :orders, only: %i[new create show] # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
 
+  # Address
+  resources :address, except: :destroy
+
+  # Users
+  resources :users, only: :update
+
   get 'stores/:store_id/offers', to: 'offers#store', as: 'store_offers'
 
   get 'credentials', to: 'stores#credentials'
@@ -28,6 +34,7 @@ Rails.application.routes.draw do
 
   scope 'profile' do
     get '/info', to: 'profile#info', as: 'user_info'
+    get '/addresses', to: 'profile#addresses', as: 'user_addresses'
   end
 
   # Admin
@@ -51,4 +58,5 @@ Rails.application.routes.draw do
   post '/cart/:cart_offer_id/decrease', to: 'carts_offers#remove', as: 'decrease_cart'
   resources :carts_offers, only: %i[destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 end

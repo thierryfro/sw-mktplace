@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   # check if user has offers on session before authentication
   def user_buying_unsigned?
     if session[:cart_id]
-      cart = Cart.find(session[:cart_id])
+      cart = Cart.find_by(id: session[:cart_id])
       # if current and devise the user just logged
       # and only gets session cart, if there is cart_offers in it
       devise_controller? && current_user && cart&.cart_offers.present?
