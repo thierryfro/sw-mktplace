@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post 'procesar-pago', to: 'orders#create' # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
   # root to index
   root to: 'pages#home'
+
+  resources :addresses, only: :update
   post 'start_address', to: 'addresses#new_address', as: 'start_address'
 
   # Offers
@@ -15,9 +17,6 @@ Rails.application.routes.draw do
 
   # Stores
   resources :stores, except: %i[ destroy ]
-
-  # Address
-  resources :address, except: :destroy
 
   # Users
   resources :users, only: :update
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
   scope 'profile' do
     get '/info', to: 'profile#info', as: 'user_info'
     get '/addresses', to: 'profile#addresses', as: 'user_addresses'
+    post '/addresses', to: 'profile#new_address', as: 'new_address'
   end
 
   # Admin
