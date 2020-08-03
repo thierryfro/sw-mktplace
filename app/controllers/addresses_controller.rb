@@ -20,9 +20,9 @@ class AddressesController < ApplicationController
   private
   
   def clean_session_address
-    address = Address.find_by(id: session[:address_id])
     session[:address] = nil
     @cart.update(address: nil)
+    # address = Address.find_by(id: session[:address_id])
     # address.destroy if address && address.user_id.nil?
   end
 
