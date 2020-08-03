@@ -52,13 +52,17 @@
 
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 <script>
-    window.Mercadopago.setPublishableKey("<%= @store.public_key %>");
-    window.Mercadopago.getIdentificationTypes();
 
 
-    document.getElementById('cardNumber').addEventListener('keyup', guessPaymentMethod);
-    document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
-    
+    function startMp() {
+        window.Mercadopago.setPublishableKey("<%= @store.public_key %>");
+        window.Mercadopago.getIdentificationTypes();
+        document.getElementById('cardNumber').addEventListener('keyup', guessPaymentMethod);
+        document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);   
+    }
+
+    setTimeout(startMp, 3000);
+
     function guessPaymentMethod(event) {
         let cardnumber = document.getElementById("cardNumber").value;
 
