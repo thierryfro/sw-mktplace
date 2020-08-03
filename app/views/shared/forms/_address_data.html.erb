@@ -1,10 +1,12 @@
 
-<span class="form-info-toggler" data-form="address-data">
+<span class="form-info-toggler" data-form="address-data-<%= address.id || 'new' %>">
     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
     <i class="fa fa-check" aria-hidden="true"></i>
 </span>
-<h3 class="form-title">Endereço de cobrança</h3>
-<%= simple_form_for address, remote: true, method: :patch, html: { id: "address-data" , class: "edit_user"} do |f| %>
+<h3 class="form-title"><%= defined?(action) ? 'Novo Endereço' : 'Endereço de cobrança' %></h3>
+<% path = defined?(action) ? new_address_path : address %>
+<% method = defined?(action) ? :post : :patch %>
+  <%= simple_form_for path, remote: true, method: method, html: { id: "address-data-#{ address.id || 'new'}" , class: "edit_user"} do |f| %>
     <div class="comercial-name-field">
         <span class="form-label">Lagradouro</span>
         <%= f.input :street,
