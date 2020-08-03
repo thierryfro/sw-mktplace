@@ -2,6 +2,7 @@
 
 class AddressesController < ApplicationController
   before_action :address_params, only: [:new_address]
+  before_action :set_address, only: :update
   skip_before_action :require_admin
 
   def new_address
@@ -17,13 +18,21 @@ class AddressesController < ApplicationController
     redirect_to offers_path
   end
 
+  def update
+    @address.update(user_address_params)
+    render json: @address
+  end
+
   private
-  
-  def clean_session_address
-    address = Address.find_by(id: session[:address_id])
-    session[:address] = nil
-    @cart.update(address: nil)
-    # address.destroy if address && address.user_id.nil?
+
+  def set_address
+    @address = Address.find_by(id: params[:id])
+  end
+
+  def user_address_params
+    params.require(:address).permit(
+      :street, :number, :neighborhood, :city, :state, :zipcode, :complement
+    )
   end
 
   def address_params

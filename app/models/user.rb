@@ -12,9 +12,9 @@ class User < ApplicationRecord
   has_many :user_stores, dependent: :destroy
   has_many :user_ratings, dependent: :destroy
 
-  has_many :address, dependent: :destroy
-  accepts_nested_attributes_for :address, allow_destroy: true
-  
+  has_many :addresses, dependent: :destroy
+  accepts_nested_attributes_for :addresses, allow_destroy: true
+
   has_one :store, :class_name => "Store", :foreign_key => 'owner_id'
 
   belongs_to :cart, optional: true
