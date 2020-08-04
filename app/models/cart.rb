@@ -69,4 +69,17 @@ class Cart < ApplicationRecord
     cart_offers.present? ? cart_offers.first.store : nil
   end
 
+  def payment_items
+    cart_offers.map do |offer|
+      product = offer.products.first
+      {
+        "id": product.id,
+        "quantity": offer.quantity,
+        "title": product.name,
+        "offer": offer.price,
+        "category_id": product.category.name,
+      }
+    end
+  end
+
 end

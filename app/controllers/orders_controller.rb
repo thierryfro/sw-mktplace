@@ -1,10 +1,12 @@
+require 'mercadopago.rb'
+
 class OrdersController < ApplicationController
   skip_before_action :require_admin
   before_action :authenticate_user!, only: :payment
 
   def new
     @store = @cart.store
-    @amount = @cart.calc_subtotal
+    @amount = @cart.calc_subtotal + @cart.freight_rule.price
     @store = @cart.store
     @quantity = @cart.count_items
   end
@@ -22,7 +24,6 @@ class OrdersController < ApplicationController
     end
   end
   
-  
   def sucess; end
   
   private
@@ -31,6 +32,7 @@ class OrdersController < ApplicationController
     $mp = MercadoPago.new(@cart.store.access_token)
     response = $mp.post('/v1/payments', payment_data)
     if response['status'] != '201'
+      raise
       flash.now[:alert] = 'Something went wrong'
       render 'new'
     end
@@ -55,14 +57,21 @@ class OrdersController < ApplicationController
   end
 
   def payment_data
+    amount = payment_params['transaction_amount'].to_i
     {
-      "transaction_amount": payment_params['transaction_amount'].to_i,
+      "transaction_amount": amount,
       "token": payment_params['token'],
       "description": payment_params['description'],
       "installments": payment_params['installments'].to_i,
+      "binary_mode": true,
+      "application_fee": amount.fdiv(10).round(2),
+      "statement_descriptor": "Suplemento Rapido",
       "payment_method_id": payment_params['payment_method_id'],
       "payer": {
         "email": payment_params['email']
+      },
+      "additional_info": {
+        "items": @cart.payment_items
       }
     }
   end
