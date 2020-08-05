@@ -8,7 +8,7 @@ class AddressesController < ApplicationController
   def new_address
     clean_session_address if session[:address_id].present?
     address = Address.new(@address_params)
-    if address.save
+    if address.save!
       session[:address_id] = address.id
       @cart.update!(address: address)
       @cart.update_freight

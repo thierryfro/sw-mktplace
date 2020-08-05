@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   resources :stores, except: %i[destroy]
 
   # Orders
-  resources :orders, only: %i[new create show] # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
+  resources :orders, only: %i[new create show] 
+  post 'orders/:id/webhook', to: 'orders#webhook', as: 'order_webhook'
+  
+  # retorno de pagamento do mercado pago ( DEVE SER ALTERADA PARA A PAGINA DE RESPOSTA )
 
   # Users
   resources :users, only: :update

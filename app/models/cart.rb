@@ -23,7 +23,6 @@ class Cart < ApplicationRecord
       return 'Seu carrinho está vazio'
     end
 
-
     store = cart_offers.first.store
     # given a zip code find store rules
     zone_rules = store.find_zone_rules(address.zipcode)
@@ -70,16 +69,15 @@ class Cart < ApplicationRecord
   end
 
   def payment_items
-    cart_offers.map do |offer|
-      product = offer.products.first
+    cart_offers.map do |cart_offer|
+      product = cart_offer.products.first
       {
         "id": product.id,
-        "quantity": offer.quantity,
         "title": product.name,
-        "offer": offer.price,
-        "category_id": product.category.name,
-      }
+        "quantity": cart_offer.quantity,
+        "unit_price": cart_offer.offer.price,
+        "category_id": product.category.name
+      }.stringify_keys
     end
   end
-
 end

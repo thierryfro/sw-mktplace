@@ -55,7 +55,7 @@
 
 
     function startMp() {
-        window.Mercadopago.setPublishableKey("<%= @store.public_key %>");
+        window.Mercadopago.setPublishableKey("<%= @cart.store.public_key %>");
         window.Mercadopago.getIdentificationTypes();
         document.getElementById('cardNumber').addEventListener('keyup', guessPaymentMethod);
         document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);   
