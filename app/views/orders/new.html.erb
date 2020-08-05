@@ -1,5 +1,7 @@
 <form action="/orders" method="post" id="pay" name="pay" class="payment-form" >
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <% amount = @cart.calc_subtotal + @cart.freight_rule.price %>
+    
     <fieldset>
         <p class="payment-description">
             <label for="description">Descrição</label>                        
@@ -7,7 +9,7 @@
         </p>                    
         <p class="payment-amount">
             <label for="transaction_amount">Valor a pagar</label>                        
-            <input name="transaction_amount" id="transaction_amount" value="<%= @amount %>"/>
+            <input name="transaction_amount" id="transaction_amount" value="<%= amount %>"/>
         </p>        
         <p class="payment-card-number">
             <label for="cardNumber">Número do cartão</label>

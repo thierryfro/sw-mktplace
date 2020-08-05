@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_152718) do
+ActiveRecord::Schema.define(version: 2020_08_05_202645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_152718) do
     t.integer "shipping_amount"
     t.integer "mercadopago_fee"
     t.integer "collector_id"
+    t.string "mp_response"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["freight_rule_id"], name: "index_orders_on_freight_rule_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
@@ -289,6 +290,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_152718) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "users"
   add_foreign_key "cart_offers", "carts"
   add_foreign_key "cart_offers", "offers"
   add_foreign_key "carts", "addresses"
