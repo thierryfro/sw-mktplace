@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_202645) do
+ActiveRecord::Schema.define(version: 2020_07_10_195804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,17 +143,7 @@ ActiveRecord::Schema.define(version: 2020_08_05_202645) do
     t.string "merchant_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "freight_rule_id"
-    t.string "payment_type"
-    t.integer "installments"
-    t.decimal "taxes_amount"
-    t.decimal "transaction_amount"
-    t.integer "shipping_amount"
-    t.integer "mercadopago_fee"
-    t.integer "collector_id"
-    t.string "mp_response"
     t.index ["address_id"], name: "index_orders_on_address_id"
-    t.index ["freight_rule_id"], name: "index_orders_on_freight_rule_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -303,7 +293,6 @@ ActiveRecord::Schema.define(version: 2020_08_05_202645) do
   add_foreign_key "order_offers", "offers"
   add_foreign_key "order_offers", "orders"
   add_foreign_key "orders", "addresses"
-  add_foreign_key "orders", "freight_rules"
   add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
   add_foreign_key "product_photos", "products"
