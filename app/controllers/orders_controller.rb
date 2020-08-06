@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
       @order.update_payment(response)
       manage_response(response)
     rescue StandardError => e
+      puts e
       @order.destroy
       flash.now[:alert] = 'Something went wrong with payment try'
       render :new
@@ -31,6 +32,7 @@ class OrdersController < ApplicationController
       response = @order.search_payment
       @order.update_payment(response)
     rescue Exception => e
+      puts e
       render json: { status: 400, error: 'Webhook failed' } and return
     end
     render json: { status: 200, message: 'OK' }
