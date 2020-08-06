@@ -8,19 +8,17 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[webhook]
   before_action :authenticate_user!, only: %i[payment]
 
-  def new
-  end
+  def new; end
 
   def create
     init_order
-    response = call_mp_api
-    begin      
-      parsed_response = helpers.parse_response(response)
-      @order.update!(parsed_response)
+    response = process_payment
+    begin
+      @order.update_payment(response)
       manage_response(response)
-    rescue => exception
+    rescue StandardError => e
       @order.destroy
-      flash.now[:alert] = "Something went wrong with payment try"
+      flash.now[:alert] = 'Something went wrong with payment try'
       render :new
     end
   end
@@ -30,7 +28,8 @@ class OrdersController < ApplicationController
   def webhook
     begin
       @order = Order.find_by(id: params[:id])
-      binding.pry
+      response = @order.search_payment
+      @order.update_payment(response)
     rescue Exception => e
       render json: { status: 400, error: 'Webhook failed' } and return
     end
@@ -48,16 +47,15 @@ class OrdersController < ApplicationController
     )
   end
 
-  def call_mp_api
+  def process_payment
     $mp = MercadoPago.new(@cart.store.access_token)
     response = $mp.post('/v1/payments', payment_data)
     response['response']
   end
 
-  def manage_response(response)
+  def manage_response(_response)
     case @order.payment_status
     when 'approved'
-      @order.update(collect_fees(response))
       @cart.cart_offers.clear
       redirect_to order_path(@order)
     when 'in_process'
