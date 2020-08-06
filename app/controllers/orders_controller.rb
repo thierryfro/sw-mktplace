@@ -1,6 +1,4 @@
 require 'mercadopago.rb'
-require 'json'
-require 'pry'
 
 class OrdersController < ApplicationController
   skip_before_action :require_admin
@@ -12,14 +10,14 @@ class OrdersController < ApplicationController
 
   def create
     init_order
-    response = process_payment
     begin
+      response = process_payment
       @order.update_payment(response)
-      manage_response(response)
+      manage_response
     rescue StandardError => e
       puts e
-      @order.destroy
-      flash.now[:alert] = 'Something went wrong with payment try'
+      # @order.destroy
+      flash.now[:alert] = 'Algo deu errado com a tentativa de pagamento'
       render :new
     end
   end
@@ -55,15 +53,11 @@ class OrdersController < ApplicationController
     response['response']
   end
 
-  def manage_response(_response)
-    case @order.payment_status
-    when 'approved'
+  def manage_response
+    if @order.payment_status.match?(/(approved|in_process)/)
       @cart.cart_offers.clear
       redirect_to order_path(@order)
-    when 'in_process'
-      @cart.cart_offers.clear
-      redirect_to order_path(@order)
-    when 'rejected'
+    else
       puts @order.response
       flash.now[:alert] = @order.mp_response
       render :new
@@ -79,7 +73,7 @@ class OrdersController < ApplicationController
       "installments": payment_params['installments'].to_i,
       "application_fee": amount.fdiv(5).round(2),
       "statement_descriptor": 'Suplemento Rapido',
-      "notification_url": "https://67f0bdef32eb.ngrok.io/orders/#{@order.id}/webhook",
+      "notification_url": "https://e8c67b18d410.ngrok.io/orders/#{@order.id}/webhook",
       "payment_method_id": payment_params['payment_method_id'],
       "payer": {
         "email": payment_params['email']
