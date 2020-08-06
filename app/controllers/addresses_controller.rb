@@ -50,7 +50,7 @@ class AddressesController < ApplicationController
   def parse_params
     {
       street: @address_params[:street],
-      zipcode: @address_params[:zipcode].gsub('-', ''),
+      zipcode: helpers.serialize_zipcode(@address_params[:zipcode]),
       city: @address_params[:city]
     }
   end
