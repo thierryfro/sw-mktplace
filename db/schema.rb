@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_152718) do
+ActiveRecord::Schema.define(version: 2020_08_07_115009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,12 @@ ActiveRecord::Schema.define(version: 2020_08_01_152718) do
     t.float "recorded_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
+    t.float "unit_price"
+    t.float "total_price"
+    t.float "weight"
+    t.integer "quantitiy"
+    t.string "image_url"
     t.index ["offer_id"], name: "index_order_offers_on_offer_id"
     t.index ["order_id"], name: "index_order_offers_on_order_id"
   end
@@ -146,11 +152,11 @@ ActiveRecord::Schema.define(version: 2020_08_01_152718) do
     t.bigint "freight_rule_id"
     t.string "payment_type"
     t.integer "installments"
-    t.decimal "taxes_amount"
-    t.decimal "transaction_amount"
-    t.decimal "shipping_amount"
-    t.decimal "application_fee"
-    t.decimal "mercadopago_fee"
+    t.float "taxes_amount"
+    t.float "transaction_amount"
+    t.float "shipping_amount"
+    t.float "application_fee"
+    t.float "mercadopago_fee"
     t.integer "collector_id"
     t.string "mp_response"
     t.datetime "date_approved"
