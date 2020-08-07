@@ -123,13 +123,12 @@ ActiveRecord::Schema.define(version: 2020_08_07_115009) do
   create_table "order_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.bigint "order_id"
-    t.float "recorded_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
     t.float "unit_price"
     t.float "total_price"
-    t.float "weight"
+    t.float "unit_weight"
     t.integer "quantitiy"
     t.string "image_url"
     t.index ["offer_id"], name: "index_order_offers_on_offer_id"
@@ -140,13 +139,10 @@ ActiveRecord::Schema.define(version: 2020_08_07_115009) do
     t.bigint "store_id"
     t.bigint "user_id"
     t.bigint "address_id"
-    t.string "preference_id"
     t.string "payment_id"
     t.string "payment_status"
     t.string "payment_status_detail"
     t.string "merchant_order_id"
-    t.string "processing_mode"
-    t.string "merchant_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "freight_rule_id"
