@@ -11,5 +11,10 @@ class AddCollumnsToOrders < ActiveRecord::Migration[5.2]
     add_column :orders, :collector_id, :integer
     add_column :orders, :mp_response, :string
     add_column :orders, :date_approved, :datetime
+
+    remove_column :orders, :preference_id
+    remove_column :orders, :processing_mode
+    remove_column :orders, :merchant_account_id
   end
 end
+
