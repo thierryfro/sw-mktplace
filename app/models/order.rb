@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :address
   belongs_to :freight_rule
+  has_many :order_offers, dependent: :destroy
 
   def update_payment(response)
     # update payment with parsed response
@@ -80,6 +81,29 @@ class Order < ApplicationRecord
       "cc_rejected_max_attempts":	'Você atingiu o limite de tentativas permitido. Escolha outro cartão ou outra forma de pagamento.',
       "cc_rejected_other_reason":	'payment_method_id não processa o pagamento.'
     }
-  }
+  }.freeze
 
+  # create order offers
+  def create_order_offers(cart)
+    cart.cart_offers.each do |cart_offer|
+      offer = cart_offer.offer
+      product = cart_offer.product
+      OrderOffer.create(
+        fill_order_offer(cart_offer, offer, product)
+      )
+    end
+  end
+
+  def fill_order_offer(cart_offer, offer, product)
+    {
+      order: self,
+      offer: offer,
+      total_price: cart_offer.total_price,
+      unit_price: offer.price,
+      description: product.name,
+      unit_weight: product.weight,
+      quantity: cart_offer.quantity,
+      image_url: product.index_photo
+    }
+  end
 end

@@ -13,10 +13,11 @@ class OrdersController < ApplicationController
     begin
       response = process_payment
       @order.update_payment(response)
-      manage_response
+      manage_response(response)
     rescue StandardError => e
       puts e
       # @order.destroy
+      raise
       flash.now[:alert] = 'Algo deu errado com a tentativa de pagamento'
       render :new
     end
@@ -29,7 +30,7 @@ class OrdersController < ApplicationController
       @order = Order.find_by(id: params[:id])
       response = @order.search_payment
       @order.update_payment(response)
-    rescue Exception => e
+    rescue StandardError => e
       puts e
       render json: { status: 400, error: 'Webhook failed' } and return
     end
@@ -53,13 +54,15 @@ class OrdersController < ApplicationController
     response['response']
   end
 
-  def manage_response
+  def manage_response(response)
     if @order.payment_status.match?(/(approved|in_process)/)
+      @order.create_order_offers(@cart)
       @cart.cart_offers.clear
       redirect_to order_path(@order)
     else
-      puts @order.response
-      flash.now[:alert] = @order.mp_response
+      @order.destroy
+      response['message']
+      flash.now[:alert] = response['message']
       render :new
     end
   end
@@ -71,7 +74,7 @@ class OrdersController < ApplicationController
       "token": payment_params['token'],
       "description": payment_params['description'],
       "installments": payment_params['installments'].to_i,
-      "application_fee": amount.fdiv(5).round(2),
+      "application_fee": amount.fdiv(20).round(2),
       "statement_descriptor": 'Suplemento Rapido',
       "notification_url": "https://e8c67b18d410.ngrok.io/orders/#{@order.id}/webhook",
       "payment_method_id": payment_params['payment_method_id'],

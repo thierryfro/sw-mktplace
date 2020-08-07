@@ -70,7 +70,7 @@ class Cart < ApplicationRecord
 
   def payment_items
     cart_offers.map do |cart_offer|
-      product = cart_offer.products.first
+      product = cart_offer.product
       {
         "id": product.id,
         "title": product.name,
