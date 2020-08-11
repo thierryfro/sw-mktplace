@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_195804) do
+ActiveRecord::Schema.define(version: 2020_08_07_115009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,9 +123,14 @@ ActiveRecord::Schema.define(version: 2020_07_10_195804) do
   create_table "order_offers", force: :cascade do |t|
     t.bigint "offer_id"
     t.bigint "order_id"
-    t.float "recorded_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
+    t.float "unit_price"
+    t.float "total_price"
+    t.string "unit_weight"
+    t.integer "quantity"
+    t.string "image_url"
     t.index ["offer_id"], name: "index_order_offers_on_offer_id"
     t.index ["order_id"], name: "index_order_offers_on_order_id"
   end
@@ -134,16 +139,25 @@ ActiveRecord::Schema.define(version: 2020_07_10_195804) do
     t.bigint "store_id"
     t.bigint "user_id"
     t.bigint "address_id"
-    t.string "preference_id"
     t.string "payment_id"
     t.string "payment_status"
     t.string "payment_status_detail"
     t.string "merchant_order_id"
-    t.string "processing_mode"
-    t.string "merchant_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "freight_rule_id"
+    t.string "payment_type"
+    t.integer "installments"
+    t.float "taxes_amount"
+    t.float "transaction_amount"
+    t.float "shipping_amount"
+    t.float "application_fee"
+    t.float "mercadopago_fee"
+    t.integer "collector_id"
+    t.string "mp_response"
+    t.datetime "date_approved"
     t.index ["address_id"], name: "index_orders_on_address_id"
+    t.index ["freight_rule_id"], name: "index_orders_on_freight_rule_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -280,6 +294,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_195804) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "users"
   add_foreign_key "cart_offers", "carts"
   add_foreign_key "cart_offers", "offers"
   add_foreign_key "carts", "addresses"
@@ -292,6 +307,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_195804) do
   add_foreign_key "order_offers", "offers"
   add_foreign_key "order_offers", "orders"
   add_foreign_key "orders", "addresses"
+  add_foreign_key "orders", "freight_rules"
   add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
   add_foreign_key "product_photos", "products"

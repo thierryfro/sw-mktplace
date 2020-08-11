@@ -12,7 +12,15 @@ class CartOffer < ApplicationRecord
     offer.products
   end
 
+  def product
+    offer.products.first
+  end
+
   def store
     offer.store
+  end
+
+  def total_price
+    offer.price * quantity
   end
 end

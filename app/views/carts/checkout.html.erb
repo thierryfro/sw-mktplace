@@ -73,10 +73,10 @@
         <% @cart.cart_offers.each do |cart_offer| %>
           <div class="resume_card">
             <div class="photo">
-              <%= image_tag cart_offer.products.first.index_photo %>
+              <%= image_tag cart_offer.product.index_photo %>
             </div>
             <div class="product_name">
-              <%= cart_offer.products.first.name %><span> (<%= cart_offer.products.first.weight %>)</span>
+              <%= cart_offer.product.name %><span> (<%= cart_offer.products.first.weight %>)</span>
             </div>
             <div class="total_price">
               <div>

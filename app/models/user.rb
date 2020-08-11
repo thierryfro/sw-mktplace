@@ -22,4 +22,12 @@ class User < ApplicationRecord
   has_one_attached :photo
   # has_many :stores, as: :owner, dependent: :destroy
 
+  def payment_info
+    {
+      "first_name": name,
+      "last_name": last_name,
+      "registration_date": created_at,
+    }
+  end
+
 end

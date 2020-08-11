@@ -1,65 +1,97 @@
+require 'mercadopago.rb'
+
 class OrdersController < ApplicationController
   skip_before_action :require_admin
-  skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :null_session, only: %i[webhook]
+  skip_before_action :verify_authenticity_token, only: %i[webhook]
+  before_action :authenticate_user!, only: %i[payment]
+
+  def new; end
 
   def create
-    @order = Order.new(order_params)
-    # @order = {
-    #   preference_id: params[:preference_id],
-    #   external_reference: params[:external_reference],
-    #   back_url: params[:back_url],
-    #   payment_id: params[:payment_id],
-    #   payment_status: params[:payment_status],
-    #   payment_status_detail: params[:payment_status_detail],
-    #   merchant_order_id: params[:merchant_order_id],
-    #   processing_mode: params[:processing_mode],
-    #   merchant_account_id: params[:merchant_account_id]
-    # }
-    @order.user = current_user
-    @order.address = current_user.address.first
-    @order.store = @cart.cart_offers.first.store
-
-    if @order.save!
-      @cart.cart_offers.each { |cart_offer| OrderOffer.create(order: @order, offer: cart_offer.offer, recorded_value: cart_offer.offer.price)}
+    init_order
+    begin
+      response = process_payment
+      @order.update_payment(response)
+      manage_response(response)
+    rescue StandardError => e
+      puts e
+      # @order.destroy
+      raise
+      flash.now[:alert] = 'Algo deu errado com a tentativa de pagamento'
+      render :new
     end
-    @cart.cart_offers.destroy_all
-
-
-    puts "ORDER + #{@order}"
-    redirect_to offers_path
-
-
   end
 
-  def order_params
-    params.permit(:preference_id, :payment_id, :payment_status, :payment_status_detail, :merchant_order_id, :processing_mode, :merchant_account_id)
+  def sucess; end
+
+  def webhook
+    begin
+      @order = Order.find_by(id: params[:id])
+      response = @order.search_payment
+      @order.update_payment(response)
+    rescue StandardError => e
+      puts e
+      render json: { status: 400, error: 'Webhook failed' } and return
+    end
+    render json: { status: 200, message: 'OK' }
   end
 
-  # APROVADA1
-  {
-    :preference_id=>"558584930-adcfd115-d450-4bd4-8965-d9405f3d90a3",
-    :external_reference=>"",
-    :back_url=>"",
-    :payment_id=>"25717816",
-    :payment_status=>"approved",
-    :payment_status_detail=>"accredited",
-    :merchant_order_id=>"1329216722",
-    :processing_mode=>"aggregator",
-    :merchant_account_id=>""
-  }
+  private
 
-  # PAGAMENTO PENDENTE
-  {
-    :preference_id=>"558584930-89b428b8-ad31-49d9-98ca-9116ea0311f6",
-    :external_reference=>"",
-    :back_url=>"",
-    :payment_id=>"25719320",
-    :payment_status=>"in_process",
-    :payment_status_detail=>"pending_contingency",
-    :merchant_order_id=>"1329370816",
-    :processing_mode=>"aggregator",
-    :merchant_account_id=>""
-  }
+  def init_order
+    @order = Order.create(
+      user: current_user,
+      store: @cart.store,
+      address: @cart.address,
+      freight_rule: @cart.freight_rule
+    )
+  end
 
+  def process_payment
+    $mp = MercadoPago.new(@cart.store.access_token)
+    response = $mp.post('/v1/payments', payment_data)
+    response['response']
+  end
 
+  def manage_response(response)
+    if @order.payment_status.match?(/(approved|in_process)/)
+      @order.create_order_offers(@cart)
+      @cart.cart_offers.clear
+      redirect_to order_path(@order)
+    else
+      @order.destroy
+      response['message']
+      flash.now[:alert] = response['message']
+      render :new
+    end
+  end
+
+  def payment_data
+    amount = payment_params['transaction_amount'].to_f.round(2)
+    {
+      "transaction_amount": amount,
+      "token": payment_params['token'],
+      "description": payment_params['description'],
+      "installments": payment_params['installments'].to_i,
+      "application_fee": amount.fdiv(20).round(2),
+      "statement_descriptor": 'Suplemento Rapido',
+      "notification_url": "https://e8c67b18d410.ngrok.io/orders/#{@order.id}/webhook",
+      "payment_method_id": payment_params['payment_method_id'],
+      "payer": {
+        "email": payment_params['email']
+      },
+      "additional_info": {
+        "items": @cart.payment_items
+      }
+    }
+  end
+
+  def payment_params
+    params.permit(
+      :transaction_amount, :token, :description,
+      :installments, :payment_method_id, :email,
+      :authenticity_token
+    )
+  end
 end

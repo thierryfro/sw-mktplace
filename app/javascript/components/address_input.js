@@ -45,25 +45,26 @@ const buildTemplate = (suggestion) => {
 const initLocateButton = () => {
   let button = document.querySelector('#locate-me');
 
-
-  /* If the user does a click on the Locate me button, do a reverse query */
-  button.addEventListener('click', function (e) {
-    e.preventDefault();
-    let buttonText = document.querySelector('.location-text');
-
-    buttonText.innerText = 'Localizando, aguarde um momento...';
-
-    navigator.geolocation.getCurrentPosition((response) => {
-      var coords = response.coords;
-      var lat = coords.latitude.toFixed(6);
-      var lng = coords.longitude.toFixed(6);
-      callApi(lat, lng)
-    }, (e) => {
-      console.log(e)
-    },
-      { enableHighAccuracy: false, maximumAge: Infinity, timeout: 60000 }
-    );
-  });
+  if (button) {
+    /* If the user does a click on the Locate me button, do a reverse query */
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      let buttonText = document.querySelector('.location-text');
+  
+      buttonText.innerText = 'Localizando, aguarde um momento...';
+  
+      navigator.geolocation.getCurrentPosition((response) => {
+        var coords = response.coords;
+        var lat = coords.latitude.toFixed(6);
+        var lng = coords.longitude.toFixed(6);
+        callApi(lat, lng)
+      }, (e) => {
+        console.log(e)
+      },
+        { enableHighAccuracy: false, maximumAge: Infinity, timeout: 60000 }
+      );
+    });
+  }
 }
 
 const initAddressInput = () => {

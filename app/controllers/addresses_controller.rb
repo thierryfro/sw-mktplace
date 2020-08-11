@@ -8,7 +8,7 @@ class AddressesController < ApplicationController
   def new_address
     clean_session_address if session[:address_id].present?
     address = Address.new(@address_params)
-    if address.save
+    if address.save!
       session[:address_id] = address.id
       @cart.update!(address: address)
       @cart.update_freight
@@ -24,6 +24,13 @@ class AddressesController < ApplicationController
   end
 
   private
+  
+  def clean_session_address
+    session[:address] = nil
+    @cart.update(address: nil)
+    # address = Address.find_by(id: session[:address_id])
+    # address.destroy if address && address.user_id.nil?
+  end
 
   def set_address
     @address = Address.find_by(id: params[:id])
@@ -43,7 +50,7 @@ class AddressesController < ApplicationController
   def parse_params
     {
       street: @address_params[:street],
-      zipcode: @address_params[:zipcode].gsub('-', ''),
+      zipcode: helpers.serialize_zipcode(@address_params[:zipcode]),
       city: @address_params[:city]
     }
   end
